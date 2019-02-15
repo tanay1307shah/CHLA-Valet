@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0ABA911D22163F0E00666324 /* ValetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911C22163F0E00666324 /* ValetEntry.swift */; };
+		0ABA911F2216472B00666324 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911E2216472B00666324 /* Constants.swift */; };
+		0ABA9121221647D100666324 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA9120221647D100666324 /* APIManager.swift */; };
 		3FE5674E221102BC00690151 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674D221102BC00690151 /* AppDelegate.swift */; };
 		3FE56750221102BC00690151 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674F221102BC00690151 /* ViewController.swift */; };
 		3FE56753221102BC00690151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56751221102BC00690151 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		0ABA911C22163F0E00666324 /* ValetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetEntry.swift; sourceTree = "<group>"; };
+		0ABA911E2216472B00666324 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0ABA9120221647D100666324 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		3FE5674A221102BC00690151 /* CHLAValet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CHLAValet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE5674D221102BC00690151 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE5674F221102BC00690151 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +45,8 @@
 			isa = PBXGroup;
 			children = (
 				0ABA911C22163F0E00666324 /* ValetEntry.swift */,
+				0ABA911E2216472B00666324 /* Constants.swift */,
+				0ABA9120221647D100666324 /* APIManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -164,7 +170,9 @@
 			files = (
 				3FE56750221102BC00690151 /* ViewController.swift in Sources */,
 				3FE5674E221102BC00690151 /* AppDelegate.swift in Sources */,
+				0ABA9121221647D100666324 /* APIManager.swift in Sources */,
 				0ABA911D22163F0E00666324 /* ValetEntry.swift in Sources */,
+				0ABA911F2216472B00666324 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
