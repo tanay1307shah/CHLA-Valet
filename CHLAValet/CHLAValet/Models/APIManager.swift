@@ -12,7 +12,9 @@ class APIManager {
     
     let baseURL = Constants.someAPIURL
     
-    func someAPICall() -> Void {
-        
+    func someAPICall(completion: @escaping (Error?) -> Void) {
+        // Something that takes some time to complete.
+        completion(nil)
+        // Or completion(SomeError.veryBadError)
     }
 }

@@ -2,10 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-<<<<<<< HEAD
       location = "self:">
-=======
-      location = "self:CHLAValet.xcodeproj">
->>>>>>> app
    </FileRef>
 </Workspace>
