@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		3FA4F46322160E27008478F8 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F46222160E27008478F8 /* CircleView.swift */; };
 		3FA4F46522161221008478F8 /* RoundedUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F46422161220008478F8 /* RoundedUIView.swift */; };
 		3FA4F467221615A1008478F8 /* RoundedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F466221615A1008478F8 /* RoundedUIButton.swift */; };
+=======
+		0ABA911D22163F0E00666324 /* ValetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911C22163F0E00666324 /* ValetEntry.swift */; };
+		0ABA911F2216472B00666324 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911E2216472B00666324 /* Constants.swift */; };
+		0ABA9121221647D100666324 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA9120221647D100666324 /* APIManager.swift */; };
+>>>>>>> app
 		3FE5674E221102BC00690151 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674D221102BC00690151 /* AppDelegate.swift */; };
 		3FE56750221102BC00690151 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674F221102BC00690151 /* ViewController.swift */; };
 		3FE56753221102BC00690151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56751221102BC00690151 /* Main.storyboard */; };
@@ -18,9 +24,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		3FA4F46222160E27008478F8 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		3FA4F46422161220008478F8 /* RoundedUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedUIView.swift; sourceTree = "<group>"; };
 		3FA4F466221615A1008478F8 /* RoundedUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedUIButton.swift; sourceTree = "<group>"; };
+=======
+		0ABA911C22163F0E00666324 /* ValetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetEntry.swift; sourceTree = "<group>"; };
+		0ABA911E2216472B00666324 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0ABA9120221647D100666324 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+>>>>>>> app
 		3FE5674A221102BC00690151 /* CHLAValet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CHLAValet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE5674D221102BC00690151 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FE5674F221102BC00690151 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +53,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+<<<<<<< HEAD
+=======
+		0ABA911922163E2500666324 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0ABA911C22163F0E00666324 /* ValetEntry.swift */,
+				0ABA911E2216472B00666324 /* Constants.swift */,
+				0ABA9120221647D100666324 /* APIManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0ABA911A22163E2F00666324 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0ABA911B22163E3600666324 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+>>>>>>> app
 		3FE56741221102BC00690151 = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +99,24 @@
 		3FE5674C221102BC00690151 /* CHLAValet */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+=======
+				0ABA911B22163E3600666324 /* Controllers */,
+				0ABA911A22163E2F00666324 /* Views */,
+				0ABA911922163E2500666324 /* Models */,
+>>>>>>> app
 				3FE5674D221102BC00690151 /* AppDelegate.swift */,
 				3FE5674F221102BC00690151 /* ViewController.swift */,
 				3FE56751221102BC00690151 /* Main.storyboard */,
 				3FE56754221102BF00690151 /* Assets.xcassets */,
 				3FE56756221102BF00690151 /* LaunchScreen.storyboard */,
 				3FE56759221102BF00690151 /* Info.plist */,
+<<<<<<< HEAD
 				3FA4F46222160E27008478F8 /* CircleView.swift */,
 				3FA4F46422161220008478F8 /* RoundedUIView.swift */,
 				3FA4F466221615A1008478F8 /* RoundedUIButton.swift */,
+=======
+>>>>>>> app
 			);
 			path = CHLAValet;
 			sourceTree = "<group>";
@@ -144,11 +192,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				3FA4F46522161221008478F8 /* RoundedUIView.swift in Sources */,
 				3FE56750221102BC00690151 /* ViewController.swift in Sources */,
 				3FA4F467221615A1008478F8 /* RoundedUIButton.swift in Sources */,
 				3FE5674E221102BC00690151 /* AppDelegate.swift in Sources */,
 				3FA4F46322160E27008478F8 /* CircleView.swift in Sources */,
+=======
+				3FE56750221102BC00690151 /* ViewController.swift in Sources */,
+				3FE5674E221102BC00690151 /* AppDelegate.swift in Sources */,
+				0ABA9121221647D100666324 /* APIManager.swift in Sources */,
+				0ABA911D22163F0E00666324 /* ValetEntry.swift in Sources */,
+				0ABA911F2216472B00666324 /* Constants.swift in Sources */,
+>>>>>>> app
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
