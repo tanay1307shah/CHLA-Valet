@@ -17,11 +17,11 @@ class ValetEntry {
     var color: String
     var type: String
     var make: String
-    var image: UIImage
+    var image: UIImage?
     var requested: Bool
     var paid: Bool
     
-    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, image: UIImage, requested: Bool, paid: Bool) {
+    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, image: UIImage?, requested: Bool, paid: Bool) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.ticketNumber = ticketNumber
