@@ -22,12 +22,15 @@
 		3FE56753221102BC00690151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56751221102BC00690151 /* Main.storyboard */; };
 		3FE56755221102BF00690151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56754221102BF00690151 /* Assets.xcassets */; };
 		3FE56758221102BF00690151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56756221102BF00690151 /* LaunchScreen.storyboard */; };
+		B1C33409EFDA0B679D1CB07C /* Pods_CHLAValet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9C43A10E480B79B71F1ECF /* Pods_CHLAValet.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0ABA911C22163F0E00666324 /* ValetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetEntry.swift; sourceTree = "<group>"; };
 		0ABA911E2216472B00666324 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0ABA9120221647D100666324 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		1BFD15AFBA90E0A33F81A8FC /* Pods-CHLAValet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValet.debug.xcconfig"; path = "Target Support Files/Pods-CHLAValet/Pods-CHLAValet.debug.xcconfig"; sourceTree = "<group>"; };
+		1E9C43A10E480B79B71F1ECF /* Pods_CHLAValet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHLAValet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F757D71221A9808006803B5 /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
 		3F757D73221A9878006803B5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		3F757D77221B5F5D006803B5 /* ValetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetTableViewCell.swift; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 		3FE56754221102BF00690151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FE56757221102BF00690151 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FE56759221102BF00690151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B75681D6222CB32B4B08A02 /* Pods-CHLAValet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValet.release.xcconfig"; path = "Target Support Files/Pods-CHLAValet/Pods-CHLAValet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C33409EFDA0B679D1CB07C /* Pods_CHLAValet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +97,8 @@
 			children = (
 				3FE5674C221102BC00690151 /* CHLAValet */,
 				3FE5674B221102BC00690151 /* Products */,
+				9668779863F35F3BE195E42F /* Pods */,
+				421705EE97B9EA7C50A7F807 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +125,24 @@
 			path = CHLAValet;
 			sourceTree = "<group>";
 		};
+		421705EE97B9EA7C50A7F807 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1E9C43A10E480B79B71F1ECF /* Pods_CHLAValet.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9668779863F35F3BE195E42F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1BFD15AFBA90E0A33F81A8FC /* Pods-CHLAValet.debug.xcconfig */,
+				5B75681D6222CB32B4B08A02 /* Pods-CHLAValet.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -125,9 +150,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FE5675C221102BF00690151 /* Build configuration list for PBXNativeTarget "CHLAValet" */;
 			buildPhases = (
+				279817F235502ED48CFAD23D /* [CP] Check Pods Manifest.lock */,
 				3FE56746221102BC00690151 /* Sources */,
 				3FE56747221102BC00690151 /* Frameworks */,
 				3FE56748221102BC00690151 /* Resources */,
+				C88A0817E9457A2E7C409BA3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -183,6 +210,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		279817F235502ED48CFAD23D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CHLAValet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C88A0817E9457A2E7C409BA3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CHLAValet/Pods-CHLAValet-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CHLAValet/Pods-CHLAValet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3FE56746221102BC00690151 /* Sources */ = {
@@ -346,6 +420,7 @@
 		};
 		3FE5675D221102BF00690151 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BFD15AFBA90E0A33F81A8FC /* Pods-CHLAValet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -363,6 +438,7 @@
 		};
 		3FE5675E221102BF00690151 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B75681D6222CB32B4B08A02 /* Pods-CHLAValet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
