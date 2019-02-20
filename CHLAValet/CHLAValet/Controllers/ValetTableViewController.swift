@@ -12,13 +12,13 @@ class ValetTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSampleData()
+        loadData()
     }
 
     // MARK: - Table view data source
     var cars = [ValetEntry]()
     
-    func loadSampleData() {
+    func loadData() {
         let valet1 = ValetEntry(name: "Nathan Scoglio", phoneNumber: "6263470607", ticketNumber: "1", licensePlate: "1ABC234", color: "Blue", type: "Elantra", make: "Hyundai", image: UIImage(named: "edit")!, requested: false, paid: false)
         cars += [valet1]
     }
@@ -118,5 +118,19 @@ class ValetTableViewController: UITableViewController {
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
     }
+    
+    @IBAction func requestDidPressed(_ sender: UIButton) {
+        guard let selectedCarCell = sender.superview?.superview as? ValetTableViewCell else {
+            fatalError("Unexpected sender: \(String(describing: sender))")
+        }
+        
+        guard let indexPath = tableView.indexPath(for: selectedCarCell) else {
+            fatalError("The selected cell is not being displayed by the table")
+        }
+        
+        cars[indexPath.row].requested = !cars[indexPath.row].requested
+        sender.isHighlighted = !cars[indexPath.row].requested
+    }
+    
 
 }

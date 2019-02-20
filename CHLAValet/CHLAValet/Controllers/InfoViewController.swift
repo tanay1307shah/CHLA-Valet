@@ -23,7 +23,37 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        loadInfo()
+    }
+    
+    // MARK: Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        switch(segue.identifier ?? "") {
+        case "editValet":
+            guard let editViewController = segue.destination as? AddEditViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            editViewController.valet = valet
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+        }
+    }
+    
+    // MARK: Actions
+    @IBAction func unwindToInfoPage(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? AddEditViewController, let editValet = sourceViewController.valet {
+            valet = editValet
+            loadInfo()
+        }
+    }
+    
+    func loadInfo() {
         nameLabel.text = valet?.name
         phoneNumberLabel.text = valet?.phoneNumber
         ticketNumberLabel.text = valet?.ticketNumber
@@ -32,7 +62,5 @@ class InfoViewController: UIViewController {
         typeLabel.text = valet?.type
         colorLabel.text = valet?.color
     }
-    
-    
 }
 

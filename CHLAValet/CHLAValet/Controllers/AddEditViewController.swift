@@ -26,7 +26,8 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
         phoneNumberTextField.delegate = self
         ticketNumberTextField.delegate = self
@@ -34,6 +35,17 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
         colorTextField.delegate = self
         typeTextField.delegate = self
         makeTextField.delegate = self
+        
+        // Set up views if editing an existing car.
+        if let valet = valet {
+            nameTextField.text = valet.name
+            phoneNumberTextField.text = valet.phoneNumber
+            ticketNumberTextField.text = valet.ticketNumber
+            licencePlateNumberTextField.text = valet.ticketNumber
+            colorTextField.text = valet.color
+            typeTextField.text = valet.type
+            makeTextField.text = valet.make
+        }
         
         // Enable the Save button only if the text field has a valid Meal name.
         updateSaveButtonState()
