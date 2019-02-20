@@ -8,24 +8,23 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class APIManager {
     
     let baseURL = URL(string: Constants.someAPIURL)!
     
-    func someAPICall() {
+    func someAPICall(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
         
         AF.request(baseURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success:
-                print("Validation Successful")
+                if let result = response.result.value {
+                    let obj = JSON(result)
+                    onSuccess(obj)
+                }
             case .failure(let error):
-                print(error)
-            }
-            if let result = response.result.value {
-                let JSON = result as! NSDictionary
-                print(JSON)
-                debugPrint(JSON)
+                onFailure(error)
             }
         }
         
