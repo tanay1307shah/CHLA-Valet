@@ -7,14 +7,28 @@
 //
 
 import Foundation
+import Alamofire
 
 class APIManager {
     
-    let baseURL = Constants.someAPIURL
+    let baseURL = URL(string: Constants.someAPIURL)!
     
-    func someAPICall(completion: @escaping (Error?) -> Void) {
-        // Something that takes some time to complete.
-        completion(nil)
-        // Or completion(SomeError.veryBadError)
+    func someAPICall() {
+        
+        AF.request(baseURL, method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+            case .failure(let error):
+                print(error)
+            }
+            if let result = response.result.value {
+                let JSON = result as! NSDictionary
+                print(JSON)
+                debugPrint(JSON)
+            }
+        }
+        
     }
 }
+
