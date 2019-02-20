@@ -1,6 +1,18 @@
-package model;
+package com.example.chla_server.CHLAserver.model;
 
+import org.springframework.data.annotation.Id;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+@Entity
 public class Car {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String phoneNumber;
     private String ticketNumber;
     private String licensePlate;
@@ -15,6 +27,14 @@ public class Car {
         this.color = color;
         this.type = type;
         this.make = make;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getPhoneNumber() {

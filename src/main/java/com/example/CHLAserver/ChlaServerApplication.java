@@ -1,13 +1,15 @@
-package com.example.chla_server.CHLAserver;
+package com.example.CHLAserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan({"com.example.chla_server.CHLAserver.controller", "com.example.chla_server.CHLAserver.service", "com.example.chla_server.CHLAserver.model","com.example.chla_server.CHLAserver.repositories"})
+@ComponentScan({"com.example.CHLAserver.controller", "com.example.CHLAserver.Model","com.example.CHLAserver.Repositories","com.example.CHLAserver.Service"})
+@SpringBootApplication
 public class ChlaServerApplication {
 
 	public static void main(String[] args) {
@@ -15,4 +17,3 @@ public class ChlaServerApplication {
 	}
 
 }
-
