@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class APIManager {
     
+    static let shared = APIManager()
     let baseURL = URL(string: Constants.someAPIURL)!
     
     func someAPICall(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {

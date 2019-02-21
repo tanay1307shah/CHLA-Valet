@@ -12,10 +12,7 @@ import SwiftyJSON
 
 class CHLAValetTests: XCTestCase {
     
-    var api:APIManager!
-    
     override func setUp() {
-        api = APIManager()
     }
     
     func testAPICall() {
@@ -36,7 +33,7 @@ class CHLAValetTests: XCTestCase {
             XCTFail(e.localizedDescription)
         }
         
-        api.someAPICall(onSuccess: onSuccessHandler, onFailure: onFailureHandler)
+        APIManager.shared.someAPICall(onSuccess: onSuccessHandler, onFailure: onFailureHandler)
         waitForExpectations(timeout: 10, handler: nil)
     }
 
