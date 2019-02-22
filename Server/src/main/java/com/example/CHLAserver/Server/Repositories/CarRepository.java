@@ -1,6 +1,7 @@
-package com.example.CHLAserver.Repositories;
+package com.example.CHLAserver.Server.Repositories;
 
-import com.example.CHLAserver.Model.Car;
+import com.example.CHLAserver.Server.Model.Car;
+import com.example.CHLAserver.Server.Model.Car;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

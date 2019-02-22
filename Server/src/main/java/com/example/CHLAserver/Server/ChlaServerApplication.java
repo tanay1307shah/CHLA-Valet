@@ -1,4 +1,4 @@
-package com.example.CHLAserver;
+package com.example.CHLAserver.Server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan({"com.example.CHLAserver.controller", "com.example.CHLAserver.Model","com.example.CHLAserver.Repositories","com.example.CHLAserver.Service"})
+@ComponentScan({"com.example.CHLAserver.Server.controller", "com.example.CHLAserver.Server.Model","com.example.CHLAserver.Server.Repositories","com.example.CHLAserver.Server.Service"})
 @SpringBootApplication
 public class ChlaServerApplication {
 

@@ -1,8 +1,10 @@
-package com.example.CHLAserver.controller;
+package com.example.CHLAserver.Server.controller;
 
-import com.example.CHLAserver.Model.Car;
-import com.example.CHLAserver.Repositories.CarRepository;
-import com.example.CHLAserver.Service.CarService;
+import com.example.CHLAserver.Server.Model.Car;
+import com.example.CHLAserver.Server.Repositories.CarRepository;
+import com.example.CHLAserver.Server.Model.Car;
+import com.example.CHLAserver.Server.Service.CarService;
+import com.example.CHLAserver.Server.Service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

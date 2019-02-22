@@ -1,4 +1,4 @@
-package com.example.chla_server.CHLAserver;
+package com.example.CHLAserver.Server;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,4 +14,3 @@ public class ChlaServerApplicationTests {
 	}
 
 }
-

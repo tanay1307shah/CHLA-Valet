@@ -1,4 +1,4 @@
-package com.example.CHLAserver.Model;
+package com.example.CHLAserver.Server.Model;
 
 import javax.persistence.*;
 

@@ -1,7 +1,9 @@
-package com.example.CHLAserver.Service;
+package com.example.CHLAserver.Server.Service;
 
-import com.example.CHLAserver.Model.Car;
-import com.example.CHLAserver.Repositories.CarRepository;
+import com.example.CHLAserver.Server.Model.Car;
+import com.example.CHLAserver.Server.Repositories.CarRepository;
+import com.example.CHLAserver.Server.Model.Car;
+import com.example.CHLAserver.Server.Repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
