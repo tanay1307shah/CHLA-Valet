@@ -7,18 +7,15 @@
 //
 
 import UIKit
-import SwiftyJSON
 
 class LogInViewController: UIViewController {
 
     @IBOutlet weak var employeeIDTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    var api: APIManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        api = APIManager()
-        api.someAPICall(onSuccess: {(obj: JSON) in print(obj)}, onFailure:{ (error: Error) in print(error.localizedDescription)})
+        // Do any additional setup after loading the view, typically from a nib.
     }
 
     // MARK: Actions
