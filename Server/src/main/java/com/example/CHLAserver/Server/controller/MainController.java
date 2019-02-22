@@ -40,8 +40,4 @@ public class MainController {
         return cs.getCar(ticket);
     }
 
-    @GetMapping("/cars/editCar")
-    public @ResponseBody Car editCar(@PathVariable Long ID){
-        return null;
-    }
 }
