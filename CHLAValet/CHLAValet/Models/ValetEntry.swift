@@ -20,8 +20,9 @@ class ValetEntry {
     var image: UIImage?
     var requested: Bool
     var paid: Bool
+    var ready: Bool
     
-    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, image: UIImage?, requested: Bool, paid: Bool) {
+    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, image: UIImage?, requested: Bool, paid: Bool, ready: Bool) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.ticketNumber = ticketNumber
@@ -32,5 +33,6 @@ class ValetEntry {
         self.image = image
         self.requested = requested
         self.paid = paid
+        self.ready = ready
     }
 }

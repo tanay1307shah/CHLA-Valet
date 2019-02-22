@@ -22,6 +22,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var typeTextField: UITextField!
     @IBOutlet weak var makeTextField: UITextField!
     @IBOutlet weak var saveButton: RoundedUIButton!
+    @IBOutlet weak var saveChangesButton: RoundedUIButton!
     
     
     override func viewDidLoad() {
@@ -35,13 +36,17 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
         colorTextField.delegate = self
         typeTextField.delegate = self
         makeTextField.delegate = self
+        saveChangesButton.isHidden = true
+        saveButton.isHidden = false
         
         // Set up views if editing an existing car.
         if let valet = valet {
+            saveChangesButton.isHidden = false
+            saveButton.isHidden = true
             nameTextField.text = valet.name
             phoneNumberTextField.text = valet.phoneNumber
             ticketNumberTextField.text = valet.ticketNumber
-            licencePlateNumberTextField.text = valet.ticketNumber
+            licencePlateNumberTextField.text = valet.licensePlate
             colorTextField.text = valet.color
             typeTextField.text = valet.type
             makeTextField.text = valet.make
@@ -56,7 +61,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         // Configure the destination view controller only when the save button is pressed.
-        guard let button = sender as? UIButton, button === saveButton else {
+        guard let button = sender as? UIButton, button === saveButton || button === saveChangesButton else{
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
         }
@@ -68,7 +73,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
         let color = colorTextField.text ?? ""
         let type = typeTextField.text ?? ""
         let make = makeTextField.text ?? ""
-        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber, licensePlate: licensePlateNumber, color: color, type: type, make: make, image: nil, requested: false, paid: false)
+        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber, licensePlate: licensePlateNumber, color: color, type: type, make: make, image: nil, requested: false, paid: false, ready: false)
     }
     
     //MARK: Actions

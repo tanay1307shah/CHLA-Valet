@@ -18,7 +18,11 @@ class LogInViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-
+    // MARK: Actions
+    @IBAction func unwindToLogInPage(sender: UIStoryboardSegue) {
+        // Logged Out
+    }
+    
     @IBAction func enterButtonDidPressed(_ sender: UIButton) {
         // Verify valid info
         performSegue(withIdentifier: "logIn", sender: sender)
