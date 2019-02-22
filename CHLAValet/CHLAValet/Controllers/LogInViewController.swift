@@ -21,7 +21,11 @@ class LogInViewController: UIViewController {
         api.someAPICall(onSuccess: {(obj: JSON) in print(obj)}, onFailure:{ (error: Error) in print(error.localizedDescription)})
     }
 
-
+    // MARK: Actions
+    @IBAction func unwindToLogInPage(sender: UIStoryboardSegue) {
+        // Logged Out
+    }
+    
     @IBAction func enterButtonDidPressed(_ sender: UIButton) {
         // Verify valid info
         performSegue(withIdentifier: "logIn", sender: sender)

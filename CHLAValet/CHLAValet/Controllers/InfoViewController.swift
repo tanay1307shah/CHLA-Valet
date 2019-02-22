@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class InfoViewController: UIViewController {
     
@@ -36,8 +37,11 @@ class InfoViewController: UIViewController {
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? "") {
         case "editValet":
-            guard let editViewController = segue.destination as? AddEditViewController else {
+            guard let navViewController = segue.destination as? UINavigationController else {
                 fatalError("Unexpected destination: \(segue.destination)")
+            }
+            guard let editViewController = navViewController.children[0] as? AddEditViewController else {
+                fatalError("Unexpected controller: \(navViewController.children[0])")
             }
             editViewController.valet = valet
         default:
@@ -49,12 +53,33 @@ class InfoViewController: UIViewController {
     @IBAction func unwindToInfoPage(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? AddEditViewController, let editValet = sourceViewController.valet {
             valet = editValet
+            if let tableViewController = self.parent?.children[0].children[0] as? ValetTableViewController, let table = tableViewController.tableView {
+                if let selectedIndexPath = table.indexPathForSelectedRow {
+                    // Update an existing meal.
+                    tableViewController.cars.set(at: selectedIndexPath.row, valet!)
+                    table.reloadRows(at: [selectedIndexPath], with: .none)
+                }
+            }
             loadInfo()
+        } else {
+            os_log("The data was not passed back", log: OSLog.default, type: .debug)
         }
     }
     
+    @IBAction func deleteButton(_ sender: UIButton) {
+        if let tableViewController = self.parent?.children[0].children[0] as? ValetTableViewController, let table = tableViewController.tableView {
+            if let selectedIndexPath = table.indexPathForSelectedRow {
+                // Remove car
+                tableViewController.cars.remove(at: selectedIndexPath.row)
+                table.deleteRows(at: [selectedIndexPath], with: .fade)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    
     func loadInfo() {
-        nameLabel.text = valet?.name
+        nameLabel.text = valet?.name.uppercased()
         phoneNumberLabel.text = valet?.phoneNumber
         ticketNumberLabel.text = valet?.ticketNumber
         licencePlateNumber.text = valet?.licensePlate
