@@ -13,11 +13,10 @@ import SwiftyJSON
 class APIManager {
     
     static let shared = APIManager()
-    let baseURL = URL(string: Constants.someAPIURL)!
     
-    func someAPICall(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
-        
-        AF.request(baseURL, method: .get).validate().responseJSON { response in
+    func getAllCars(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
+        let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/getAllCars")!
+        AF.request(url, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let result = response.result.value {
@@ -28,7 +27,6 @@ class APIManager {
                 onFailure(error)
             }
         }
-        
     }
 }
 

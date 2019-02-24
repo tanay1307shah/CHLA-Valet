@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 class ValetEntry {
     var name: String
@@ -34,5 +35,19 @@ class ValetEntry {
         self.requested = requested
         self.paid = paid
         self.ready = ready
+    }
+    
+    init(obj: JSON) {
+        self.name = "test"
+        self.phoneNumber = obj["phoneNumber"].stringValue
+        self.ticketNumber = obj["ticketNumber"].stringValue
+        self.licensePlate = obj["licensePlate"].stringValue
+        self.color = obj["color"].stringValue
+        self.type = obj["type"].stringValue
+        self.make = obj["make"].stringValue
+        self.image = UIImage(named: "edit")!
+        self.requested = false
+        self.paid = false
+        self.ready = false
     }
 }

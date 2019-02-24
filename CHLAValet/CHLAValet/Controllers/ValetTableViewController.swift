@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ValetTableViewController: UITableViewController {
     
@@ -117,8 +118,23 @@ class ValetTableViewController: UITableViewController {
     }
     
     func loadData() {
-        let valet1 = ValetEntry(name: "Nathan Scoglio", phoneNumber: "6263470607", ticketNumber: "1", licensePlate: "1ABC234", color: "Blue", type: "Elantra", make: "Hyundai", image: UIImage(named: "edit")!, requested: false, paid: false, ready: false)
-        cars.append(valet1)
+        let onSuccessHandler: (JSON) -> (Void) = { obj in
+            print(obj)
+            for (_,subJson):(String, JSON) in obj {
+                let valet = ValetEntry(obj: subJson)
+                self.cars.append(valet)
+            }
+            self.tableView.reloadData()
+        }
+        let onFailureHandler: (Error) ->(Void) = { e in
+            // TODO: Add error message
+            print(e.localizedDescription)
+        }
+    
+        APIManager.shared.getAllCars(onSuccess: onSuccessHandler, onFailure: onFailureHandler)
+        
+        //        let valet1 = ValetEntry(name: "Nathan Scoglio", phoneNumber: "6263470607", ticketNumber: "1", licensePlate: "1ABC234", color: "Blue", type: "Elantra", make: "Hyundai", image: UIImage(named: "edit")!, requested: false, paid: false, ready: false)
+        //        cars.append(valet1)
     }
 
 }
