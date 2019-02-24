@@ -132,9 +132,6 @@ class ValetTableViewController: UITableViewController {
         }
     
         APIManager.shared.getAllCars(onSuccess: onSuccessHandler, onFailure: onFailureHandler)
-        
-        //        let valet1 = ValetEntry(name: "Nathan Scoglio", phoneNumber: "6263470607", ticketNumber: "1", licensePlate: "1ABC234", color: "Blue", type: "Elantra", make: "Hyundai", image: UIImage(named: "edit")!, requested: false, paid: false, ready: false)
-        //        cars.append(valet1)
     }
 
 }
