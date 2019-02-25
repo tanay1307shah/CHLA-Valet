@@ -7,7 +7,7 @@ import com.example.CHLAserver.Server.Repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Hashtable;
+import java.util.*;
 
 @Service
 public class CarService {
@@ -16,17 +16,29 @@ public class CarService {
     private CarRepository cr;
 
     private Hashtable<String,Car> carDB = new Hashtable<>();
+    private List<Car> requestList = new ArrayList<>();
 
-    public boolean addCar(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make){
+    public boolean addCar(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make,String im1,String im2,String im3,String im4){
 
         if(!carDB.containsKey(ticketNumber)){
-            Car c = new Car(phoneNumber,ticketNumber,licensePlate,color,type,make);
+            Car c = new Car(phoneNumber,ticketNumber,licensePlate,color,make,type,im1,im2,im3,im4);
             cr.save(c);
             carDB.put(ticketNumber,c);
             return true;
         }else
             return false;
     }
+
+    public List<Car> getRequested(){
+        return requestList;
+    }
+
+    public void request(String phoneNumber){
+        Car c  =cr.findCarByPhone(phoneNumber);
+        if(carDB.containsValue(c))
+            requestList.add(c);
+    }
+
 
     public Iterable<Car> getAll(){
         return cr.findAll();
