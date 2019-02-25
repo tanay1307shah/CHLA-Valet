@@ -40,4 +40,15 @@ public class MainController {
         return cs.getCar(ticket);
     }
 
+    @GetMapping("/cars/updateInfo")
+    public @ResponseBody String editCarInfo(@RequestParam String phone,
+                                                   @RequestParam String ticket,
+                                                   @RequestParam String license,
+                                                   @RequestParam String color,
+                                                   @RequestParam String type,
+                                                   @RequestParam String make){
+        cs.editCarInfo(phone, ticket, license, color, type, make);
+        return "Completed";
+    }
+
 }

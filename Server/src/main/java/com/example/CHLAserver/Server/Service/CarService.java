@@ -35,4 +35,16 @@ public class CarService {
     public Car getCar(String ticket){
         return cr.findCarByTicket(ticket);
     }
+
+    public void editCarInfo(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make){
+        Car currCar = cr.findCarByTicket(ticketNumber);
+
+        currCar.setPhoneNumber(phoneNumber);
+        currCar.setColor(color);
+        currCar.setLicensePlate(licensePlate);
+        currCar.setType(type);
+        currCar.setMake(make);
+
+        cr.save(currCar);
+    }
 }
