@@ -11,6 +11,7 @@
 		0A62E60A221DEABE0035D02F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911E2216472B00666324 /* Constants.swift */; };
 		0A62E60B221DEAC00035D02F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA9120221647D100666324 /* APIManager.swift */; };
 		0A62E60C221DEAC30035D02F /* ValetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911C22163F0E00666324 /* ValetEntry.swift */; };
+		0A8EC1D22224A6D200777BA2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8EC1D12224A6D200777BA2 /* UIViewControllerExtension.swift */; };
 		0ABA911D22163F0E00666324 /* ValetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911C22163F0E00666324 /* ValetEntry.swift */; };
 		0ABA911F2216472B00666324 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911E2216472B00666324 /* Constants.swift */; };
 		0ABA9121221647D100666324 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA9120221647D100666324 /* APIManager.swift */; };
@@ -48,6 +49,7 @@
 		0A62E600221DEA860035D02F /* CHLAValetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CHLAValetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A62E602221DEA860035D02F /* CHLAValetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CHLAValetTests.swift; sourceTree = "<group>"; };
 		0A62E604221DEA860035D02F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A8EC1D12224A6D200777BA2 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		0ABA911C22163F0E00666324 /* ValetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetEntry.swift; sourceTree = "<group>"; };
 		0ABA911E2216472B00666324 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0ABA9120221647D100666324 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			path = CHLAValetTests;
 			sourceTree = "<group>";
 		};
+		0A8EC1D02224A69B00777BA2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0A8EC1D12224A6D200777BA2 /* UIViewControllerExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0ABA911922163E2500666324 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +178,7 @@
 		3FE5674C221102BC00690151 /* CHLAValet */ = {
 			isa = PBXGroup;
 			children = (
+				0A8EC1D02224A69B00777BA2 /* Extensions */,
 				0ABA911B22163E3600666324 /* Controllers */,
 				0ABA911A22163E2F00666324 /* Views */,
 				0ABA911922163E2500666324 /* Models */,
@@ -335,6 +346,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CHLAValet/Pods-CHLAValet-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -342,6 +354,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +418,7 @@
 				3FE5674E221102BC00690151 /* AppDelegate.swift in Sources */,
 				0ABA9121221647D100666324 /* APIManager.swift in Sources */,
 				0ABA911D22163F0E00666324 /* ValetEntry.swift in Sources */,
+				0A8EC1D22224A6D200777BA2 /* UIViewControllerExtension.swift in Sources */,
 				3F757D74221A9878006803B5 /* InfoViewController.swift in Sources */,
 				0ABA911F2216472B00666324 /* Constants.swift in Sources */,
 			);

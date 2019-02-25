@@ -33,18 +33,13 @@ class APIManager {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/addCar")!
         let parameters: Parameters = ["phone":valetEntry.phoneNumber, "ticket":valetEntry.ticketNumber,
                                       "license":valetEntry.licensePlate, "color":valetEntry.color, "type":valetEntry.type, "make":valetEntry.make]
-        print(parameters)
-        AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print("response")
-            print(response.result)
-            onSuccess()
-//            switch response.result {
-//                case .success:
-//                    onSuccess()
-//                    print("success")
-//                case .failure(let error):
-//                    onFailure(error)
-//            }
+        AF.request(url, method: .get, parameters: parameters).responseString { response in
+            if (response.result.description == "SUCCESS") {
+                onSuccess()
+            } else {
+                // TODO: call onFailure()
+                print("Failure in addCar request")
+            }
         }
     }
     

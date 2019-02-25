@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import SwiftSpinner
 
 class ValetTableViewController: UITableViewController {
     
@@ -77,11 +78,20 @@ class ValetTableViewController: UITableViewController {
     //MARK: Actions
     @IBAction func unwindToValetList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? AddEditViewController, let valet = sourceViewController.valet {
-            APIManager.shared.addCar(valetEntry: valet, onSuccess: { self.loadData() }, onFailure: {e in print(e.localizedDescription) })
+            SwiftSpinner.show("Loading...")
+            APIManager.shared.addCar(valetEntry: valet, onSuccess: {
+                self.loadData()
+                
+            }, onFailure: {e in
+                print(e.localizedDescription)
+                SwiftSpinner.hide()
+            })
         }
     }
     
     func loadData() {
+        //self.showSpinner(onView: self.view)
+        SwiftSpinner.show("Loading...")
         ValetEntryModel.shared.clear()
         let onSuccessHandler: (JSON) -> (Void) = { obj in
             for (_,subJson):(String, JSON) in obj {
@@ -89,9 +99,11 @@ class ValetTableViewController: UITableViewController {
                 self.cars.append(valet)
             }
             self.tableView.reloadData()
+            SwiftSpinner.hide()
         }
         let onFailureHandler: (Error) ->(Void) = { e in
             // TODO: Add error message
+            SwiftSpinner.hide()
             print(e.localizedDescription)
         }
     
