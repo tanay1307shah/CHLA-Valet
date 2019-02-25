@@ -47,7 +47,16 @@ class APIManager {
 //            }
         }
     }
-
     
+    private func imageTobase64(image: UIImage) -> String {
+        let imageData = image.pngData()!
+        return imageData.base64EncodedString()
+    }
+    
+    private func base64ToImage(base64: String) -> UIImage {
+        let imageData: Data = Data(base64Encoded: base64, options: .ignoreUnknownCharacters)!
+        let image: UIImage = UIImage(data: imageData)!
+        return image
+    }
 }
 
