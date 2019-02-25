@@ -37,4 +37,8 @@ class ValetEntryModel{
     func count() -> Int {
         return valetEntries.count
     }
+    
+    func clear() {
+        valetEntries.removeAll()
+    }
 }

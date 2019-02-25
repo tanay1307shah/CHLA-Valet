@@ -65,16 +65,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
         }
-        
-        let name = nameTextField.text ?? ""
-        let phoneNumber = phoneNumberTextField.text ?? ""
-        let ticketNumber = ticketNumberTextField.text ?? ""
-        let licensePlateNumber = licencePlateNumberTextField.text ?? ""
-        let color = colorTextField.text ?? ""
-        let type = typeTextField.text ?? ""
-        let make = makeTextField.text ?? ""
-        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber, licensePlate: licensePlateNumber, color: color, type: type, make: make, image: nil, requested: false, paid: false, ready: false)
-        APIManager.shared.addCar(valetEntry: valet!, onSuccess: { ValetEntryModel.shared.append(self.valet!)}, onFailure: { e in print(e.localizedDescription)})
+        createValetEntry()
     }
     
     //MARK: Actions
@@ -114,5 +105,16 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
         let make = makeTextField.text ?? ""
         saveButton.isEnabled = !name.isEmpty && !phoneNumber.isEmpty && !ticketNumber.isEmpty && !licensePlateNumber.isEmpty && !color.isEmpty && !type.isEmpty && !make.isEmpty
         saveButton.isHighlighted = !saveButton.isEnabled
+    }
+    
+    private func createValetEntry() {
+        let name = nameTextField.text ?? ""
+        let phoneNumber = phoneNumberTextField.text ?? ""
+        let ticketNumber = ticketNumberTextField.text ?? ""
+        let licensePlateNumber = licencePlateNumberTextField.text ?? ""
+        let color = colorTextField.text ?? ""
+        let type = typeTextField.text ?? ""
+        let make = makeTextField.text ?? ""
+        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber, licensePlate: licensePlateNumber, color: color, type: type, make: make, image: nil, requested: false, paid: false, ready: false)
     }
 }

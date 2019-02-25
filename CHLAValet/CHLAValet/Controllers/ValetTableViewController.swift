@@ -42,48 +42,15 @@ class ValetTableViewController: UITableViewController {
         cell.nameLabel.text = car.name.uppercased()
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func viewDidAppear(_ animated: Bool) {
+        loadData()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? "") {
         case "showInfo":
@@ -110,16 +77,13 @@ class ValetTableViewController: UITableViewController {
     //MARK: Actions
     @IBAction func unwindToValetList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? AddEditViewController, let valet = sourceViewController.valet {
-            // Add a new car.
-            let newIndexPath = IndexPath(row: cars.count(), section: 0)
-            cars.append(valet)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            APIManager.shared.addCar(valetEntry: valet, onSuccess: { self.loadData() }, onFailure: {e in print(e.localizedDescription) })
         }
     }
     
     func loadData() {
+        ValetEntryModel.shared.clear()
         let onSuccessHandler: (JSON) -> (Void) = { obj in
-            print(obj)
             for (_,subJson):(String, JSON) in obj {
                 let valet = ValetEntry(obj: subJson)
                 self.cars.append(valet)
