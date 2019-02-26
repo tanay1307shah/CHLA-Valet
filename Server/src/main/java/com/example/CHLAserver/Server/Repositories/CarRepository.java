@@ -10,6 +10,7 @@ public interface CarRepository extends CrudRepository<Car,Long> {
     @Query(value = "SELECT * FROM car WHERE ticket_number = ?1",nativeQuery = true)
     Car findCarByTicket(String ticketNumber);
 
-    //uery(value =  "DELETE * FROM car WHERE ticket_number = ?1",nativeQuery = true)
-//
+    @Query(value = "SELECT * FROM car WHERE phone_number = ?1",nativeQuery = true)
+    Car findCarByPhone(String phoneNumber);
+
 }
