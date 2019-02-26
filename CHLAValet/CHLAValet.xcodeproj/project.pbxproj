@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A62E603221DEA860035D02F /* CHLAValetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62E602221DEA860035D02F /* CHLAValetTests.swift */; };
-		0A62E60A221DEABE0035D02F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911E2216472B00666324 /* Constants.swift */; };
-		0A62E60B221DEAC00035D02F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA9120221647D100666324 /* APIManager.swift */; };
-		0A62E60C221DEAC30035D02F /* ValetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911C22163F0E00666324 /* ValetEntry.swift */; };
 		0A8EC1D22224A6D200777BA2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8EC1D12224A6D200777BA2 /* UIViewControllerExtension.swift */; };
 		0ABA911D22163F0E00666324 /* ValetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911C22163F0E00666324 /* ValetEntry.swift */; };
 		0ABA911F2216472B00666324 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA911E2216472B00666324 /* Constants.swift */; };
@@ -31,31 +27,14 @@
 		3FE56753221102BC00690151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56751221102BC00690151 /* Main.storyboard */; };
 		3FE56755221102BF00690151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56754221102BF00690151 /* Assets.xcassets */; };
 		3FE56758221102BF00690151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56756221102BF00690151 /* LaunchScreen.storyboard */; };
-		425DC722CC2C279478C04512 /* Pods_CHLAValetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5CFF80A92327755D69B4B4 /* Pods_CHLAValetTests.framework */; };
-		B1C33409EFDA0B679D1CB07C /* Pods_CHLAValet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9C43A10E480B79B71F1ECF /* Pods_CHLAValet.framework */; };
+		AB3D16D47A44731719B373AB /* Pods_CHLAValet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1BBF33C9A896B309679904 /* Pods_CHLAValet.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		0A62E605221DEA860035D02F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3FE56742221102BC00690151 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3FE56749221102BC00690151;
-			remoteInfo = CHLAValet;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		0A62E600221DEA860035D02F /* CHLAValetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CHLAValetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A62E602221DEA860035D02F /* CHLAValetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CHLAValetTests.swift; sourceTree = "<group>"; };
-		0A62E604221DEA860035D02F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A8EC1D12224A6D200777BA2 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		0ABA911C22163F0E00666324 /* ValetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetEntry.swift; sourceTree = "<group>"; };
 		0ABA911E2216472B00666324 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0ABA9120221647D100666324 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		1BFD15AFBA90E0A33F81A8FC /* Pods-CHLAValet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValet.debug.xcconfig"; path = "Target Support Files/Pods-CHLAValet/Pods-CHLAValet.debug.xcconfig"; sourceTree = "<group>"; };
-		1E9C43A10E480B79B71F1ECF /* Pods_CHLAValet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHLAValet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B9735F8F822B61631EC4F92 /* Pods_CHLAValetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHLAValetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F757D71221A9808006803B5 /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
 		3F757D73221A9878006803B5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		3F757D77221B5F5D006803B5 /* ValetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetTableViewCell.swift; sourceTree = "<group>"; };
@@ -74,43 +53,23 @@
 		3FE56754221102BF00690151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FE56757221102BF00690151 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FE56759221102BF00690151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55F92407CB6B73416F11A17A /* Pods-CHLAValetTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValetTests.debug.xcconfig"; path = "Target Support Files/Pods-CHLAValetTests/Pods-CHLAValetTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5B75681D6222CB32B4B08A02 /* Pods-CHLAValet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValet.release.xcconfig"; path = "Target Support Files/Pods-CHLAValet/Pods-CHLAValet.release.xcconfig"; sourceTree = "<group>"; };
-		7E5CFF80A92327755D69B4B4 /* Pods_CHLAValetTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHLAValetTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		81B3A9CB74125E0A3D47F8CA /* Pods-CHLAValetUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValetUITests.debug.xcconfig"; path = "Target Support Files/Pods-CHLAValetUITests/Pods-CHLAValetUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		A469FF93E7C3B6CA5F05F65B /* Pods-CHLAValetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValetUITests.release.xcconfig"; path = "Target Support Files/Pods-CHLAValetUITests/Pods-CHLAValetUITests.release.xcconfig"; sourceTree = "<group>"; };
-		B222A9F57F237DF533274BE8 /* Pods-CHLAValetTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValetTests.release.xcconfig"; path = "Target Support Files/Pods-CHLAValetTests/Pods-CHLAValetTests.release.xcconfig"; sourceTree = "<group>"; };
+		608BE975AE820EA27A5655F6 /* Pods-CHLAValet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValet.debug.xcconfig"; path = "Target Support Files/Pods-CHLAValet/Pods-CHLAValet.debug.xcconfig"; sourceTree = "<group>"; };
+		CA1BBF33C9A896B309679904 /* Pods_CHLAValet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHLAValet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E12B6127386325CEE208D8D9 /* Pods-CHLAValet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValet.release.xcconfig"; path = "Target Support Files/Pods-CHLAValet/Pods-CHLAValet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0A62E5FD221DEA860035D02F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				425DC722CC2C279478C04512 /* Pods_CHLAValetTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3FE56747221102BC00690151 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1C33409EFDA0B679D1CB07C /* Pods_CHLAValet.framework in Frameworks */,
+				AB3D16D47A44731719B373AB /* Pods_CHLAValet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A62E601221DEA860035D02F /* CHLAValetTests */ = {
-			isa = PBXGroup;
-			children = (
-				0A62E602221DEA860035D02F /* CHLAValetTests.swift */,
-				0A62E604221DEA860035D02F /* Info.plist */,
-			);
-			path = CHLAValetTests;
-			sourceTree = "<group>";
-		};
 		0A8EC1D02224A69B00777BA2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,14 +114,23 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		28165710D587FB029FC6BAE1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				608BE975AE820EA27A5655F6 /* Pods-CHLAValet.debug.xcconfig */,
+				E12B6127386325CEE208D8D9 /* Pods-CHLAValet.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		3FE56741221102BC00690151 = {
 			isa = PBXGroup;
 			children = (
 				3FE5674C221102BC00690151 /* CHLAValet */,
-				0A62E601221DEA860035D02F /* CHLAValetTests */,
 				3FE5674B221102BC00690151 /* Products */,
-				9668779863F35F3BE195E42F /* Pods */,
-				421705EE97B9EA7C50A7F807 /* Frameworks */,
+				28165710D587FB029FC6BAE1 /* Pods */,
+				78A0E958FD213F8D9C1F59DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				3FE5674A221102BC00690151 /* CHLAValet.app */,
-				0A62E600221DEA860035D02F /* CHLAValetTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -191,60 +158,26 @@
 			path = CHLAValet;
 			sourceTree = "<group>";
 		};
-		421705EE97B9EA7C50A7F807 /* Frameworks */ = {
+		78A0E958FD213F8D9C1F59DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1E9C43A10E480B79B71F1ECF /* Pods_CHLAValet.framework */,
-				2B9735F8F822B61631EC4F92 /* Pods_CHLAValetUITests.framework */,
-				7E5CFF80A92327755D69B4B4 /* Pods_CHLAValetTests.framework */,
+				CA1BBF33C9A896B309679904 /* Pods_CHLAValet.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9668779863F35F3BE195E42F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				1BFD15AFBA90E0A33F81A8FC /* Pods-CHLAValet.debug.xcconfig */,
-				5B75681D6222CB32B4B08A02 /* Pods-CHLAValet.release.xcconfig */,
-				81B3A9CB74125E0A3D47F8CA /* Pods-CHLAValetUITests.debug.xcconfig */,
-				A469FF93E7C3B6CA5F05F65B /* Pods-CHLAValetUITests.release.xcconfig */,
-				55F92407CB6B73416F11A17A /* Pods-CHLAValetTests.debug.xcconfig */,
-				B222A9F57F237DF533274BE8 /* Pods-CHLAValetTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0A62E5FF221DEA860035D02F /* CHLAValetTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0A62E607221DEA860035D02F /* Build configuration list for PBXNativeTarget "CHLAValetTests" */;
-			buildPhases = (
-				E875D78E7278A03750500249 /* [CP] Check Pods Manifest.lock */,
-				0A62E5FC221DEA860035D02F /* Sources */,
-				0A62E5FD221DEA860035D02F /* Frameworks */,
-				0A62E5FE221DEA860035D02F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0A62E606221DEA860035D02F /* PBXTargetDependency */,
-			);
-			name = CHLAValetTests;
-			productName = CHLAValetTests;
-			productReference = 0A62E600221DEA860035D02F /* CHLAValetTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		3FE56749221102BC00690151 /* CHLAValet */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FE5675C221102BF00690151 /* Build configuration list for PBXNativeTarget "CHLAValet" */;
 			buildPhases = (
-				279817F235502ED48CFAD23D /* [CP] Check Pods Manifest.lock */,
+				0BB990DBA2408939500D1402 /* [CP] Check Pods Manifest.lock */,
 				3FE56746221102BC00690151 /* Sources */,
 				3FE56747221102BC00690151 /* Frameworks */,
 				3FE56748221102BC00690151 /* Resources */,
-				C88A0817E9457A2E7C409BA3 /* [CP] Embed Pods Frameworks */,
+				01F7BACF66FEFE9DF4B63FAA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -265,10 +198,6 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = CSCI401;
 				TargetAttributes = {
-					0A62E5FF221DEA860035D02F = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = 3FE56749221102BC00690151;
-					};
 					3FE56749221102BC00690151 = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -288,19 +217,11 @@
 			projectRoot = "";
 			targets = (
 				3FE56749221102BC00690151 /* CHLAValet */,
-				0A62E5FF221DEA860035D02F /* CHLAValetTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0A62E5FE221DEA860035D02F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3FE56748221102BC00690151 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -314,29 +235,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		279817F235502ED48CFAD23D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CHLAValet-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C88A0817E9457A2E7C409BA3 /* [CP] Embed Pods Frameworks */ = {
+		01F7BACF66FEFE9DF4B63FAA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -362,7 +261,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CHLAValet/Pods-CHLAValet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E875D78E7278A03750500249 /* [CP] Check Pods Manifest.lock */ = {
+		0BB990DBA2408939500D1402 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -377,7 +276,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CHLAValetTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-CHLAValet-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -387,17 +286,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0A62E5FC221DEA860035D02F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0A62E60B221DEAC00035D02F /* APIManager.swift in Sources */,
-				0A62E60C221DEAC30035D02F /* ValetEntry.swift in Sources */,
-				0A62E603221DEA860035D02F /* CHLAValetTests.swift in Sources */,
-				0A62E60A221DEABE0035D02F /* Constants.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3FE56746221102BC00690151 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -426,14 +314,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		0A62E606221DEA860035D02F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3FE56749221102BC00690151 /* CHLAValet */;
-			targetProxy = 0A62E605221DEA860035D02F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		3FE56751221102BC00690151 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -454,46 +334,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0A62E608221DEA860035D02F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55F92407CB6B73416F11A17A /* Pods-CHLAValetTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = CHLAValetTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.theappvineyard.CHLAValetTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CHLAValet.app/CHLAValet";
-			};
-			name = Debug;
-		};
-		0A62E609221DEA860035D02F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B222A9F57F237DF533274BE8 /* Pods-CHLAValetTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = CHLAValetTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.theappvineyard.CHLAValetTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CHLAValet.app/CHLAValet";
-			};
-			name = Release;
-		};
 		3FE5675A221102BF00690151 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -612,7 +452,7 @@
 		};
 		3FE5675D221102BF00690151 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BFD15AFBA90E0A33F81A8FC /* Pods-CHLAValet.debug.xcconfig */;
+			baseConfigurationReference = 608BE975AE820EA27A5655F6 /* Pods-CHLAValet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -630,7 +470,7 @@
 		};
 		3FE5675E221102BF00690151 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B75681D6222CB32B4B08A02 /* Pods-CHLAValet.release.xcconfig */;
+			baseConfigurationReference = E12B6127386325CEE208D8D9 /* Pods-CHLAValet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -649,15 +489,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A62E607221DEA860035D02F /* Build configuration list for PBXNativeTarget "CHLAValetTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0A62E608221DEA860035D02F /* Debug */,
-				0A62E609221DEA860035D02F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3FE56745221102BC00690151 /* Build configuration list for PBXProject "CHLAValet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

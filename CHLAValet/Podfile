@@ -9,7 +9,4 @@ target 'CHLAValet' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftSpinner'
 
-  target 'CHLAValetTests' do
-    inherit! :search_paths
-  end
 end

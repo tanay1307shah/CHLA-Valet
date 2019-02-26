@@ -88,6 +88,9 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // Disable the Save button while editing.
         saveButton.isEnabled = false
+        saveChangesButton.isEnabled = false
+        saveButton.alpha = 0.5
+        saveChangesButton.alpha = 0.5
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateSaveButtonState()
@@ -104,7 +107,17 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
         let type = typeTextField.text ?? ""
         let make = makeTextField.text ?? ""
         saveButton.isEnabled = !name.isEmpty && !phoneNumber.isEmpty && !ticketNumber.isEmpty && !licensePlateNumber.isEmpty && !color.isEmpty && !type.isEmpty && !make.isEmpty
-        saveButton.isHighlighted = !saveButton.isEnabled
+        saveChangesButton.isEnabled = !name.isEmpty && !phoneNumber.isEmpty && !ticketNumber.isEmpty && !licensePlateNumber.isEmpty && !color.isEmpty && !type.isEmpty && !make.isEmpty
+        if saveButton.isEnabled {
+            saveButton.alpha = 1.0
+        } else {
+            saveButton.alpha = 0.5
+        }
+        if saveChangesButton.isEnabled {
+            saveChangesButton.alpha = 1.0
+        } else {
+            saveChangesButton.alpha = 0.5
+        }
     }
     
     private func createValetEntry() {
