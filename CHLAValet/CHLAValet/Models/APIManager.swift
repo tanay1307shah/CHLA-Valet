@@ -13,11 +13,10 @@ import SwiftyJSON
 class APIManager {
     
     static let shared = APIManager()
-    let baseURL = URL(string: Constants.someAPIURL)!
     
-    func someAPICall(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
-        
-        AF.request(baseURL, method: .get).validate().responseJSON { response in
+    func getAllCars(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
+        let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/getAllCars")!
+        AF.request(url, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let result = response.result.value {
@@ -28,7 +27,31 @@ class APIManager {
                 onFailure(error)
             }
         }
-        
+    }
+    
+    func addCar(valetEntry: ValetEntry, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
+        let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/addCar")!
+        let parameters: Parameters = ["phone":valetEntry.phoneNumber, "ticket":valetEntry.ticketNumber,
+                                      "license":valetEntry.licensePlate, "color":valetEntry.color, "type":valetEntry.type, "make":valetEntry.make]
+        AF.request(url, method: .get, parameters: parameters).responseString { response in
+            if (response.result.description == "SUCCESS") {
+                onSuccess()
+            } else {
+                // TODO: call onFailure()
+                print("Failure in addCar request")
+            }
+        }
+    }
+    
+    private func imageTobase64(image: UIImage) -> String {
+        let imageData = image.pngData()!
+        return imageData.base64EncodedString()
+    }
+    
+    private func base64ToImage(base64: String) -> UIImage {
+        let imageData: Data = Data(base64Encoded: base64, options: .ignoreUnknownCharacters)!
+        let image: UIImage = UIImage(data: imageData)!
+        return image
     }
 }
 

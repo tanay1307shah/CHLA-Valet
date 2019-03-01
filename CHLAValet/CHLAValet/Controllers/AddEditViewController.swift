@@ -65,15 +65,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
         }
-        
-        let name = nameTextField.text ?? ""
-        let phoneNumber = phoneNumberTextField.text ?? ""
-        let ticketNumber = ticketNumberTextField.text ?? ""
-        let licensePlateNumber = licencePlateNumberTextField.text ?? ""
-        let color = colorTextField.text ?? ""
-        let type = typeTextField.text ?? ""
-        let make = makeTextField.text ?? ""
-        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber, licensePlate: licensePlateNumber, color: color, type: type, make: make, image: nil, requested: false, paid: false, ready: false)
+        createValetEntry()
     }
     
     //MARK: Actions
@@ -96,6 +88,9 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // Disable the Save button while editing.
         saveButton.isEnabled = false
+        saveChangesButton.isEnabled = false
+        saveButton.alpha = 0.5
+        saveChangesButton.alpha = 0.5
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateSaveButtonState()
@@ -112,6 +107,27 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
         let type = typeTextField.text ?? ""
         let make = makeTextField.text ?? ""
         saveButton.isEnabled = !name.isEmpty && !phoneNumber.isEmpty && !ticketNumber.isEmpty && !licensePlateNumber.isEmpty && !color.isEmpty && !type.isEmpty && !make.isEmpty
-        saveButton.isHighlighted = !saveButton.isEnabled
+        saveChangesButton.isEnabled = !name.isEmpty && !phoneNumber.isEmpty && !ticketNumber.isEmpty && !licensePlateNumber.isEmpty && !color.isEmpty && !type.isEmpty && !make.isEmpty
+        if saveButton.isEnabled {
+            saveButton.alpha = 1.0
+        } else {
+            saveButton.alpha = 0.5
+        }
+        if saveChangesButton.isEnabled {
+            saveChangesButton.alpha = 1.0
+        } else {
+            saveChangesButton.alpha = 0.5
+        }
+    }
+    
+    private func createValetEntry() {
+        let name = nameTextField.text ?? ""
+        let phoneNumber = phoneNumberTextField.text ?? ""
+        let ticketNumber = ticketNumberTextField.text ?? ""
+        let licensePlateNumber = licencePlateNumberTextField.text ?? ""
+        let color = colorTextField.text ?? ""
+        let type = typeTextField.text ?? ""
+        let make = makeTextField.text ?? ""
+        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber, licensePlate: licensePlateNumber, color: color, type: type, make: make, image: nil, requested: false, paid: false, ready: false)
     }
 }

@@ -49,7 +49,8 @@ class RequestTableViewController: ValetTableViewController{
         }
         
         // TODO: Code to send ready text
-        if sender.alpha == 1.0 {
+        cars.getCarAt(indexPath.row).ready = !cars.getCarAt(indexPath.row).ready
+        if cars.getCarAt(indexPath.row).ready {
             sender.alpha = 0.5
         } else {
             sender.alpha = 1.0

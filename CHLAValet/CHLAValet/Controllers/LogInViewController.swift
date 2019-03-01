@@ -13,22 +13,27 @@ class LogInViewController: UIViewController {
 
     @IBOutlet weak var employeeIDTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    var api: APIManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        api = APIManager()
-        api.someAPICall(onSuccess: {(obj: JSON) in print(obj)}, onFailure:{ (error: Error) in print(error.localizedDescription)})
     }
 
     // MARK: Actions
     @IBAction func unwindToLogInPage(sender: UIStoryboardSegue) {
         // Logged Out
+        let cars = ValetEntryModel.shared
+        cars.clear()
     }
     
     @IBAction func enterButtonDidPressed(_ sender: UIButton) {
         // Verify valid info
         performSegue(withIdentifier: "logIn", sender: sender)
+    }
+    
+    func loadData() {
+        let cars = ValetEntryModel.shared
+        let valet1 = ValetEntry(name: "Nathan Scoglio", phoneNumber: "6263470607", ticketNumber: "1", licensePlate: "1ABC234", color: "Blue", type: "Elantra", make: "Hyundai", image: UIImage(named: "edit")!, requested: false, paid: false, ready: false)
+        cars.append(valet1)
     }
 }
 

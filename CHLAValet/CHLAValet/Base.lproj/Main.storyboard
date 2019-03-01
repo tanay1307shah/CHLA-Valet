@@ -280,6 +280,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="deleteButton:" destination="B5d-Qh-jCc" eventType="touchUpInside" id="Abg-VK-mup"/>
                                     <segue destination="hAo-BD-XZH" kind="unwind" unwindAction="unwindToValetListFromRemoveWithSender:" id="D4K-WV-zvr"/>
                                 </connections>
                             </button>
@@ -820,11 +821,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CHLALogo" width="877" height="339"/>
-        <image name="edit" width="45" height="45"/>
-        <image name="logOut" width="45" height="45"/>
-        <image name="parked" width="45" height="45"/>
-        <image name="requests" width="45" height="45"/>
+        <image name="CHLALogo" width="438" height="169"/>
+        <image name="edit" width="30" height="30"/>
+        <image name="logOut" width="30" height="30"/>
+        <image name="parked" width="30" height="30"/>
+        <image name="requests" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dPT-Vn-vtn"/>
