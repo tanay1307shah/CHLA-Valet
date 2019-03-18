@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70c5d205-b333-4cb0-940b-580b6a88ebd4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/request.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/temp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Model/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Model/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Service/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Service/CarService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Server-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Server-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Server-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/Server-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/ChlaServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/ChlaServerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/Model/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/Model/Car.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/Model/Requests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/Model/Requests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/Repositories/CarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/Repositories/CarRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/Service/CarService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/Service/CarService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CHLAserver/Server/controller/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.CHLAserver.Server.ChlaServerApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.CHLAserver.Server.ChlaServerApplicationTests.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.example.CHLAserver.Server.ChlaServerApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.example.CHLAserver.Server.ChlaServerApplicationTests.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/request.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/request.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -54,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/request.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="24" column="83" selection-start-line="24" selection-start-column="83" selection-end-line="24" selection-end-column="83" />
+            <state relative-caret-position="42">
+              <caret line="10" column="45" lean-forward="true" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#image#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -195,7 +174,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="835" />
     <option name="height" value="900" />
   </component>
@@ -305,7 +284,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552949788839" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552950208038" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="MTConfigurable" />
@@ -383,12 +362,12 @@
       <workItem from="1552698556028" duration="12482000" />
       <workItem from="1552888974774" duration="1610000" />
       <workItem from="1552891386434" duration="2144000" />
-      <workItem from="1552943792762" duration="5187000" />
+      <workItem from="1552943792762" duration="5644000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35359000" />
+    <option name="totallyTimeSpent" value="35816000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -542,8 +521,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/request.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="24" column="83" selection-start-line="24" selection-start-column="83" selection-end-line="24" selection-end-column="83" />
+        <state relative-caret-position="42">
+          <caret line="10" column="45" lean-forward="true" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
           <folding>
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#image#0;n#body#0;n#html#0;n#!!top" expanded="true" />
