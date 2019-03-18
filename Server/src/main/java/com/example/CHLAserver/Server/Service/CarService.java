@@ -18,10 +18,10 @@ public class CarService {
     private Hashtable<String,Car> carDB = new Hashtable<>();
     private List<Car> requestList = new ArrayList<>();
 
-    public boolean addCar(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make,String im1,String im2,String im3,String im4){
+    public boolean addCar(String Name, String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make,String im1,String im2,String im3,String im4,String location,String cuType){
 
         if(!carDB.containsKey(ticketNumber)){
-            Car c = new Car(phoneNumber,ticketNumber,licensePlate,color,make,type,im1,im2,im3,im4);
+            Car c = new Car(Name,phoneNumber,ticketNumber,licensePlate,color,make,type,im1,im2,im3,im4,location,cuType);
             cr.save(c);
             carDB.put(ticketNumber,c);
             return true;
@@ -29,14 +29,19 @@ public class CarService {
             return false;
     }
 
-    public List<Car> getRequested(){
+    public Iterable<Car> getRequested(){
+        System.out.println("Request list fetching");
         return requestList;
     }
 
-    public void request(String phoneNumber){
-        Car c  =cr.findCarByPhone(phoneNumber);
-        if(carDB.containsValue(c))
+    public Car request(String ticket){
+        Car c  =cr.findCarByTicket(ticket);
+        if(carDB.containsKey(ticket)) {
             requestList.add(c);
+            System.out.println("Car Added to request list");
+            return c;
+        }
+        return null;
     }
 
 

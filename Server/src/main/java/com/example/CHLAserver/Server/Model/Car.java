@@ -1,6 +1,11 @@
 package com.example.CHLAserver.Server.Model;
 
+import org.aspectj.lang.annotation.RequiredTypes;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -10,8 +15,15 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
+    private String Name;
+
+    @Min(10)
     private String phoneNumber;
+
+    @Min(3)
     private String ticketNumber;
+
     private String licensePlate;
     private String color;
     private String type;
@@ -20,13 +32,13 @@ public class Car {
     private String Image_2;
     private String Image_3;
     private String Image_4;
-    private boolean customerType;
     private String parkingLocation;
+    private String customerType;
 
     public Car(){}
 
-
-    public Car(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, boolean customerType, String parkingLocation) {
+    public Car(String name, String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, String parkingLocation, String customerType) {
+        Name = name;
         this.phoneNumber = phoneNumber;
         this.ticketNumber = ticketNumber;
         this.licensePlate = licensePlate;
@@ -37,21 +49,45 @@ public class Car {
         Image_2 = image_2;
         Image_3 = image_3;
         Image_4 = image_4;
-        this.customerType = customerType;
         this.parkingLocation = parkingLocation;
+        this.customerType = customerType;
     }
 
-    public Car(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4) {
-        this.phoneNumber = phoneNumber;
-        this.ticketNumber = ticketNumber;
-        this.licensePlate = licensePlate;
-        this.color = color;
-        this.type = type;
-        this.make = make;
-        Image_1 = image_1;
-        Image_2 = image_2;
-        Image_3 = image_3;
-        Image_4 = image_4;
+//    public Car(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, boolean customerType, String parkingLocation) {
+//        this.phoneNumber = phoneNumber;
+//        this.ticketNumber = ticketNumber;
+//        this.licensePlate = licensePlate;
+//        this.color = color;
+//        this.type = type;
+//        this.make = make;
+//        Image_1 = image_1;
+//        Image_2 = image_2;
+//        Image_3 = image_3;
+//        Image_4 = image_4;
+//    }
+//
+//    public Car(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, String parkingLocation, String customerType) {
+//        this.phoneNumber = phoneNumber;
+//        this.ticketNumber = ticketNumber;
+//        this.licensePlate = licensePlate;
+//        this.color = color;
+//        this.type = type;
+//        this.make = make;
+//        Image_1 = image_1;
+//        Image_2 = image_2;
+//        Image_3 = image_3;
+//        Image_4 = image_4;
+//        this.parkingLocation = parkingLocation;
+//        this.customerType = customerType;
+//    }
+
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
     }
 
     public Long getId() {
@@ -140,5 +176,21 @@ public class Car {
 
     public void setImage_4(String image_4) {
         Image_4 = image_4;
+    }
+
+    public String getParkingLocation() {
+        return parkingLocation;
+    }
+
+    public void setParkingLocation(String parkingLocation) {
+        this.parkingLocation = parkingLocation;
+    }
+
+    public String getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(String customerType) {
+        this.customerType = customerType;
     }
 }

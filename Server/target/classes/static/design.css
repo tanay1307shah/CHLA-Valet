@@ -1,0 +1,108 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#attribution {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    color: #fe8989;
+    z-index: 100;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+#container {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.button {
+    position: relative;
+    margin-bottom: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: #73AD21;
+    box-shadow: 0px 0px 0 0px rgba(0, 0, 0, 0);
+    border-radius: 50px;
+    width: 35.25rem;
+    height:10.25rem;
+    padding: 1rem 0;
+    font-family: "Itim", cursive;
+    font-weight: 600;
+    font-size: 4.95rem;
+    color: white;
+    cursor: pointer;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.icons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5rem 0 0;
+    width: 1.75rem;
+    height: 4.3rem;
+}
+
+i {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+}
+.icon-default {
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.icon-hover {
+    transition: opacity 0.3s, transform 0.3s;
+    transform: rotate(-180deg) scale(0.5);
+    opacity: 0;
+}
+
+.button:hover {
+    transform: scale(1.2);
+    box-shadow: 20px 15px rgba(0, 0, 0, 0.15);
+}
+.icon-hover {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+}
+.icon-default {
+    transform: rotate(180deg) scale(0.5);
+    opacity: 0;
+}
+
+.loader {
+    border: 16px solid #FFFFFF;
+    border-radius: 50%;
+    border-top: 16px solid #73AD21;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
