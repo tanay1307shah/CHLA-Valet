@@ -35,13 +35,14 @@ public class MainController {
     public static final String ACCOUNT_SID = "ACe6274305c04d3c304fda8f3c9ee96f41";
     public static final String AUTH_TOKEN = "9970b693a54501d5bbba2e9bdce14b5a";
     public static final String TWILIO_NUMBER = "+13312561975";
+    public static final String MSG_PRESET = "Thank you for dropping your car at CHLA - Valet, To get your car back from the Valet. ";
 
     @Autowired
     private CarService cs;
 
 
     private final static Logger log =
-            Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+            (Logger) Logger.getLogger(String.valueOf(Logger.class));
 
 
 
@@ -68,7 +69,6 @@ public class MainController {
     @PostMapping("/cars/addCar")
     public @ResponseBody String addNewCar(@RequestParam String Name,
                                           @RequestParam String phone,
-                                          @RequestParam String ticket,
                                           @RequestParam String license,
                                           @RequestParam String color,
                                           @RequestParam String type,
@@ -81,9 +81,19 @@ public class MainController {
                                           @RequestParam String customerType
     ){
 
-        if(cs.addCar(Name,phone, ticket, license, color, type, make,im1,im2,im3,im4,location,customerType)){
+        Car c = cs.addCar(Name,phone, license, color, type, make,im1,im2,im3,im4,location,customerType);
+        if(c!= null){
             log.log(Level.INFO,"Adding Car to the Database");
-            String msg = "Thank you for dropping your car at CHLA - Valet, To get your car back from the Valet, click the link below to request your car back from Valet. https://chlaserver.azurewebsites.net/request.html?id=" + ticket;
+            String msg = "";
+            if(c.getCustomerType().compareToIgnoreCase("patient") == 0){
+                String url = "https://chlaserver.azurewebsites.net/request.html?id=" + c.getTicketNumber();
+                String sp_msg = "You can request your car back by using the link provided below. ";
+                msg = MSG_PRESET + sp_msg + url;
+            }else{
+                String url = "https://chlaserver.azurewebsites.net/employee.html?id=" + c.getTicketNumber();
+                String sp_msg = "You can find your cars parking location by the link provided below. ";
+                msg = MSG_PRESET + sp_msg + url;
+            }
             sendSMS(msg, phone);
             return "OK";
         }

@@ -13,17 +13,14 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(updatable = false,nullable = false)
+    private Long ticketNumber;
 
     @NotNull
     private String Name;
 
     @Min(10)
     private String phoneNumber;
-
-    @Min(3)
-    private String ticketNumber;
-
     private String licensePlate;
     private String color;
     private String type;
@@ -37,10 +34,9 @@ public class Car {
 
     public Car(){}
 
-    public Car(String name, String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, String parkingLocation, String customerType) {
+    public Car(String name, String phoneNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, String parkingLocation, String customerType) {
         Name = name;
         this.phoneNumber = phoneNumber;
-        this.ticketNumber = ticketNumber;
         this.licensePlate = licensePlate;
         this.color = color;
         this.type = type;
@@ -90,28 +86,12 @@ public class Car {
         Name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getTicketNumber() {
-        return ticketNumber;
-    }
-
-    public void setTicketNumber(String ticketNumber) {
-        this.ticketNumber = ticketNumber;
     }
 
     public String getLicensePlate() {
@@ -182,6 +162,14 @@ public class Car {
         return parkingLocation;
     }
 
+    public Long getTicketNumber() {
+        return ticketNumber;
+    }
+
+    public void setTicketNumber(Long ticketNumber) {
+        this.ticketNumber = ticketNumber;
+    }
+
     public void setParkingLocation(String parkingLocation) {
         this.parkingLocation = parkingLocation;
     }
@@ -193,4 +181,10 @@ public class Car {
     public void setCustomerType(String customerType) {
         this.customerType = customerType;
     }
+
+//    @Override
+//    public String toString() {
+//        String s = "Car{" + "ID:" + this.id+ "}";
+//        return s;
+//    }
 }

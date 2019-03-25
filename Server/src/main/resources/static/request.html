@@ -8,7 +8,7 @@
             var data = url.split("?")[1];
             var id = data.split("=")[1];
 
-            var request_url = "http://chlaserver.azurewebsites.net/chla/request/" + id;
+            var request_url = "https://chlaserver.azurewebsites.net/chla/request/" + id;
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 document.getElementById("requestBtn").innerHTML = "<div class=\"loader\">\n" +

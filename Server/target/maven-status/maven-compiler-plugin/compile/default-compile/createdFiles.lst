@@ -1,7 +1,7 @@
 com\example\CHLAserver\Server\Model\Car.class
-com\example\CHLAserver\Server\Service\CarService.class
 com\example\CHLAserver\Server\Model\Requests.class
 com\example\CHLAserver\Server\Repositories\CarRepository.class
 com\example\CHLAserver\Server\Repositories\RequestRepository.class
+com\example\CHLAserver\Server\Service\CarService.class
 com\example\CHLAserver\Server\controller\MainController.class
 com\example\CHLAserver\Server\ChlaServerApplication.class
