@@ -27,6 +27,11 @@ import java.util.logging.Logger;
 
 import static org.springframework.http.HttpStatus.*;
 
+//TODO: New local storage for employee parked cars and patient parked cars
+//TODO: New endpoints for /getPatientParkedCars and /getEmployeeParkedCars
+//TODO: New endpoint for getAllParkedCars (Leave for now)
+
+
 @Controller
 @RequestMapping("/chla")
 public class MainController {
@@ -111,6 +116,7 @@ public class MainController {
         return cs.getCar(ticket);
     }
 
+    //TODO: Update the function based on the next Database Structure
     @GetMapping("/cars/updateInfo")
     public @ResponseBody String editCarInfo(@RequestParam String phone,
                                                    @RequestParam String ticket,
@@ -170,5 +176,13 @@ public class MainController {
     public @ResponseBody Iterable<Car> getRequestedCars(){
         return cs.getRequested();
     }
+
+
+    //TODO
+    @PostMapping("cars/delete/{ticket}")
+    public void deleteCar(@PathVariable String ticket){
+
+    }
+
 
 }
