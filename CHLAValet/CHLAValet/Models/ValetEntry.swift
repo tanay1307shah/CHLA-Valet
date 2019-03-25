@@ -18,12 +18,11 @@ class ValetEntry {
     var color: String
     var type: String
     var make: String
-    var image: UIImage?
-    var requested: Bool
-    var paid: Bool
-    var ready: Bool
+    var images: [UIImage?]
+    var location: String
+    var customerType: String
     
-    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, image: UIImage?, requested: Bool, paid: Bool, ready: Bool) {
+    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, images: [UIImage?], customerType: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.ticketNumber = ticketNumber
@@ -31,23 +30,31 @@ class ValetEntry {
         self.color = color
         self.type = type
         self.make = make
-        self.image = image
-        self.requested = requested
-        self.paid = paid
-        self.ready = ready
+        self.images = images
+        self.customerType = customerType
+        self.location = ""
     }
     
     init(obj: JSON) {
-        self.name = "test"
+        self.name = obj["name"].stringValue
         self.phoneNumber = obj["phoneNumber"].stringValue
         self.ticketNumber = obj["ticketNumber"].stringValue
         self.licensePlate = obj["licensePlate"].stringValue
         self.color = obj["color"].stringValue
         self.type = obj["type"].stringValue
         self.make = obj["make"].stringValue
-        self.image = UIImage(named: "edit")!
-        self.requested = false
-        self.paid = false
-        self.ready = false
+        
+        let imagesArray = obj["images"].arrayValue
+        let manager = APIManager.shared
+        self.images = []
+        for image in imagesArray{
+            self.images.append(manager.base64ToImage(base64url: image.stringValue))
+        }
+        self.location = obj["location"].stringValue
+        self.customerType = obj["customerType"].stringValue
+    }
+    
+    func setlocation(location: String){
+        self.location = location
     }
 }

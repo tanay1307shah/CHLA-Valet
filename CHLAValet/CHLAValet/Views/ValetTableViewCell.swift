@@ -15,6 +15,8 @@ class ValetTableViewCell : UITableViewCell {
     @IBOutlet weak var carLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var requestButton: RoundedUIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

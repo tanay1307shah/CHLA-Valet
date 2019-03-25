@@ -9,14 +9,16 @@
 import UIKit
 import os.log
 
-class AddEditViewController: UIViewController, UITextFieldDelegate {
+class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     var valet: ValetEntry?
+    var images: [UIImage?] = []
     
     //MARK: Outlets
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
-    @IBOutlet weak var ticketNumberTextField: UITextField!
+    @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var licencePlateNumberTextField: UITextField!
     @IBOutlet weak var colorTextField: UITextField!
     @IBOutlet weak var typeTextField: UITextField!
@@ -28,10 +30,10 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Handle the text field’s user input through delegate callbacks.
+        // Handle the text field’s user input through delegate callbacks.        
         nameTextField.delegate = self
         phoneNumberTextField.delegate = self
-        ticketNumberTextField.delegate = self
+        locationTextField.delegate = self
         licencePlateNumberTextField.delegate = self
         colorTextField.delegate = self
         typeTextField.delegate = self
@@ -45,15 +47,66 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
             saveButton.isHidden = true
             nameTextField.text = valet.name
             phoneNumberTextField.text = valet.phoneNumber
-            ticketNumberTextField.text = valet.ticketNumber
             licencePlateNumberTextField.text = valet.licensePlate
             colorTextField.text = valet.color
             typeTextField.text = valet.type
             makeTextField.text = valet.make
+            locationTextField.text = valet.location
         }
         
         // Enable the Save button only if the text field has a valid Meal name.
         updateSaveButtonState()
+    }
+    
+    // MARK: UIImagePickerControllerDelegate
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let originalImage = info[.originalImage] as! UIImage
+        images.append(originalImage)
+        collectionView.reloadData()
+        print("original Image\(originalImage)")
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Collection view delegates
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
+        cell.imageView.image = images[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let imgHeight = collectionView.bounds.height / 2.0
+        let imgWidth = imgHeight
+        
+        return CGSize(width: imgWidth, height: imgHeight)
     }
     
     //MARK: Navigation
@@ -76,13 +129,32 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
     @IBAction func backgroundDidPressed(_ sender: UITapGestureRecognizer) {
         nameTextField.resignFirstResponder()
         phoneNumberTextField.resignFirstResponder()
-        ticketNumberTextField.resignFirstResponder()
+        locationTextField.resignFirstResponder()
         licencePlateNumberTextField.resignFirstResponder()
         colorTextField.resignFirstResponder()
         typeTextField.resignFirstResponder()
         makeTextField.resignFirstResponder()
     }
     
+    @IBAction func getImagePickerDidSelect(_ sender: UIButton){
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteButtonDidPressed(_ sender: UIButton) {
+        guard let selectedCollectionCell = sender.superview?.superview as? ImageCollectionViewCell else {
+            fatalError("Unexpected sender: \(String(describing: sender))")
+        }
+        
+        guard let indexPath = collectionView.indexPath(for: selectedCollectionCell) else {
+            fatalError("The selected cell is not being displayed by the table")
+        }
+        
+        images.remove(at: indexPath.row)
+        collectionView.reloadData()
+    }
     
     //MARK: UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -101,13 +173,12 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
         // Disable the Save button if the any text fields are empty.
         let name = nameTextField.text ?? ""
         let phoneNumber = phoneNumberTextField.text ?? ""
-        let ticketNumber = ticketNumberTextField.text ?? ""
         let licensePlateNumber = licencePlateNumberTextField.text ?? ""
         let color = colorTextField.text ?? ""
         let type = typeTextField.text ?? ""
         let make = makeTextField.text ?? ""
-        saveButton.isEnabled = !name.isEmpty && !phoneNumber.isEmpty && !ticketNumber.isEmpty && !licensePlateNumber.isEmpty && !color.isEmpty && !type.isEmpty && !make.isEmpty
-        saveChangesButton.isEnabled = !name.isEmpty && !phoneNumber.isEmpty && !ticketNumber.isEmpty && !licensePlateNumber.isEmpty && !color.isEmpty && !type.isEmpty && !make.isEmpty
+        saveButton.isEnabled = !name.isEmpty && !phoneNumber.isEmpty && !licensePlateNumber.isEmpty && !color.isEmpty && !type.isEmpty && !make.isEmpty
+        saveChangesButton.isEnabled = !name.isEmpty && !phoneNumber.isEmpty && !licensePlateNumber.isEmpty && !color.isEmpty && !type.isEmpty && !make.isEmpty
         if saveButton.isEnabled {
             saveButton.alpha = 1.0
         } else {
@@ -123,11 +194,15 @@ class AddEditViewController: UIViewController, UITextFieldDelegate {
     private func createValetEntry() {
         let name = nameTextField.text ?? ""
         let phoneNumber = phoneNumberTextField.text ?? ""
-        let ticketNumber = ticketNumberTextField.text ?? ""
+        let ticketNumber = valet?.ticketNumber
         let licensePlateNumber = licencePlateNumberTextField.text ?? ""
         let color = colorTextField.text ?? ""
         let type = typeTextField.text ?? ""
         let make = makeTextField.text ?? ""
-        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber, licensePlate: licensePlateNumber, color: color, type: type, make: make, image: nil, requested: false, paid: false, ready: false)
+        let location = locationTextField.text ?? ""
+        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber ?? "", licensePlate: licensePlateNumber, color: color, type: type, make: make, images: images, customerType: "patient")
+        if location != "" {
+            valet?.setlocation(location: location)
+        }
     }
 }

@@ -18,8 +18,60 @@ class RequestTableViewController: ValetTableViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         requestsTableView.reloadData()
     }
+    
+    // MARK: Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        switch(segue.identifier ?? "") {
+        case "showInfo":
+            guard let infoViewController = segue.destination as? InfoViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedCarCell = sender as? ValetTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedCarCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedCar = ValetEntryModel.shared.requestedEntries[indexPath.row]
+            infoViewController.valet = selectedCar
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+        }
+    }
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ValetEntryModel.shared.requestedEntries.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "valetCell"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ValetTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of ValetTableViewCell.")
+        }
+        // Configure the cell...
+        let car = ValetEntryModel.shared.requestedEntries[indexPath.row]
+        cell.ticketNumberLabel.text = car.ticketNumber
+        cell.colorLabel.text = car.color.uppercased()
+        cell.carLabel.text = car.make.uppercased() + " " + car.type.uppercased()
+        cell.nameLabel.text = car.name.uppercased()
+        return cell
+    }
+    
     
     //MARK: Actions
     @IBAction func payButtonDidPressed(_ sender: UIButton) {
@@ -30,31 +82,5 @@ class RequestTableViewController: ValetTableViewController{
         guard let indexPath = tableView.indexPath(for: selectedCarCell) else {
             fatalError("The selected cell is not being displayed by the table")
         }
-        
-        cars.getCarAt(indexPath.row).paid = !cars.getCarAt(indexPath.row).paid
-        if cars.getCarAt(indexPath.row).paid {
-            sender.alpha = 0.5
-        } else {
-            sender.alpha = 1.0
-        }
-    }
-    
-    @IBAction func readyButtonDidPressed(_ sender: UIButton) {
-        guard let selectedCarCell = sender.superview?.superview as? ValetTableViewCell else {
-            fatalError("Unexpected sender: \(String(describing: sender))")
-        }
-        
-        guard let indexPath = tableView.indexPath(for: selectedCarCell) else {
-            fatalError("The selected cell is not being displayed by the table")
-        }
-        
-        // TODO: Code to send ready text
-        cars.getCarAt(indexPath.row).ready = !cars.getCarAt(indexPath.row).ready
-        if cars.getCarAt(indexPath.row).ready {
-            sender.alpha = 0.5
-        } else {
-            sender.alpha = 1.0
-        }
-        
     }
 }

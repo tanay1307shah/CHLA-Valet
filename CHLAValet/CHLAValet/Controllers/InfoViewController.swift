@@ -8,10 +8,12 @@
 
 import UIKit
 import os.log
+import SwiftSpinner
 
-class InfoViewController: UIViewController {
+class InfoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var valet: ValetEntry?
+    @IBOutlet weak var collectionView: UICollectionView!
     
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -24,7 +26,6 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadInfo()
     }
     
@@ -49,17 +50,33 @@ class InfoViewController: UIViewController {
         }
     }
     
+    // MARK: Collection view delegates
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return valet?.images.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
+        cell.imageView.image = valet?.images[indexPath.row]
+        return cell
+    }
+    
     // MARK: Actions
     @IBAction func unwindToInfoPage(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? AddEditViewController, let editValet = sourceViewController.valet {
             valet = editValet
-            if let tableViewController = self.parent?.children[0].children[0] as? ValetTableViewController, let table = tableViewController.tableView {
-                if let selectedIndexPath = table.indexPathForSelectedRow {
-                    // Update an existing meal.
-                    tableViewController.cars.set(at: selectedIndexPath.row, valet!)
-                    table.reloadRows(at: [selectedIndexPath], with: .none)
-                }
-            }
+            SwiftSpinner.show("Loading...")
+            APIManager.shared.updateInfo(valetEntry: valet!, onSuccess: {
+                SwiftSpinner.hide()
+                
+            }, onFailure: {e in
+                print(e.localizedDescription)
+                SwiftSpinner.hide()
+            })
             loadInfo()
         } else {
             os_log("The data was not passed back", log: OSLog.default, type: .debug)
@@ -67,14 +84,9 @@ class InfoViewController: UIViewController {
     }
     
     @IBAction func deleteButton(_ sender: UIButton) {
-        if let tableViewController = self.parent?.children[0].children[0] as? ValetTableViewController, let table = tableViewController.tableView {
-            if let selectedIndexPath = table.indexPathForSelectedRow {
-                // Remove car
-                tableViewController.cars.remove(at: selectedIndexPath.row)
-                table.deleteRows(at: [selectedIndexPath], with: .fade)
-            }
-            self.navigationController?.popViewController(animated: true)
-        }
+        // Remove car from database : TODO
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     

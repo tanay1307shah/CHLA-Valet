@@ -10,35 +10,14 @@ import Foundation
 
 class ValetEntryModel{
     
-    private var valetEntries: [ValetEntry]
+    var valetEntries: [ValetEntry]
+    var requestedEntries: [ValetEntry]
     
     public static let shared = ValetEntryModel()
     
     init(){
         valetEntries = [ValetEntry]()
+        requestedEntries = [ValetEntry]()
     }
     
-    func getCarAt(_ index: Int) -> ValetEntry {
-        return valetEntries[index]
-    }
-    
-    func append(_ valetEntry: ValetEntry){
-        valetEntries.append(valetEntry)
-    }
-    
-    func set(at: Int, _ valetEntry: ValetEntry){
-        valetEntries[at] = valetEntry
-    }
-    
-    func remove(at: Int){
-        valetEntries.remove(at: at)
-    }
-    
-    func count() -> Int {
-        return valetEntries.count
-    }
-    
-    func clear() {
-        valetEntries.removeAll()
-    }
 }
