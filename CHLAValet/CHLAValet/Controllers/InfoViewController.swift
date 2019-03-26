@@ -23,6 +23,7 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var makeLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var colorLabel: UILabel!
+    @IBOutlet weak var customerTypeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,9 +96,10 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
         phoneNumberLabel.text = valet?.phoneNumber
         ticketNumberLabel.text = valet?.ticketNumber
         licencePlateNumber.text = valet?.licensePlate
-        makeLabel.text = valet?.make
-        typeLabel.text = valet?.type
-        colorLabel.text = valet?.color
+        makeLabel.text = valet?.make.capitalized
+        typeLabel.text = valet?.type.capitalized
+        colorLabel.text = valet?.color.capitalized
+        customerTypeLabel.text = valet?.customerType.capitalized
     }
 }
 

@@ -33,7 +33,6 @@ class ValetTableViewController: UITableViewController {
     }
     
     func loadData() {
-        //self.showSpinner(onView: self.view)
         SwiftSpinner.show("Loading...")
         ValetEntryModel.shared.valetEntries.removeAll()
         let onSuccessHandlerAll: (JSON) -> (Void) = { obj in

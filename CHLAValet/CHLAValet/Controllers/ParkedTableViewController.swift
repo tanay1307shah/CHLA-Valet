@@ -69,6 +69,9 @@ class ParkedTableViewController: ValetTableViewController{
         cell.colorLabel.text = car.color.uppercased()
         cell.carLabel.text = car.make.uppercased() + " " + car.type.uppercased()
         cell.nameLabel.text = car.name.uppercased()
+        if(ValetEntryModel.shared.requestedEntries.contains(where: { $0.ticketNumber == ValetEntryModel.shared.valetEntries[indexPath.row].ticketNumber })){
+            cell.requestButton.alpha = 0.5
+        }
         return cell
     }
     
@@ -80,5 +83,11 @@ class ParkedTableViewController: ValetTableViewController{
         guard let indexPath = tableView.indexPath(for: selectedCarCell) else {
             fatalError("The selected cell is not being displayed by the table")
         }
+        
+        APIManager.shared.requestCar(ticketNumber: ValetEntryModel.shared.valetEntries[indexPath.row].ticketNumber, onSuccess: {
+            print("Success!")
+        }, onFailure: {e in
+            print(e.localizedDescription)
+        })
     }
 }

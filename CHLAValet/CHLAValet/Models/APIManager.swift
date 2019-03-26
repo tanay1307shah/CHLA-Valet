@@ -46,23 +46,26 @@ class APIManager {
 
     
     func addCar(valetEntry: ValetEntry, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
-        let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/addCar")!
-        var imageStrings = ["", "", "", ""]
-        for i in 0..<min(imageStrings.count, valetEntry.images.count) {
-            imageStrings[i] = imageTobase64(image: valetEntry.images[i]!)
-            print(imageStrings[i])
-        }
-        let parameters: Parameters = ["Name": valetEntry.name, "phone":valetEntry.phoneNumber,
+        let parameters: Parameters = ["Name":valetEntry.name,
+                                      "phone":valetEntry.phoneNumber,
                                       "license":valetEntry.licensePlate, "color":valetEntry.color,
                                       "type":valetEntry.type, "make":valetEntry.make,
-                                      "im1":imageStrings[0], "im2":imageStrings[1], "im3":imageStrings[2], "im4":imageStrings[3], "location":valetEntry.location,
-                                      "customerType": valetEntry.customerType]
-        AF.request(url, method: .post, parameters: parameters).responseString { response in
+                                      "location":valetEntry.location,
+                                      "customerType":valetEntry.customerType]
+        AF.upload(multipartFormData: { (multipartFormData) in
+            for (key, value) in parameters {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+            for i in 0..<valetEntry.images.count{
+                if let data = valetEntry.images[i]?.jpegData(compressionQuality: 0.25){
+                    multipartFormData.append(data, withName: "images", fileName: "image\(i).jpeg", mimeType: "image/jpeg")
+                }
+            }
+        }, to: Constants.CHLA_API_BASE_URL + "/test/mpf", method: .post).responseString { response in
             if (response.result.description == "SUCCESS") {
                 debugPrint(response)
                 onSuccess()
             } else {
-                // TODO: call onFailure()
                 print("Failure in addCar request")
                 debugPrint(response)
             }
@@ -71,13 +74,8 @@ class APIManager {
     
     func updateInfo(valetEntry: ValetEntry, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/updateInfo")!
-        var imageStrings = ["", "", "", ""]
-        for i in 0..<min(imageStrings.count, valetEntry.images.count) {
-            imageStrings[i] = imageTobase64(image: valetEntry.images[i]!)
-            print(imageStrings[i])
-        }
         let parameters: Parameters = ["phone":valetEntry.phoneNumber, "ticket":valetEntry.ticketNumber,
-                                      "license":valetEntry.licensePlate, "color":valetEntry.color, "type":valetEntry.type, "make":valetEntry.make, "im1": imageStrings[0], "im2":imageStrings[1], "im3":imageStrings[2], "im4":imageStrings[3]]
+                                      "license":valetEntry.licensePlate, "color":valetEntry.color, "type":valetEntry.type, "make":valetEntry.make]
         AF.request(url, method: .get, parameters: parameters).responseString { response in
             if (response.result.description == "Completed") {
                 onSuccess()
@@ -89,25 +87,18 @@ class APIManager {
         }
     }
     
-    func imageTobase64(image: UIImage) -> String {
-        let imageData = image.pngData()!
-        let base64 = imageData.base64EncodedString(options: .lineLength64Characters)
-        let base64url = base64.replacingOccurrences(of: "/", with: "_")
-            .replacingOccurrences(of: "+", with: "-")
-            .replacingOccurrences(of: "=", with: "")
-        return base64url
-    }
-    
-    func base64ToImage(base64url: String) -> UIImage {
-        var base64 = base64url.replacingOccurrences(of: "_", with: "/")
-            .replacingOccurrences(of: "-", with: "+")
-        // Add any necessary padding with `=`
-        if base64.count % 4 != 0 {
-            base64.append(String(repeating: "=", count: 4 - base64.count % 4))
+    func requestCar(ticketNumber: String, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
+        let url = URL(string: Constants.CHLA_API_BASE_URL + "/request")!
+        let parameters: Parameters = ["id":ticketNumber]
+        AF.request(url, method: .get, parameters: parameters).responseString { response in
+            if (response.result.description == "Completed") {
+                debugPrint(response)
+                onSuccess()
+            } else {
+                // TODO: call onFailure()
+                debugPrint(response)
+            }
         }
-        let imageData: Data = Data(base64Encoded: base64, options: .ignoreUnknownCharacters)!
-        let image: UIImage = UIImage(data: imageData)!
-        return image
     }
 }
 

@@ -94,6 +94,7 @@
 		0ABA911A22163E2F00666324 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3FE56751221102BC00690151 /* Main.storyboard */,
 				3FA4F46222160E27008478F8 /* CircleView.swift */,
 				3FA4F46422161220008478F8 /* RoundedUIView.swift */,
 				3FA4F466221615A1008478F8 /* RoundedUIButton.swift */,
@@ -152,7 +153,6 @@
 				0ABA911A22163E2F00666324 /* Views */,
 				0ABA911922163E2500666324 /* Models */,
 				3FE5674D221102BC00690151 /* AppDelegate.swift */,
-				3FE56751221102BC00690151 /* Main.storyboard */,
 				3FE56754221102BF00690151 /* Assets.xcassets */,
 				3FE56756221102BF00690151 /* LaunchScreen.storyboard */,
 				3FE56759221102BF00690151 /* Info.plist */,

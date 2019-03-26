@@ -45,10 +45,9 @@ class ValetEntry {
         self.make = obj["make"].stringValue
         
         let imagesArray = obj["images"].arrayValue
-        let manager = APIManager.shared
         self.images = []
         for image in imagesArray{
-            self.images.append(manager.base64ToImage(base64url: image.stringValue))
+            self.images.append(UIImage(named: image.stringValue))
         }
         self.location = obj["location"].stringValue
         self.customerType = obj["customerType"].stringValue
