@@ -16,10 +16,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -34,6 +32,7 @@ public class MainController {
 
     public static String uploadDirectory = System.getProperty("user.dir")+"/src/main/resources/static/images";
     public static final String MSG_PRESET = "Thank you for dropping your car at CHLA - Valet, To get your car back from the Valet. ";
+    public static final String DATE_PATTERN = "yyyy-MM-dd";
 
     @Autowired
     private CarService cs;
@@ -62,10 +61,13 @@ public class MainController {
         };
 
         for(int i=0;i<images.length;i++){
+            SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+            String date = sdf.format(new Date());
+            date = date.replace("-","_");
             new File(uploadDirectory + "/"+license).mkdir();
             Path path = Paths.get(uploadDirectory+"/"+license,images[i].getOriginalFilename());
             log.info("Add Car: Writing image " + images[i].getOriginalFilename() + " at location " + path.toString());
-            String imLoc = "localhost:8080/images/" + license + "/"+ images[i].getOriginalFilename();
+            String imLoc = "https://b0997224.ngrok.io/images/" +license + "/"+ images[i].getOriginalFilename();
             imLocation.add(i,imLoc);
             Files.write(path,images[i].getBytes());
         }
@@ -74,7 +76,6 @@ public class MainController {
         Car c = cs.addCar(Name,phone, license, color, type, make,imLocation.get(0),imLocation.get(1),imLocation.get(2),imLocation.get(3),location,customerType);
         if(c!= null){
             log.info("Adding Car " + c.getTicketNumber() +" to DB");
-            //log.log(Level.INFO,"Adding Car to the Database");
             String msg = "";
             if(c.getCustomerType().compareToIgnoreCase("patient") == 0){
                 String url = "https://chlaserver.azurewebsites.net/request.html?id=" + c.getTicketNumber();

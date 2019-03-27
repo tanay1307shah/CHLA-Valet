@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -182,7 +183,15 @@ public class Car {
         this.customerType = customerType;
     }
 
-//    @Override
+//    public ArrayList<String> getImages() {
+//        return images;
+//    }
+//
+//    public void setImages(ArrayList<String> images) {
+//        this.images = images;
+//    }
+
+    //    @Override
 //    public String toString() {
 //        String s = "Car{" + "ID:" + this.id+ "}";
 //        return s;
