@@ -16,7 +16,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.http.HttpStatus.*;
@@ -39,23 +41,39 @@ public class MainController {
     private static Logger log = LoggerFactory.getLogger(MainController.class);
 
     @PostMapping("/cars/addCar")
-    public @ResponseBody String addNewCar(@RequestParam String Name,
-                                          @RequestParam String phone,
-                                          @RequestParam String license,
-                                          @RequestParam String color,
-                                          @RequestParam String type,
-                                          @RequestParam String make,
-                                          @RequestParam String im1,
-                                          @RequestParam String im2,
-                                          @RequestParam String im3,
-                                          @RequestParam String im4,
-                                          @RequestParam String location,
-                                          @RequestParam String customerType
-    ){
+    public @ResponseBody Car addNewCar(@RequestParam Map<String,String> allData,@RequestParam MultipartFile[] images,HttpServletRequest req) throws IOException {
 
-        Car c = cs.addCar(Name,phone, license, color, type, make,im1,im2,im3,im4,location,customerType);
+        String Name = allData.get("Name");
+        String phone = allData.get("phone");
+        String type = allData.get("type");
+        String license = allData.get("license");
+        String color = allData.get("color");
+        String make = allData.get("location");
+        String location = allData.get("location");
+        String customerType = allData.get("customerType");
+
+        ArrayList<String> imLocation = new ArrayList<String>(){
+            {
+                add("");
+                add("");
+                add("");
+                add("");
+            }
+        };
+
+        for(int i=0;i<images.length;i++){
+            new File(uploadDirectory + "/"+license).mkdir();
+            Path path = Paths.get(uploadDirectory+"/"+license,images[i].getOriginalFilename());
+            log.info("Add Car: Writing image " + images[i].getOriginalFilename() + " at location " + path.toString());
+            String imLoc = "localhost:8080/images/" + license + "/"+ images[i].getOriginalFilename();
+            imLocation.add(i,imLoc);
+            Files.write(path,images[i].getBytes());
+        }
+
+
+        Car c = cs.addCar(Name,phone, license, color, type, make,imLocation.get(0),imLocation.get(1),imLocation.get(2),imLocation.get(3),location,customerType);
         if(c!= null){
-            log.info("Adding Car to DB");
+            log.info("Adding Car " + c.getTicketNumber() +" to DB");
             //log.log(Level.INFO,"Adding Car to the Database");
             String msg = "";
             if(c.getCustomerType().compareToIgnoreCase("patient") == 0){
@@ -68,10 +86,10 @@ public class MainController {
                 msg = MSG_PRESET + sp_msg + url;
             }
             Twillio.sendSMS(msg, phone);
-            return "OK";
+            return c;
         }
         log.error("Car Already Exsits in the Database");
-        return "ALREADY_EXSITS";
+        return null;
     }
 
     @GetMapping("/cars/getAllCars")
@@ -158,36 +176,10 @@ public class MainController {
         System.out.println(allReqParam.toString());
     }
 
-    @PostMapping("/test/mpf")
-    @ResponseStatus(HttpStatus.OK)
-    public void test(@RequestParam MultipartFile[] images, HttpServletRequest req) throws IOException {
-        //byte[] bytes = image0.getBytes();
-
-        for(MultipartFile image:images){
-            System.out.println(image.getOriginalFilename());
-            Path path = Paths.get(uploadDirectory,image.getOriginalFilename());
-            Files.write(path,image.getBytes());
-        }
-
-
-
-
-//        System.out.println(req.getServletContext().getRealPath("/static"));
-//        inputStream = image0.getInputStream();
+//    @PostMapping("/test/mpf")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void test(@RequestParam MultipartFile[] images, HttpServletRequest req) throws IOException {
 //
-//        File newFile = new File("classpath:static/" + image0.getOriginalFilename());
-//        if (!newFile.exists()) {
-//            newFile.createNewFile();
-//        }
-//        outputStream = new FileOutputStream(newFile);
-//        int read = 0;
-//        byte[] bytes = new byte[1024];
-//
-//        while ((read = inputStream.read(bytes)) != -1) {
-//            outputStream.write(bytes, 0, read);
-//        }
-//        Files.write(Paths.get("/" + image0.getOriginalFilename()),bytes);
-        //FileUtils.writeByteArrayToFile(new File("/"+image0.getOriginalFilename()), bytes);
-    }
+//    }
 
 }

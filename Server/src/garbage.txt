@@ -1,0 +1,16 @@
+//        System.out.println(req.getServletContext().getRealPath("/static"));
+//        inputStream = image0.getInputStream();
+//
+//        File newFile = new File("classpath:static/" + image0.getOriginalFilename());
+//        if (!newFile.exists()) {
+//            newFile.createNewFile();
+//        }
+//        outputStream = new FileOutputStream(newFile);
+//        int read = 0;
+//        byte[] bytes = new byte[1024];
+//
+//        while ((read = inputStream.read(bytes)) != -1) {
+//            outputStream.write(bytes, 0, read);
+//        }
+//        Files.write(Paths.get("/" + image0.getOriginalFilename()),bytes);
+        //FileUtils.writeByteArrayToFile(new File("/"+image0.getOriginalFilename()), bytes);
