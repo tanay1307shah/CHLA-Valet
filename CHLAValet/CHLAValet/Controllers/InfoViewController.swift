@@ -13,6 +13,7 @@ import SwiftSpinner
 class InfoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var valet: ValetEntry?
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -100,6 +101,17 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
         typeLabel.text = valet?.type.capitalized
         colorLabel.text = valet?.color.capitalized
         customerTypeLabel.text = valet?.customerType.capitalized
+        for i in 0 ..< (valet?.imageURLs.count)! {
+            let url = valet?.imageURLs[i]
+            if url == nil {
+                continue
+            }
+            if let data = try? Data(contentsOf: url!){ //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                valet?.images[i] = UIImage(data: data)
+            } else {
+                valet?.images[i] = UIImage(named: "sadCloud")
+            }
+        }
     }
 }
 

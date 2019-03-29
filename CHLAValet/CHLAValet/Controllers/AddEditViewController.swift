@@ -25,7 +25,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     @IBOutlet weak var makeTextField: UITextField!
     @IBOutlet weak var saveButton: RoundedUIButton!
     @IBOutlet weak var saveChangesButton: RoundedUIButton!
-    
+    @IBOutlet weak var customerSegControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +52,11 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
             typeTextField.text = valet.type
             makeTextField.text = valet.make
             locationTextField.text = valet.location
+            if(valet.customerType.lowercased() == "employee")
+            {
+                customerSegControl.selectedSegmentIndex = 1
+            }
+            images = valet.images
         }
         
         // Enable the Save button only if the text field has a valid Meal name.
@@ -200,9 +205,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         let type = typeTextField.text ?? ""
         let make = makeTextField.text ?? ""
         let location = locationTextField.text ?? ""
-        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber ?? "", licensePlate: licensePlateNumber, color: color, type: type, make: make, images: images, customerType: "patient")
-        if location != "" {
-            valet?.setlocation(location: location)
-        }
+        let customerType = customerSegControl.titleForSegment(at: customerSegControl.selectedSegmentIndex) ?? ""
+        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber ?? "", licensePlate: licensePlateNumber, color: color, type: type, make: make, images: images, customerType: customerType, location: location)
     }
 }

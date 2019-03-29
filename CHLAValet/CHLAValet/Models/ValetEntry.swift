@@ -19,10 +19,11 @@ class ValetEntry {
     var type: String
     var make: String
     var images: [UIImage?]
+    var imageURLs: [URL?]
     var location: String
     var customerType: String
     
-    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, images: [UIImage?], customerType: String) {
+    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, images: [UIImage?], customerType: String, location: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.ticketNumber = ticketNumber
@@ -31,8 +32,9 @@ class ValetEntry {
         self.type = type
         self.make = make
         self.images = images
+        self.imageURLs = []
         self.customerType = customerType
-        self.location = ""
+        self.location = location
     }
     
     init(obj: JSON) {
@@ -44,16 +46,14 @@ class ValetEntry {
         self.type = obj["type"].stringValue
         self.make = obj["make"].stringValue
         
-        let imagesArray = obj["images"].arrayValue
+        let imagesArray = obj["imageList"].arrayValue
         self.images = []
+        self.imageURLs = []
         for image in imagesArray{
-            self.images.append(UIImage(named: image.stringValue))
+            self.images.append(nil)
+            self.imageURLs.append(URL(string: image.stringValue))
         }
         self.location = obj["location"].stringValue
         self.customerType = obj["customerType"].stringValue
-    }
-    
-    func setlocation(location: String){
-        self.location = location
     }
 }

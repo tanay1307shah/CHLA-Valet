@@ -61,7 +61,7 @@ class APIManager {
                     multipartFormData.append(data, withName: "images", fileName: "image\(i).jpeg", mimeType: "image/jpeg")
                 }
             }
-        }, to: Constants.CHLA_API_BASE_URL + "/test/mpf", method: .post).responseString { response in
+        }, to: Constants.CHLA_API_BASE_URL + "/cars/addCar", method: .post).responseString { response in
             if (response.result.description == "SUCCESS") {
                 debugPrint(response)
                 onSuccess()
