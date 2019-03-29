@@ -40,7 +40,7 @@ public class MainController {
     private static Logger log = LoggerFactory.getLogger(MainController.class);
 
     @PostMapping("/cars/addCar")
-    public @ResponseBody Car addNewCar(@RequestParam Map<String,String> allData,@RequestParam MultipartFile[] images,HttpServletRequest req) throws IOException {
+    public @ResponseBody String addNewCar(@RequestParam Map<String,String> allData,@RequestParam MultipartFile[] images,HttpServletRequest req) throws IOException {
 
         String Name = allData.get("Name");
         String phone = allData.get("phone");
@@ -51,29 +51,28 @@ public class MainController {
         String location = allData.get("location");
         String customerType = allData.get("customerType");
 
-        ArrayList<String> imLocation = new ArrayList<String>(){
-            {
-                add("");
-                add("");
-                add("");
-                add("");
-            }
-        };
+        StringBuilder sb = new StringBuilder();
+
 
         for(int i=0;i<images.length;i++){
-            SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
-            String date = sdf.format(new Date());
-            date = date.replace("-","_");
+//            SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+//            String date = sdf.format(new Date());
             new File(uploadDirectory + "/"+license).mkdir();
             Path path = Paths.get(uploadDirectory+"/"+license,images[i].getOriginalFilename());
             log.info("Add Car: Writing image " + images[i].getOriginalFilename() + " at location " + path.toString());
-            String imLoc = "https://b0997224.ngrok.io/images/" +license + "/"+ images[i].getOriginalFilename();
-            imLocation.add(i,imLoc);
             Files.write(path,images[i].getBytes());
+
+            String imLoc = "https://chlaserver.azurewebsites.net/images/" +license + "/"+ images[i].getOriginalFilename();
+            if(i!=images.length-1){
+                sb.append(imLoc+",");
+            }else{
+                sb.append(imLoc);
+            }
+
         }
 
 
-        Car c = cs.addCar(Name,phone, license, color, type, make,imLocation.get(0),imLocation.get(1),imLocation.get(2),imLocation.get(3),location,customerType);
+        Car c = cs.addCar(Name,phone, license, color, type, make,sb.toString(),location,customerType);
         if(c!= null){
             log.info("Adding Car " + c.getTicketNumber() +" to DB");
             String msg = "";
@@ -87,10 +86,10 @@ public class MainController {
                 msg = MSG_PRESET + sp_msg + url;
             }
             Twillio.sendSMS(msg, phone);
-            return c;
+            return "OK";
         }
         log.error("Car Already Exsits in the Database");
-        return null;
+        return "ALREADY EXSITS";
     }
 
     @GetMapping("/cars/getAllCars")

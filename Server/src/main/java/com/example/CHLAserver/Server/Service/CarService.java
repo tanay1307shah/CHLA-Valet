@@ -18,9 +18,9 @@ public class CarService {
     private Hashtable<Long,Car> carDB = new Hashtable<>();
     private List<Car> requestList = new ArrayList<>();
 
-    public Car addCar(String Name, String phoneNumber, String licensePlate, String color, String type, String make,String im1,String im2,String im3,String im4,String location,String cuType){
+    public Car addCar(String Name, String phoneNumber, String licensePlate, String color, String type, String make,String images,String location,String cuType){
 
-            Car c = new Car(Name,phoneNumber,licensePlate,color,make,type,im1,im2,im3,im4,location,cuType);
+            Car c = new Car(Name,phoneNumber,licensePlate,color,make,type,images,location,cuType);
             Car cd = cr.save(c);
             System.out.println(cd.toString());
             carDB.put(cd.getTicketNumber(),cd);
@@ -45,7 +45,12 @@ public class CarService {
 
 
     public Iterable<Car> getAll(){
-        return cr.findAll();
+        Iterable<Car> cars = cr.findAll();
+        for(Car c:cars){
+            if(c.getImageList() == null)
+                c.parseImages();
+        }
+        return cars;
     }
 
     public Car getCar(String ticket){

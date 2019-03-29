@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.CHLAserver.Server.ChlaServerApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.595 s - in com.example.CHLAserver.Server.ChlaServerApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.493 s - in com.example.CHLAserver.Server.ChlaServerApplicationTests
