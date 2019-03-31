@@ -88,9 +88,8 @@ class APIManager {
     }
     
     func requestCar(ticketNumber: String, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
-        let url = URL(string: Constants.CHLA_API_BASE_URL + "/request")!
-        let parameters: Parameters = ["id":ticketNumber]
-        AF.request(url, method: .get, parameters: parameters).responseString { response in
+        let url = URL(string: Constants.CHLA_API_BASE_URL + "/request/" + ticketNumber)!
+        AF.request(url, method: .get).responseString { response in
             if (response.result.description == "Completed") {
                 debugPrint(response)
                 onSuccess()

@@ -34,48 +34,51 @@ class ValetTableViewController: UITableViewController {
     
     func loadData() {
         SwiftSpinner.show("Loading...")
-        ValetEntryModel.shared.valetEntries.removeAll()
+        
+        // Loading all cars succeeded
         let onSuccessHandlerAll: (JSON) -> (Void) = { obj in
+            ValetEntryModel.shared.valetEntries.removeAll()
             for (_,subJson):(String, JSON) in obj {
                 let valet = ValetEntry(obj: subJson)
                 ValetEntryModel.shared.valetEntries.append(valet)
             }
             self.tableView.reloadData()
-            SwiftSpinner.hide()
-        }
-        let onFailureHandlerAll: (Error) ->(Void) = { e in
-            // TODO: Add error message
-            SwiftSpinner.hide()
-            print(e.localizedDescription)
-        }
-    
-        APIManager.shared.getAllCars(onSuccess: onSuccessHandlerAll, onFailure: onFailureHandlerAll)
-        
-        ValetEntryModel.shared.requestedEntries.removeAll()
-        let onSuccessHandlerReq: (JSON) -> (Void) = { obj in
-            for (_,subJson):(String, JSON) in obj {
-                let valet = ValetEntry(obj: subJson)
-                ValetEntryModel.shared.requestedEntries.append(valet)
-            }
-            self.tableView.reloadData()
-            if let tabItems = self.tabBarController?.tabBar.items {
-                // In this case we want to modify the badge number of the third tab:
-                let tabItem = tabItems[1]
-                if ValetEntryModel.shared.requestedEntries.count == 0 {
-                    tabItem.badgeValue = nil
-                } else {
-                    tabItem.badgeValue = "\(ValetEntryModel.shared.requestedEntries.count)"
+            
+            // Loading requested cars succeeded
+            let onSuccessHandlerReq: (JSON) -> (Void) = { obj in
+                ValetEntryModel.shared.requestedEntries.removeAll()
+                for (_,subJson):(String, JSON) in obj {
+                    let valet = ValetEntry(obj: subJson)
+                    ValetEntryModel.shared.requestedEntries.append(valet)
                 }
+                if let tabItems = self.tabBarController?.tabBar.items {
+                    let tabItem = tabItems[1]
+                    if ValetEntryModel.shared.requestedEntries.count == 0 {
+                        tabItem.badgeValue = nil
+                    } else {
+                        tabItem.badgeValue = "\(ValetEntryModel.shared.requestedEntries.count)"
+                    }
+                }
+                self.tableView.reloadData()
+                SwiftSpinner.hide()
             }
-            SwiftSpinner.hide()
+            
+            // Loading requested cars failed
+            let onFailureHandlerReq: (Error) ->(Void) = { e in
+                // TODO: Add alert to show error
+                SwiftSpinner.hide()
+                print(e.localizedDescription)
+            }
+            APIManager.shared.getRequestedCars(onSuccess: onSuccessHandlerReq, onFailure: onFailureHandlerReq)
         }
-        let onFailureHandlerReq: (Error) ->(Void) = { e in
-            // TODO: Add error message
+        
+        // Loading all cars failed
+        let onFailureHandlerAll: (Error) ->(Void) = { e in
+            // TODO: Add alert to show error
             SwiftSpinner.hide()
             print(e.localizedDescription)
         }
-        
-        APIManager.shared.getRequestedCars(onSuccess: onSuccessHandlerReq, onFailure: onFailureHandlerReq)
+        APIManager.shared.getAllCars(onSuccess: onSuccessHandlerAll, onFailure: onFailureHandlerAll)
         
     }
 

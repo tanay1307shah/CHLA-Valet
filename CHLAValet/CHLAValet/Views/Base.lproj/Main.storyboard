@@ -433,7 +433,7 @@
         <!--Valet-->
         <scene sceneID="WCa-ZE-doS">
             <objects>
-                <tabBarController id="lJs-Fq-S71" sceneMemberID="viewController">
+                <tabBarController id="lJs-Fq-S71" customClass="TabBarViewController" customModule="CHLAValet" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Valet" leftItemsSupplementBackButton="YES" id="oDx-ba-ibq">
                         <barButtonItem key="backBarButtonItem" title="Back" id="9Fn-yE-puW"/>
                         <barButtonItem key="leftBarButtonItem" title="Log Out" image="logOut" id="pU7-vl-I7l">
@@ -441,12 +441,15 @@
                                 <segue destination="gFj-5x-kwS" kind="unwind" unwindAction="unwindToLogInPageWithSender:" id="mV1-CA-HLN"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="kyD-gk-lvF">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <segue destination="HZk-vg-Xuc" kind="presentation" identifier="addValet" id="R9Y-ah-J71"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="add" id="kyD-gk-lvF">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <segue destination="HZk-vg-Xuc" kind="presentation" identifier="addValet" id="R9Y-ah-J71"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="All" id="cey-18-gTT"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FQ3-qo-gBW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -573,7 +576,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nmw-Nn-cXu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2056.521739130435" y="-96.428571428571431"/>
+            <point key="canvasLocation" x="2057" y="-486"/>
         </scene>
         <!--New Car-->
         <scene sceneID="k9I-ka-uEt">
@@ -983,7 +986,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9uF-lF-LJk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2056.521739130435" y="631.47321428571422"/>
+            <point key="canvasLocation" x="2057" y="276"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MBO-Ia-0eZ">
@@ -1128,7 +1131,7 @@
         <image name="requests" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dPT-Vn-vtn"/>
+        <segue reference="R9Y-ah-J71"/>
         <segue reference="GXh-5T-e3s"/>
     </inferredMetricsTieBreakers>
 </document>
