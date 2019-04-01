@@ -53,9 +53,6 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     // MARK: Collection view delegates
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return valet?.images.count ?? 0
@@ -112,6 +109,7 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 valet?.images[i] = UIImage(named: "sadCloud")
             }
         }
+        collectionView.reloadData()
     }
 }
 

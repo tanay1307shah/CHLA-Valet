@@ -62,12 +62,13 @@ class APIManager {
                 }
             }
         }, to: Constants.CHLA_API_BASE_URL + "/cars/addCar", method: .post).responseString { response in
-            if (response.result.description == "SUCCESS") {
+            switch response.result {
+            case .success:
                 debugPrint(response)
                 onSuccess()
-            } else {
-                print("Failure in addCar request")
+            case .failure(let error):
                 debugPrint(response)
+                onFailure(error)
             }
         }
     }
@@ -77,12 +78,13 @@ class APIManager {
         let parameters: Parameters = ["phone":valetEntry.phoneNumber, "ticket":valetEntry.ticketNumber,
                                       "license":valetEntry.licensePlate, "color":valetEntry.color, "type":valetEntry.type, "make":valetEntry.make]
         AF.request(url, method: .get, parameters: parameters).responseString { response in
-            if (response.result.description == "Completed") {
+            switch response.result {
+            case .success:
+                debugPrint(response)
                 onSuccess()
-            } else {
-                // TODO: call onFailure()
-                print("Failure in updateInfo request")
-                print(response.result.description)
+            case .failure(let error):
+                debugPrint(response)
+                onFailure(error)
             }
         }
     }
@@ -90,12 +92,13 @@ class APIManager {
     func requestCar(ticketNumber: String, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/request/" + ticketNumber)!
         AF.request(url, method: .get).responseString { response in
-            if (response.result.description == "Completed") {
+            switch response.result {
+            case .success:
                 debugPrint(response)
                 onSuccess()
-            } else {
-                // TODO: call onFailure()
+            case .failure(let error):
                 debugPrint(response)
+                onFailure(error)
             }
         }
     }

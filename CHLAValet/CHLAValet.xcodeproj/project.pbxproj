@@ -15,19 +15,19 @@
 		3F757D72221A9808006803B5 /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F757D71221A9808006803B5 /* AddEditViewController.swift */; };
 		3F757D74221A9878006803B5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F757D73221A9878006803B5 /* InfoViewController.swift */; };
 		3F757D78221B5F5D006803B5 /* ValetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F757D77221B5F5D006803B5 /* ValetTableViewCell.swift */; };
-		3F757D7A221B6D95006803B5 /* ValetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F757D79221B6D95006803B5 /* ValetTableViewController.swift */; };
+		3F757D7A221B6D95006803B5 /* ValetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F757D79221B6D95006803B5 /* ValetViewController.swift */; };
 		3FA4F46322160E27008478F8 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F46222160E27008478F8 /* CircleView.swift */; };
 		3FA4F46522161221008478F8 /* RoundedUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F46422161220008478F8 /* RoundedUIView.swift */; };
 		3FA4F467221615A1008478F8 /* RoundedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F466221615A1008478F8 /* RoundedUIButton.swift */; };
 		3FC58207221F573200FBBB62 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC58206221F573200FBBB62 /* CircleButton.swift */; };
-		3FC58209221F61D300FBBB62 /* ParkedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC58208221F61D300FBBB62 /* ParkedTableViewController.swift */; };
-		3FC5820B221F626400FBBB62 /* RequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC5820A221F626400FBBB62 /* RequestsTableViewController.swift */; };
+		3FC58209221F61D300FBBB62 /* ParkedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC58208221F61D300FBBB62 /* ParkedViewController.swift */; };
+		3FC5820B221F626400FBBB62 /* RequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC5820A221F626400FBBB62 /* RequestsViewController.swift */; };
 		3FC5820D221F999600FBBB62 /* ValetEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC5820C221F999600FBBB62 /* ValetEntryModel.swift */; };
-		3FE5674E221102BC00690151 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674D221102BC00690151 /* AppDelegate.swift */; };
-		3FE56750221102BC00690151 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674F221102BC00690151 /* LogInViewController.swift */; };
 		3FE56753221102BC00690151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56751221102BC00690151 /* Main.storyboard */; };
 		3FE56755221102BF00690151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56754221102BF00690151 /* Assets.xcassets */; };
 		3FE56758221102BF00690151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56756221102BF00690151 /* LaunchScreen.storyboard */; };
+		3FFAB5592250AC2F0031FA91 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674F221102BC00690151 /* LogInViewController.swift */; };
+		3FFAB55A2250AC3C0031FA91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674D221102BC00690151 /* AppDelegate.swift */; };
 		AB3D16D47A44731719B373AB /* Pods_CHLAValet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1BBF33C9A896B309679904 /* Pods_CHLAValet.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,13 +40,13 @@
 		3F757D71221A9808006803B5 /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
 		3F757D73221A9878006803B5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		3F757D77221B5F5D006803B5 /* ValetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetTableViewCell.swift; sourceTree = "<group>"; };
-		3F757D79221B6D95006803B5 /* ValetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetTableViewController.swift; sourceTree = "<group>"; };
+		3F757D79221B6D95006803B5 /* ValetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetViewController.swift; sourceTree = "<group>"; };
 		3FA4F46222160E27008478F8 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		3FA4F46422161220008478F8 /* RoundedUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedUIView.swift; sourceTree = "<group>"; };
 		3FA4F466221615A1008478F8 /* RoundedUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedUIButton.swift; sourceTree = "<group>"; };
 		3FC58206221F573200FBBB62 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
-		3FC58208221F61D300FBBB62 /* ParkedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkedTableViewController.swift; sourceTree = "<group>"; };
-		3FC5820A221F626400FBBB62 /* RequestsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsTableViewController.swift; sourceTree = "<group>"; };
+		3FC58208221F61D300FBBB62 /* ParkedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkedViewController.swift; sourceTree = "<group>"; };
+		3FC5820A221F626400FBBB62 /* RequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
 		3FC5820C221F999600FBBB62 /* ValetEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetEntryModel.swift; sourceTree = "<group>"; };
 		3FE5674A221102BC00690151 /* CHLAValet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CHLAValet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE5674D221102BC00690151 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,9 +111,9 @@
 				3FE5674F221102BC00690151 /* LogInViewController.swift */,
 				3F757D71221A9808006803B5 /* AddEditViewController.swift */,
 				3F757D73221A9878006803B5 /* InfoViewController.swift */,
-				3F757D79221B6D95006803B5 /* ValetTableViewController.swift */,
-				3FC58208221F61D300FBBB62 /* ParkedTableViewController.swift */,
-				3FC5820A221F626400FBBB62 /* RequestsTableViewController.swift */,
+				3F757D79221B6D95006803B5 /* ValetViewController.swift */,
+				3FC58208221F61D300FBBB62 /* ParkedViewController.swift */,
+				3FC5820A221F626400FBBB62 /* RequestsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -239,7 +239,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		01F7BACF66FEFE9DF4B63FAA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -292,21 +292,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FFAB55A2250AC3C0031FA91 /* AppDelegate.swift in Sources */,
+				3FFAB5592250AC2F0031FA91 /* LogInViewController.swift in Sources */,
 				3FC58207221F573200FBBB62 /* CircleButton.swift in Sources */,
 				3F757D78221B5F5D006803B5 /* ValetTableViewCell.swift in Sources */,
 				3FA4F46522161221008478F8 /* RoundedUIView.swift in Sources */,
 				3FC5820D221F999600FBBB62 /* ValetEntryModel.swift in Sources */,
-				3FE56750221102BC00690151 /* LogInViewController.swift in Sources */,
-				3FC5820B221F626400FBBB62 /* RequestsTableViewController.swift in Sources */,
+				3FC5820B221F626400FBBB62 /* RequestsViewController.swift in Sources */,
 				3F37FDCB22443A7100ED1333 /* ImageCollectionViewCell.swift in Sources */,
 				3FA4F467221615A1008478F8 /* RoundedUIButton.swift in Sources */,
 				3F757D72221A9808006803B5 /* AddEditViewController.swift in Sources */,
-				3FE5674E221102BC00690151 /* AppDelegate.swift in Sources */,
 				3FA4F46322160E27008478F8 /* CircleView.swift in Sources */,
-				3FC58209221F61D300FBBB62 /* ParkedTableViewController.swift in Sources */,
-				3FE56750221102BC00690151 /* LogInViewController.swift in Sources */,
-				3F757D7A221B6D95006803B5 /* ValetTableViewController.swift in Sources */,
-				3FE5674E221102BC00690151 /* AppDelegate.swift in Sources */,
+				3FC58209221F61D300FBBB62 /* ParkedViewController.swift in Sources */,
+				3F757D7A221B6D95006803B5 /* ValetViewController.swift in Sources */,
 				0ABA9121221647D100666324 /* APIManager.swift in Sources */,
 				0ABA911D22163F0E00666324 /* ValetEntry.swift in Sources */,
 				0A8EC1D22224A6D200777BA2 /* UIViewControllerExtension.swift in Sources */,
@@ -461,6 +459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q44F52DFYU;
 				INFOPLIST_FILE = CHLAValet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -480,6 +479,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q44F52DFYU;
 				INFOPLIST_FILE = CHLAValet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ParkedTableViewController: ValetTableViewController{
+class ParkedViewController: ValetViewController{
     
     @IBOutlet var parkedTableView: UITableView!
     
@@ -50,10 +50,6 @@ class ParkedTableViewController: ValetTableViewController{
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ValetEntryModel.shared.valetEntries.count
     }
@@ -69,6 +65,9 @@ class ParkedTableViewController: ValetTableViewController{
         cell.colorLabel.text = car.color.uppercased()
         cell.carLabel.text = car.make.uppercased() + " " + car.type.uppercased()
         cell.nameLabel.text = car.name.uppercased()
+        if car.customerType.lowercased() == "employee" {
+            cell.requestButton.isHidden = true
+        }
         if(ValetEntryModel.shared.requestedEntries.contains(where: { $0.ticketNumber == ValetEntryModel.shared.valetEntries[indexPath.row].ticketNumber })){
             cell.requestButton.alpha = 0.5
         }

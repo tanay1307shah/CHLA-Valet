@@ -10,7 +10,9 @@ import UIKit
 import SwiftyJSON
 import SwiftSpinner
 
-class ValetTableViewController: UITableViewController {
+class ValetViewController: UIViewController, UITableViewDataSource{
+    
+    var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,15 @@ class ValetTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
     }
     
     //MARK: Actions
@@ -79,7 +90,6 @@ class ValetTableViewController: UITableViewController {
             print(e.localizedDescription)
         }
         APIManager.shared.getAllCars(onSuccess: onSuccessHandlerAll, onFailure: onFailureHandlerAll)
-        
     }
 
 }
