@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -103,14 +104,16 @@ public class MainController {
     }
 
     //TODO: Update the function based on the next Database Structure
+    //UPDATED FOR EDITING NAME
     @GetMapping("/cars/updateInfo")
-    public @ResponseBody String editCarInfo(@RequestParam String phone,
-                                                   @RequestParam String ticket,
-                                                   @RequestParam String license,
-                                                   @RequestParam String color,
-                                                   @RequestParam String type,
-                                                   @RequestParam String make){
-        cs.editCarInfo(phone, ticket, license, color, type, make);
+    public @ResponseBody String editCarInfo(@RequestParam String name,
+                                            @RequestParam String phone,
+                                            @RequestParam String license,
+                                            @RequestParam String color,
+                                            @RequestParam String type,
+                                            @RequestParam String make,
+                                            ){
+        cs.editCarInfo(name, phone, ticket, license, color, type, make);
         return "Completed";
     }
 
@@ -167,7 +170,8 @@ public class MainController {
     //TODO
     @PostMapping("/cars/delete/{ticket}")
     public void deleteCar(@PathVariable String ticket){
-
+        cs.deleteExistingCar(ticket);
+       // return "Completed";
     }
 
     @PostMapping("/twillio/recieveSMS")
