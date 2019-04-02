@@ -93,7 +93,7 @@ public class MainController {
         return "ALREADY EXSITS";
     }
 
-    @GetMapping("/cars/getAllCars")
+    @GetMapping("/cars/getAllCarsParked")
     public @ResponseBody Iterable<Car> getAll(){
         return cs.getAll();
     }
@@ -105,17 +105,17 @@ public class MainController {
 
     //TODO: Update the function based on the next Database Structure
     //UPDATED FOR EDITING NAME
-    @GetMapping("/cars/updateInfo")
-    public @ResponseBody String editCarInfo(@RequestParam String name,
-                                            @RequestParam String phone,
-                                            @RequestParam String license,
-                                            @RequestParam String color,
-                                            @RequestParam String type,
-                                            @RequestParam String make,
-                                            ){
-        cs.editCarInfo(name, phone, ticket, license, color, type, make);
-        return "Completed";
-    }
+//    @GetMapping("/cars/updateInfo")
+//    public @ResponseBody String editCarInfo(@RequestParam String name,
+//                                            @RequestParam String phone,
+//                                            @RequestParam String license,
+//                                            @RequestParam String color,
+//                                            @RequestParam String type,
+//                                            @RequestParam String make,
+//                                            ){
+//        cs.editCarInfo(name, phone, ticket, license, color, type, make);
+//        return "Completed";
+//    }
 
 
 
@@ -168,10 +168,14 @@ public class MainController {
 
 
     //TODO
-    @PostMapping("/cars/delete/{ticket}")
-    public void deleteCar(@PathVariable String ticket){
-        cs.deleteExistingCar(ticket);
-       // return "Completed";
+    @PostMapping("/cars/paid/{ticket}")
+    @ResponseStatus(OK)
+    public void paidCar(@PathVariable String ticket){
+        if(cs.payExistingCar(ticket)){
+            log.info("Car : " + ticket + " Paid" );
+        }else{
+            RequestError();
+        }
     }
 
     @PostMapping("/twillio/recieveSMS")
@@ -179,11 +183,5 @@ public class MainController {
     public void recieveText(@RequestParam Map<String,String> allReqParam){
         System.out.println(allReqParam.toString());
     }
-
-//    @PostMapping("/test/mpf")
-//    @ResponseStatus(HttpStatus.OK)
-//    public void test(@RequestParam MultipartFile[] images, HttpServletRequest req) throws IOException {
-//
-//    }
 
 }

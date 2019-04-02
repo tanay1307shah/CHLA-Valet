@@ -45,7 +45,8 @@ public class CarService {
 
 
     public Iterable<Car> getAll(){
-        Iterable<Car> cars = cr.findAll();
+        Collection<Car> temp = carDB.values();
+        Iterable<Car> cars = temp;
         for(Car c:cars){
             if(c.getImageList() == null)
                 c.parseImages();
@@ -70,8 +71,14 @@ public class CarService {
         cr.save(currCar);
     }
 
-    public void deleteExistingCar(String ticket){
-        Car currCar = cr.findCarByTicket(ticket);
-        cr.delete(currCar);
+    public boolean payExistingCar(String ticket){
+        long tick =  Long.parseLong(ticket);
+        if(requestList.contains(tick) && carDB.containsKey(tick)){
+            requestList.remove(tick);
+            carDB.remove(tick);
+            return true;
+        }else{
+            return false;
+        }
     }
 }
