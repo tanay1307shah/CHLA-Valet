@@ -105,17 +105,20 @@ public class MainController {
 
     //TODO: Update the function based on the next Database Structure
     //UPDATED FOR EDITING NAME
-//    @GetMapping("/cars/updateInfo")
-//    public @ResponseBody String editCarInfo(@RequestParam String name,
-//                                            @RequestParam String phone,
-//                                            @RequestParam String license,
-//                                            @RequestParam String color,
-//                                            @RequestParam String type,
-//                                            @RequestParam String make,
-//                                            ){
-//        cs.editCarInfo(name, phone, ticket, license, color, type, make);
-//        return "Completed";
-//    }
+    @GetMapping("/cars/updateInfo")
+    public @ResponseBody String editCarInfo(@RequestParam String ticket,
+                                            @RequestParam String name,
+                                            @RequestParam String phone,
+                                            @RequestParam String license,
+                                            @RequestParam String color,
+                                            @RequestParam String type,
+                                            @RequestParam String make,
+                                            @RequestParam String images,
+                                            @RequestParam String parkingLocation,
+                                            @RequestParam String customerType){
+        cs.editCarInfo(ticket, name, phone, license, color, type, make, images, parkingLocation, customerType);
+        return "Completed";
+    }
 
 
 

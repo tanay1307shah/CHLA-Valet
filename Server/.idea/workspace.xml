@@ -23,10 +23,14 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Model/Car.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-345">
+<<<<<<< Updated upstream
               <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+              <caret line="118" column="109" selection-start-line="118" selection-start-column="109" selection-end-line="118" selection-end-column="109" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -34,8 +38,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Service/CarService.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="209">
               <caret line="47" column="46" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
+=======
+            <state relative-caret-position="663">
+              <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -52,8 +61,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="1012">
               <caret line="44" column="21" selection-start-line="40" selection-start-column="8" selection-end-line="44" selection-end-column="21" />
+=======
+            <state relative-caret-position="29">
+              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -158,9 +172,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/ChlaServerApplication.java" />
         <option value="$PROJECT_DIR$/src/garbage.txt" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Model/Car.java" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Service/CarService.java" />
+=======
+>>>>>>> Stashed changes
         <option value="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/controller/MainController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Service/CarService.java" />
       </list>
     </option>
   </component>
@@ -311,7 +329,11 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< Updated upstream
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554175624030" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554175110111" />
+>>>>>>> Stashed changes
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="MTConfigurable" />
@@ -407,12 +429,16 @@
       <workItem from="1553822825616" duration="482000" />
       <workItem from="1553823642773" duration="1780000" />
       <workItem from="1553825944220" duration="4474000" />
-      <workItem from="1554154207193" duration="5393000" />
+      <workItem from="1554154207193" duration="7223000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="91793000" />
+=======
+    <option name="totallyTimeSpent" value="92220000" />
+>>>>>>> Stashed changes
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -585,24 +611,41 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Model/Car.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/Service/CarService.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="209">
           <caret line="47" column="46" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
+=======
+        <state relative-caret-position="29">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/CHLAserver/Server/controller/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="138">
           <caret line="95" column="39" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
+=======
+        <state relative-caret-position="-345">
+          <caret line="118" column="109" selection-start-line="118" selection-start-column="109" selection-end-line="118" selection-end-column="109" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>

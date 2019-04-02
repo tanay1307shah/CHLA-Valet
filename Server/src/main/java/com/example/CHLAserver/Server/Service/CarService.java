@@ -58,7 +58,8 @@ public class CarService {
         return cr.findCarByTicket(ticket);
     }
 
-    public void editCarInfo(String name, String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make){
+    public void editCarInfo(String ticketNumber, String name, String phoneNumber, String licensePlate, String color, String type, String make, String images,
+                            String parkingLocation, String customerType){
         Car currCar = cr.findCarByTicket(ticketNumber);
 
         currCar.setName(name);
@@ -67,6 +68,9 @@ public class CarService {
         currCar.setLicensePlate(licensePlate);
         currCar.setType(type);
         currCar.setMake(make);
+        //currCar.setImages(images);
+        currCar.setParkingLocation(parkingLocation);
+        currCar.setCustomerType(customerType);
 
         cr.save(currCar);
     }
