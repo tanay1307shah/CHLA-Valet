@@ -105,8 +105,8 @@ public class MainController {
 
     //TODO: Update the function based on the next Database Structure
     //UPDATED FOR EDITING NAME
-    @GetMapping("/cars/updateInfo")
-    public @ResponseBody String editCarInfo(@RequestParam String ticket,
+    @GetMapping("/cars/updateInfo/{ticket}")
+    public @ResponseBody String editCarInfo(@PathVariable String ticket,
                                             @RequestParam String name,
                                             @RequestParam String phone,
                                             @RequestParam String license,
