@@ -15,7 +15,7 @@ class APIManager {
     static let shared = APIManager()
     
     func getAllCars(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
-        let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/getAllCars")!
+        let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/getAllCarsParked")!
         AF.request(url, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -74,9 +74,9 @@ class APIManager {
     }
     
     func updateInfo(valetEntry: ValetEntry, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
-        let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/updateInfo")!
-        let parameters: Parameters = ["phone":valetEntry.phoneNumber, "ticket":valetEntry.ticketNumber,
-                                      "license":valetEntry.licensePlate, "color":valetEntry.color, "type":valetEntry.type, "make":valetEntry.make]
+        let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/updateInfo/\(valetEntry.ticketNumber)")!
+        let parameters: Parameters = ["name": valetEntry.name, "phone":valetEntry.phoneNumber,
+                                      "license":valetEntry.licensePlate, "color":valetEntry.color, "type":valetEntry.type, "make":valetEntry.make, "images": "", "parkingLocation": valetEntry.location, "customerType": valetEntry.customerType]
         AF.request(url, method: .get, parameters: parameters).responseString { response in
             switch response.result {
             case .success:
@@ -91,6 +91,20 @@ class APIManager {
     
     func requestCar(ticketNumber: String, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/request/" + ticketNumber)!
+        AF.request(url, method: .get).responseString { response in
+            switch response.result {
+            case .success:
+                debugPrint(response)
+                onSuccess()
+            case .failure(let error):
+                debugPrint(response)
+                onFailure(error)
+            }
+        }
+    }
+    
+    func removeCar(ticketNumber: String, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
+        let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/paid/" + ticketNumber)!
         AF.request(url, method: .get).responseString { response in
             switch response.result {
             case .success:

@@ -103,13 +103,33 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
             if url == nil {
                 continue
             }
-            if let data = try? Data(contentsOf: url!){ //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-                valet?.images[i] = UIImage(data: data)
-            } else {
-                valet?.images[i] = UIImage(named: "sadCloud")
+            downloadImage(from: url!, index: i)
+        }
+    }
+    
+    func downloadImage(from url: URL, index: Int) {
+        print("Download Started")
+        print(url)
+        valet?.images[index] = UIImage(named: "loading")
+        self.collectionView.reloadData()
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil
+                else {
+                    self.valet?.images[index] = UIImage(named: "sadCloud")
+                    self.collectionView.reloadData()
+                    return
+            }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() {
+                self.valet?.images[index] = UIImage(data: data)
+                self.collectionView.reloadData()
             }
         }
-        collectionView.reloadData()
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
 }
 

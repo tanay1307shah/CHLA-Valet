@@ -122,7 +122,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     @IBAction func getImagePickerDidSelect(_ sender: UIButton){
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = .camera
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
     }

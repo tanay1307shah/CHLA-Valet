@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyJSON
+import SwiftSpinner
 
 class RequestViewController: ValetViewController{
     
@@ -19,6 +21,8 @@ class RequestViewController: ValetViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        parent?.navigationItem.rightBarButtonItems?[1].isEnabled = false
+        parent?.navigationItem.rightBarButtonItems?[1].title = ""
         requestsTableView.reloadData()
     }
     
@@ -78,5 +82,15 @@ class RequestViewController: ValetViewController{
         guard let indexPath = tableView.indexPath(for: selectedCarCell) else {
             fatalError("The selected cell is not being displayed by the table")
         }
+        
+        SwiftSpinner.show("Removing Car...")
+        APIManager.shared.removeCar(ticketNumber: ValetEntryModel.shared.requestedEntries[indexPath.row].ticketNumber, onSuccess: {
+            self.loadData()
+            SwiftSpinner.hide()
+        }, onFailure: {e in
+            self.loadData()
+            print(e.localizedDescription)
+            SwiftSpinner.hide()
+        })
     }
 }

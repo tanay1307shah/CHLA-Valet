@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyJSON
+import SwiftSpinner
 
 class ParkedViewController: ValetViewController{
     
@@ -14,12 +16,19 @@ class ParkedViewController: ValetViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        filterButton = UIBarButtonItem(title: filterNames[filterType], style: .plain, target: self, action: #selector(ValetViewController.nextFilter))
+        parent?.navigationItem.rightBarButtonItems?.append(filterButton)
         tableView = parkedTableView
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        parkedTableView.reloadData()
+        parent?.navigationItem.rightBarButtonItems?[1].isEnabled = true
+        parent?.navigationItem.rightBarButtonItems?[1].title = filterNames[filterType]
+//        UIView.transition(with: parkedTableView,
+//                          duration: 0.35,
+//                          options: .transitionCurlDown,
+//                          animations: { self.parkedTableView.reloadData() })
     }
     
     // MARK: Navigation
@@ -51,7 +60,14 @@ class ParkedViewController: ValetViewController{
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ValetEntryModel.shared.valetEntries.count
+        switch filterType {
+        case 1:
+            return ValetEntryModel.shared.patientEntries.count
+        case 2:
+            return ValetEntryModel.shared.employeeEntries.count
+        default:
+            return ValetEntryModel.shared.valetEntries.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,16 +76,29 @@ class ParkedViewController: ValetViewController{
             fatalError("The dequeued cell is not an instance of ValetTableViewCell.")
         }
         // Configure the cell...
-        let car = ValetEntryModel.shared.valetEntries[indexPath.row]
+        var entries: [ValetEntry]
+        switch filterType {
+        case 1:
+            entries = ValetEntryModel.shared.patientEntries
+        case 2:
+            entries = ValetEntryModel.shared.employeeEntries
+        default:
+            entries = ValetEntryModel.shared.valetEntries
+        }
+        let car = entries[indexPath.row]
         cell.ticketNumberLabel.text = car.ticketNumber
         cell.colorLabel.text = car.color.uppercased()
         cell.carLabel.text = car.make.uppercased() + " " + car.type.uppercased()
         cell.nameLabel.text = car.name.uppercased()
         if car.customerType.lowercased() == "employee" {
             cell.requestButton.isHidden = true
+        } else {
+            cell.requestButton.isHidden = false
         }
-        if(ValetEntryModel.shared.requestedEntries.contains(where: { $0.ticketNumber == ValetEntryModel.shared.valetEntries[indexPath.row].ticketNumber })){
+        if(ValetEntryModel.shared.requestedEntries.contains(where: { $0.ticketNumber == entries[indexPath.row].ticketNumber })){
             cell.requestButton.alpha = 0.5
+        } else {
+            cell.requestButton.alpha = 1.0
         }
         return cell
     }
@@ -82,11 +111,23 @@ class ParkedViewController: ValetViewController{
         guard let indexPath = tableView.indexPath(for: selectedCarCell) else {
             fatalError("The selected cell is not being displayed by the table")
         }
+        var entries: [ValetEntry]
+        switch filterType {
+        case 1:
+            entries = ValetEntryModel.shared.patientEntries
+        case 2:
+            entries = ValetEntryModel.shared.employeeEntries
+        default:
+            entries = ValetEntryModel.shared.valetEntries
+        }
         
-        APIManager.shared.requestCar(ticketNumber: ValetEntryModel.shared.valetEntries[indexPath.row].ticketNumber, onSuccess: {
+        SwiftSpinner.show("Requesting Car...")
+        APIManager.shared.requestCar(ticketNumber: entries[indexPath.row].ticketNumber, onSuccess: {
             print("Success!")
+            self.loadData()
         }, onFailure: {e in
             print(e.localizedDescription)
+            self.loadData()
         })
     }
 }

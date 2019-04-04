@@ -52,6 +52,7 @@ class ValetEntry {
         for image in imagesArray{
             self.images.append(nil)
             self.imageURLs.append(URL(string: image.stringValue))
+            print(image.stringValue)
         }
         self.location = obj["location"].stringValue
         self.customerType = obj["customerType"].stringValue
