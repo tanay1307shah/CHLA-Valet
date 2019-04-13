@@ -26,6 +26,7 @@
 		3FE56753221102BC00690151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56751221102BC00690151 /* Main.storyboard */; };
 		3FE56755221102BF00690151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56754221102BF00690151 /* Assets.xcassets */; };
 		3FE56758221102BF00690151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE56756221102BF00690151 /* LaunchScreen.storyboard */; };
+		3FF8B3E822616276003FD15E /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8B3E722616276003FD15E /* ImageViewController.swift */; };
 		3FFAB5592250AC2F0031FA91 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674F221102BC00690151 /* LogInViewController.swift */; };
 		3FFAB55A2250AC3C0031FA91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE5674D221102BC00690151 /* AppDelegate.swift */; };
 		AB3D16D47A44731719B373AB /* Pods_CHLAValet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1BBF33C9A896B309679904 /* Pods_CHLAValet.framework */; };
@@ -55,6 +56,7 @@
 		3FE56754221102BF00690151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FE56757221102BF00690151 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FE56759221102BF00690151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FF8B3E722616276003FD15E /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		608BE975AE820EA27A5655F6 /* Pods-CHLAValet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValet.debug.xcconfig"; path = "Target Support Files/Pods-CHLAValet/Pods-CHLAValet.debug.xcconfig"; sourceTree = "<group>"; };
 		CA1BBF33C9A896B309679904 /* Pods_CHLAValet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHLAValet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12B6127386325CEE208D8D9 /* Pods-CHLAValet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHLAValet.release.xcconfig"; path = "Target Support Files/Pods-CHLAValet/Pods-CHLAValet.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				3FE5674F221102BC00690151 /* LogInViewController.swift */,
+				3FF8B3E722616276003FD15E /* ImageViewController.swift */,
 				3F757D71221A9808006803B5 /* AddEditViewController.swift */,
 				3F757D73221A9878006803B5 /* InfoViewController.swift */,
 				3F757D79221B6D95006803B5 /* ValetViewController.swift */,
@@ -308,6 +311,7 @@
 				0ABA9121221647D100666324 /* APIManager.swift in Sources */,
 				0ABA911D22163F0E00666324 /* ValetEntry.swift in Sources */,
 				0A8EC1D22224A6D200777BA2 /* UIViewControllerExtension.swift in Sources */,
+				3FF8B3E822616276003FD15E /* ImageViewController.swift in Sources */,
 				3F757D74221A9878006803B5 /* InfoViewController.swift in Sources */,
 				0ABA911F2216472B00666324 /* Constants.swift in Sources */,
 			);

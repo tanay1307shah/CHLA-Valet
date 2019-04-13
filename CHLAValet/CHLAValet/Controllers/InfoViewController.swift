@@ -82,13 +82,6 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    @IBAction func deleteButton(_ sender: UIButton) {
-        // Remove car from database : TODO
-        
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    
     func loadInfo() {
         nameLabel.text = valet?.name.uppercased()
         phoneNumberLabel.text = valet?.phoneNumber

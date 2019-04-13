@@ -14,12 +14,14 @@ class ValetViewController: UIViewController, UITableViewDataSource{
     
     var tableView: UITableView!
     var filterButton: UIBarButtonItem!
+    var refreshButton: UIBarButtonItem!
     
     var filterType = 0
     var filterNames = ["All", "Patients", "Employees"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(ValetViewController.loadData))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,7 +51,7 @@ class ValetViewController: UIViewController, UITableViewDataSource{
         }
     }
     
-    func loadData() {
+    @objc func loadData() {
         SwiftSpinner.show("Retrieving Cars...")
         
         // Loading all cars succeeded

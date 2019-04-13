@@ -18,6 +18,7 @@ class ParkedViewController: ValetViewController{
         super.viewDidLoad()
         filterButton = UIBarButtonItem(title: filterNames[filterType], style: .plain, target: self, action: #selector(ValetViewController.nextFilter))
         parent?.navigationItem.rightBarButtonItems?.append(filterButton)
+        parent?.navigationItem.leftBarButtonItems?.append(refreshButton)
         tableView = parkedTableView
     }
     

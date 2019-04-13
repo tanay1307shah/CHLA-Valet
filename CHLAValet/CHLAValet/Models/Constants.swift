@@ -11,6 +11,6 @@ import Foundation
 struct Constants {
     
     static let someAPIURL = "https://jsonplaceholder.typicode.com/todos/1"
-    static let CHLA_API_BASE_URL = "https://212e3655.ngrok.io/chla"  //"https://chlaserver.azurewebsites.net/chla"
+    static let CHLA_API_BASE_URL = "https://chlaserver.azurewebsites.net/chla"
     
 }

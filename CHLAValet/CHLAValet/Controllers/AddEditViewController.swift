@@ -9,7 +9,8 @@
 import UIKit
 import os.log
 
-class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout{
     
     var valet: ValetEntry?
     var images: [UIImage?] = []
@@ -93,10 +94,28 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
     //MARK: Navigation
     // This method lets you configure a view controller before it's presented.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
+        if segue.identifier == "showImage" {
+            print("segueing!")
+            let viewController = segue.destination as! ImageViewController
+            let index = collectionView.indexPathsForSelectedItems!.first!
+            viewController.selectedImage = images[index.row]
+            return
+        }
+        
         // Configure the destination view controller only when the save button is pressed.
         guard let button = sender as? UIButton, button === saveButton || button === saveChangesButton else{
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
@@ -122,7 +141,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     @IBAction func getImagePickerDidSelect(_ sender: UIButton){
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
     }
@@ -135,10 +154,10 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         guard let indexPath = collectionView.indexPath(for: selectedCollectionCell) else {
             fatalError("The selected cell is not being displayed by the table")
         }
-        
+        collectionView.deleteItems(at: [indexPath])
         images.remove(at: indexPath.row)
-        collectionView.reloadData()
     }
+    
     
     //MARK: UITextFieldDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
