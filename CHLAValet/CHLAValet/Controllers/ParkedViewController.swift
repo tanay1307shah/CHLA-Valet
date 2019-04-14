@@ -13,6 +13,7 @@ import SwiftSpinner
 class ParkedViewController: ValetViewController{
     
     @IBOutlet var parkedTableView: UITableView!
+    let timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(ValetViewController.loadData), userInfo: nil, repeats: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()

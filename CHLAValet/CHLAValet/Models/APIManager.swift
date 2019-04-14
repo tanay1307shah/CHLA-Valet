@@ -9,10 +9,12 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import SwiftHash
 
 class APIManager {
     
     static let shared = APIManager()
+    
     
     func getAllCars(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/getAllCarsParked")!
@@ -115,6 +117,44 @@ class APIManager {
                 onFailure(error)
             }
         }
+    }
+    
+    func getCarMakes(onSuccess: @escaping(JSON) -> Void)
+    {
+        let url = URL(string: "https://www.carqueryapi.com/api/0.3/?cmd=getMakes&sold_in_us=1")!
+        AF.request(url, method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let result = response.result.value {
+                    let obj = JSON(result)
+                    onSuccess(obj)
+                }
+            case .failure:
+                debugPrint(response)
+            }
+        }
+    }
+    
+    func getCarModelByMake(make: String, onSuccess: @escaping(JSON) -> Void) {
+        let makeSafe = make.replacingOccurrences(of: " ", with: "+")
+        let url = URL(string: "https://www.carqueryapi.com/api/0.3/?cmd=getModels&sold_in_us=1&make=" + makeSafe.lowercased())!
+        AF.request(url, method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                debugPrint(response)
+                if let result = response.result.value {
+                    let obj = JSON(result)
+                    onSuccess(obj)
+                }
+            case .failure:
+                debugPrint(response)
+            }
+        }
+    }
+    
+    func md5Hash(string: String) -> String
+    {
+        return MD5(string)
     }
 }
 

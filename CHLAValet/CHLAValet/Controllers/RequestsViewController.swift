@@ -86,7 +86,6 @@ class RequestViewController: ValetViewController{
         SwiftSpinner.show("Removing Car...")
         APIManager.shared.removeCar(ticketNumber: ValetEntryModel.shared.requestedEntries[indexPath.row].ticketNumber, onSuccess: {
             self.loadData()
-            SwiftSpinner.hide()
         }, onFailure: {e in
             self.loadData()
             print(e.localizedDescription)

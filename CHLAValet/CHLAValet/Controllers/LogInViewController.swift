@@ -25,6 +25,10 @@ class LogInViewController: UIViewController {
     
     @IBAction func enterButtonDidPressed(_ sender: UIButton) {
         // Verify valid info
+        
+        // Test request to make sure connection exists (otherwise error occurs)
+        APIManager.shared.getAllCars(onSuccess:{ obj in print(obj)
+            }, onFailure: {e in print(e)})
         performSegue(withIdentifier: "logIn", sender: sender)
     }
     

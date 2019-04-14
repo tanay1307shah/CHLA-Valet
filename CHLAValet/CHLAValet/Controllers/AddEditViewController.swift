@@ -8,12 +8,15 @@
 
 import UIKit
 import os.log
+import SwiftyJSON
 
-class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource,
-    UICollectionViewDelegateFlowLayout{
+class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIPickerViewDelegate, UIPickerViewDataSource{
     
     var valet: ValetEntry?
     var images: [UIImage?] = []
+    
+    var models: [String] = []
+    var makes: [String] = []
     
     //MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -30,15 +33,45 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        APIManager.shared.getCarMakes { obj in
+            let array = obj["Makes"]
+            for (_,subJson):(String, JSON) in array {
+                self.makes.append(subJson["make_display"].stringValue)
+            }
+        }
         // Handle the text field’s user input through delegate callbacks.        
         nameTextField.delegate = self
         phoneNumberTextField.delegate = self
         locationTextField.delegate = self
         licencePlateNumberTextField.delegate = self
+        
         colorTextField.delegate = self
+        let colorPickerView = UIPickerView()
+        colorPickerView.delegate = self
+        colorTextField.inputView = colorPickerView
+        let colorDropDown = UIImageView(image: UIImage(named: "dropDown"))
+        colorDropDown.backgroundColor = UIColor.lightGray
+        colorTextField.rightView = colorDropDown
+        colorTextField.rightViewMode = .always
+        
         typeTextField.delegate = self
+        let modelPickerView = UIPickerView()
+        modelPickerView.delegate = self
+        typeTextField.inputView = modelPickerView
+        let typeDropDown = UIImageView(image: UIImage(named: "dropDown"))
+        typeDropDown.backgroundColor = UIColor.lightGray
+        typeTextField.rightView = typeDropDown
+        typeTextField.rightViewMode = .always
+        
         makeTextField.delegate = self
+        let makePickerView = UIPickerView()
+        makePickerView.delegate = self
+        makeTextField.inputView = makePickerView
+        let makeDropDown = UIImageView(image: UIImage(named: "dropDown"))
+        makeDropDown.backgroundColor = UIColor.lightGray
+        makeTextField.rightView = makeDropDown
+        makeTextField.rightViewMode = .always
+        
         saveChangesButton.isHidden = true
         saveButton.isHidden = false
         
@@ -104,6 +137,53 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         return 10
     }
     
+    // MARK: Picker View Delegates
+    // Sets number of columns in picker view
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // Sets the number of rows in the picker view
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if makeTextField.inputView == pickerView {
+            return makes.count
+        } else if typeTextField.inputView == pickerView {
+            return models.count
+        }
+        return Constants.colors.count
+    }
+    
+    // This function sets the text of the picker view to the content of the "makes" array
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if makeTextField.inputView == pickerView {
+            return makes[row]
+        } else if typeTextField.inputView == pickerView {
+            return models[row]
+        }
+        return Constants.colors[row]
+    }
+    
+    // When user selects an option, this function will set the text of the text field to reflect
+    // the selected option.
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if makeTextField.inputView == pickerView {
+            makeTextField.text = makes[row]
+            APIManager.shared.getCarModelByMake(make: makes[row]) { obj in
+                self.models.removeAll()
+                let array = obj["Models"]
+                for (_,subJson):(String, JSON) in array {
+                    self.models.append(subJson["model_name"].stringValue)
+                }
+                let modelPicker = self.typeTextField.inputView as? UIPickerView
+                modelPicker?.reloadAllComponents()
+            }
+        } else if typeTextField.inputView == pickerView {
+            typeTextField.text = models[row]
+        } else {
+            colorTextField.text = Constants.colors[row]
+        }
+    }
+    
     //MARK: Navigation
     // This method lets you configure a view controller before it's presented.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -154,8 +234,8 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         guard let indexPath = collectionView.indexPath(for: selectedCollectionCell) else {
             fatalError("The selected cell is not being displayed by the table")
         }
-        collectionView.deleteItems(at: [indexPath])
         images.remove(at: indexPath.row)
+        collectionView.deleteItems(at: [indexPath])
     }
     
     

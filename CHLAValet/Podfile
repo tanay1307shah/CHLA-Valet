@@ -8,5 +8,5 @@ target 'CHLAValet' do
   pod 'Alamofire', '~> 5.0.0-beta.2'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SwiftSpinner'
-
+  pod 'SwiftHash'
 end
