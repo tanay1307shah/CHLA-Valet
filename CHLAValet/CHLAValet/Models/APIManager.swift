@@ -2,7 +2,7 @@
 //  APIManager.swift
 //  CHLAValet
 //
-//  Created by Ali Hashemi on 2/14/19.
+//  Created by Student on 2/14/19.
 //  Copyright © 2019 CSCI401. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ class APIManager {
     
     static let shared = APIManager()
     
-    
+    // Azure Backend API Endpoints
     func getAllCars(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/getAllCarsParked")!
         AF.request(url, method: .get).validate().responseJSON { response in
@@ -119,6 +119,21 @@ class APIManager {
         }
     }
     
+    func logIn(username: String, password: String, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
+        let url = URL(string: Constants.CHLA_API_BASE_URL + "/login")!
+        AF.request(url, method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                debugPrint(response)
+                onSuccess()
+            case .failure(let error):
+                debugPrint(response)
+                onFailure(error)
+            }
+        }
+    }
+    
+    // Car query API
     func getCarMakes(onSuccess: @escaping(JSON) -> Void)
     {
         let url = URL(string: "https://www.carqueryapi.com/api/0.3/?cmd=getMakes&sold_in_us=1")!
@@ -152,6 +167,7 @@ class APIManager {
         }
     }
     
+    // Additional functions
     func md5Hash(string: String) -> String
     {
         return MD5(string)

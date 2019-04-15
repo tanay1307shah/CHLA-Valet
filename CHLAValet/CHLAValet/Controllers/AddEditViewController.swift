@@ -93,18 +93,16 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
             images = valet.images
         }
         
-        // Enable the Save button only if the text field has a valid Meal name.
+        // Enable the Save button only if required text fields are filled
         updateSaveButtonState()
     }
     
     // MARK: UIImagePickerControllerDelegate
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         let originalImage = info[.originalImage] as! UIImage
         images.append(originalImage)
         collectionView.reloadData()

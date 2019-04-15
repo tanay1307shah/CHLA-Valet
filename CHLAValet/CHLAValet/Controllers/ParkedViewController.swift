@@ -27,10 +27,6 @@ class ParkedViewController: ValetViewController{
         super.viewDidAppear(animated)
         parent?.navigationItem.rightBarButtonItems?[1].isEnabled = true
         parent?.navigationItem.rightBarButtonItems?[1].title = filterNames[filterType]
-//        UIView.transition(with: parkedTableView,
-//                          duration: 0.35,
-//                          options: .transitionCurlDown,
-//                          animations: { self.parkedTableView.reloadData() })
     }
     
     // MARK: Navigation
