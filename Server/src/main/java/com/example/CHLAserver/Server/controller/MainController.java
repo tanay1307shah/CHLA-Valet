@@ -42,28 +42,32 @@ public class MainController {
 
     @PostMapping("/cars/addCar")
     public @ResponseBody String addNewCar(@RequestParam Map<String,String> allData,@RequestParam MultipartFile[] images,HttpServletRequest req) throws IOException {
-
+        //System.out.println(allData.toString());
         String Name = allData.get("Name");
         String phone = allData.get("phone");
         String type = allData.get("type");
         String license = allData.get("license");
         String color = allData.get("color");
-        String make = allData.get("location");
+        String make = allData.get("make");
         String location = allData.get("location");
         String customerType = allData.get("customerType");
-
+        //System.out.println(make + " " + type);
         StringBuilder sb = new StringBuilder();
 
 
+        //image path finding
+        Path currPath = Paths.get(".");
+        Path absolutePath = currPath.toAbsolutePath();
+
+
+
         for(int i=0;i<images.length;i++){
-//            SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
-//            String date = sdf.format(new Date());
-            new File(uploadDirectory + "/"+license).mkdir();
-            Path path = Paths.get(uploadDirectory+"/"+license,images[i].getOriginalFilename());
-            log.info("Add Car: Writing image " + images[i].getOriginalFilename() + " at location " + path.toString());
+           // new File(uploadDirectory + "/"+license).mkdir();
+            Path path = Paths.get(absolutePath + "/src/main/resources/static/" + license + "_" +images[i].getOriginalFilename());
+            log.info("Add Car: Writing image " + images[i].getOriginalFilename() + " at location " + path.normalize().toString());
             Files.write(path,images[i].getBytes());
 
-            String imLoc = "https://chlaserver.azurewebsites.net/images/" +license + "/"+ images[i].getOriginalFilename();
+            String imLoc = "https://chalserver.azurewebsites.net/images/"+ path.toString();
             if(i!=images.length-1){
                 sb.append(imLoc+",");
             }else{
@@ -151,7 +155,6 @@ public class MainController {
     public @ResponseBody Car requestCar(@PathVariable String id){
         System.out.print(id);
         Car c = cs.request(id);
-
         if(c !=null){
             return c;
         }else{
@@ -171,7 +174,7 @@ public class MainController {
 
 
     //TODO
-    @PostMapping("/cars/paid/{ticket}")
+    @GetMapping("/cars/paid/{ticket}")
     @ResponseStatus(OK)
     public void paidCar(@PathVariable String ticket){
         if(cs.payExistingCar(ticket)){

@@ -14,3 +14,33 @@
 //        }
 //        Files.write(Paths.get("/" + image0.getOriginalFilename()),bytes);
         //FileUtils.writeByteArrayToFile(new File("/"+image0.getOriginalFilename()), bytes);
+
+
+
+        #azure.storage.connection-string=DefaultEndpointsProtocol=https;AccountName=cs4ecde06df2d76x492bxa3a;AccountKey=Y/I11C+8/Ztj5euqhOiajKfTJbFCrTKob9ltKTfBm5S6d0IbIux9SWarBxbMdk2ycfT0n1Ktot4mtT59BDz8KQ==;EndpointSuffix=core.windows.net
+        #azure.storage.account-name=cs4ecde06df2d76x492bxa3a
+        #azure.storage.account-key=Y/I11C+8/Ztj5euqhOiajKfTJbFCrTKob9ltKTfBm5S6d0IbIux9SWarBxbMdk2ycfT0n1Ktot4mtT59BDz8KQ==
+        #azure.storage.container-name=chla
+        #azure.storage.allow-telemetry=false
+
+
+        <dependency>
+                    <groupId>com.google.code.findbugs</groupId>
+                    <artifactId>annotations</artifactId>
+                    <version>3.0.1</version>
+                </dependency>
+        		<dependency>
+        			<groupId>com.microsoft.azure</groupId>
+        			<artifactId>azure-storage-spring-boot-starter</artifactId>
+        			<version>2.0.5</version>
+        		</dependency>
+        		<dependency>
+        			<groupId>com.microsoft.azure</groupId>
+        			<artifactId>spring-azure-starter-storage</artifactId>
+        			<version>1.0.0.M2</version>
+        		</dependency>
+        		<dependency>
+        			<groupId>com.microsoft.azure</groupId>
+        			<artifactId>azure-storage-blob</artifactId>
+        			<version>10.0.1-Preview</version>
+        		</dependency>
