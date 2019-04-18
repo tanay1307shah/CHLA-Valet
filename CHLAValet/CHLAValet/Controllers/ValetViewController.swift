@@ -10,11 +10,15 @@ import UIKit
 import SwiftyJSON
 import SwiftSpinner
 
-class ValetViewController: UIViewController, UITableViewDataSource{
+class ValetViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     var tableView: UITableView!
     var filterButton: UIBarButtonItem!
     var refreshButton: UIBarButtonItem!
+    
+    var timer: Timer?
+    
+    static var edited = false
     
     var filterType = 0
     var filterNames = ["All", "Patients", "Employees"]
@@ -22,11 +26,18 @@ class ValetViewController: UIViewController, UITableViewDataSource{
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(ValetViewController.loadData))
-        loadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if ValetViewController.edited {
+            self.loadData()
+            ValetViewController.edited = false
+        }
+        UIView.transition(with: self.tableView,
+                          duration: 0.50,
+                          options: .transitionCrossDissolve,
+                          animations: { self.tableView.reloadData() })
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,15 +48,20 @@ class ValetViewController: UIViewController, UITableViewDataSource{
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     //MARK: Actions
     @IBAction func unwindToValetList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? AddEditViewController, let valet = sourceViewController.valet {
             SwiftSpinner.show("Adding Car...")
-            APIManager.shared.addCar(valetEntry: valet, onSuccess: {
+            let images = sourceViewController.images
+            APIManager.shared.addCar(valetEntry: valet, images: images, onSuccess: {
                 print("Success!")
                 self.loadData()
             }, onFailure: {e in
-                print(e.localizedDescription)
+                print(e)
             })
         }
     }
@@ -77,6 +93,8 @@ class ValetViewController: UIViewController, UITableViewDataSource{
                 $0.ticketNumber < $1.ticketNumber
             }
             
+            SwiftSpinner.show("Checking for requests...")
+            
             // Loading requested cars succeeded
             let onSuccessHandlerReq: (JSON) -> (Void) = { obj in
                 ValetEntryModel.shared.requestedEntries.removeAll()
@@ -103,22 +121,23 @@ class ValetViewController: UIViewController, UITableViewDataSource{
             }
             
             // Loading requested cars failed
-            let onFailureHandlerReq: (Error) ->(Void) = { e in
-                // TODO: Add alert to show error
+            let onFailureHandlerReq: (String) ->(Void) = { e in
                 SwiftSpinner.hide()
-                print(e.localizedDescription)
+                let alertController = UIAlertController(title: "Error Retrieving Requested Cars List",
+                                                        message: e,
+                                                        preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
             }
-            SwiftSpinner.show("Checking for requests...")
             APIManager.shared.getRequestedCars(onSuccess: onSuccessHandlerReq, onFailure: onFailureHandlerReq)
         }
         
         // Loading all cars failed
-        let onFailureHandlerAll: (Error) ->(Void) = { e in
-            // TODO: Add alert to show error
+        let onFailureHandlerAll: (String) ->(Void) = { e in
             SwiftSpinner.hide()
-            print(e.localizedDescription)
-            let alertController = UIAlertController(title: "Error Retrieving Car List",
-                                                    message: "Please try again.",
+            let alertController = UIAlertController(title: "Error Retrieving Car List, Please Try Again",
+                                                    message: e,
                                                     preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(okAction)

@@ -13,10 +13,10 @@ import SwiftSpinner
 class ParkedViewController: ValetViewController{
     
     @IBOutlet var parkedTableView: UITableView!
-    let timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(ValetViewController.loadData), userInfo: nil, repeats: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         filterButton = UIBarButtonItem(title: filterNames[filterType], style: .plain, target: self, action: #selector(ValetViewController.nextFilter))
         parent?.navigationItem.rightBarButtonItems?.append(filterButton)
         parent?.navigationItem.leftBarButtonItems?.append(refreshButton)
@@ -25,8 +25,14 @@ class ParkedViewController: ValetViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(ValetViewController.loadData), userInfo: nil, repeats: true)
         parent?.navigationItem.rightBarButtonItems?[1].isEnabled = true
         parent?.navigationItem.rightBarButtonItems?[1].title = filterNames[filterType]
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.timer?.invalidate()
     }
     
     // MARK: Navigation
@@ -50,6 +56,11 @@ class ParkedViewController: ValetViewController{
             
             let selectedCar = ValetEntryModel.shared.valetEntries[indexPath.row]
             infoViewController.valet = selectedCar
+            if(ValetEntryModel.shared.requestedEntries.contains(where: { $0.ticketNumber == selectedCar.ticketNumber })){
+                infoViewController.updateDisabled = true
+            } else {
+                infoViewController.updateDisabled = false
+            }
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
@@ -89,14 +100,16 @@ class ParkedViewController: ValetViewController{
         cell.carLabel.text = car.make.uppercased() + " " + car.type.uppercased()
         cell.nameLabel.text = car.name.uppercased()
         if car.customerType.lowercased() == "employee" {
-            cell.requestButton.isHidden = true
+            cell.requestButton.setTitle("Picked Up", for: .normal)
         } else {
-            cell.requestButton.isHidden = false
+            cell.requestButton.setTitle("Request", for: .normal)
         }
         if(ValetEntryModel.shared.requestedEntries.contains(where: { $0.ticketNumber == entries[indexPath.row].ticketNumber })){
             cell.requestButton.alpha = 0.5
+            cell.requestButton.isEnabled = false
         } else {
             cell.requestButton.alpha = 1.0
+            cell.requestButton.isEnabled = true
         }
         return cell
     }
@@ -119,13 +132,38 @@ class ParkedViewController: ValetViewController{
             entries = ValetEntryModel.shared.valetEntries
         }
         
-        SwiftSpinner.show("Requesting Car...")
-        APIManager.shared.requestCar(ticketNumber: entries[indexPath.row].ticketNumber, onSuccess: {
-            print("Success!")
-            self.loadData()
-        }, onFailure: {e in
-            print(e.localizedDescription)
-            self.loadData()
-        })
+        if entries[indexPath.row].customerType.lowercased() == "employee" {
+            SwiftSpinner.show("Removing Car...")
+            APIManager.shared.requestCar(ticketNumber: entries[indexPath.row].ticketNumber, onSuccess: {
+                print("Success!")
+                APIManager.shared.removeCar(ticketNumber: entries[indexPath.row].ticketNumber, onSuccess: {
+                    self.loadData()
+                }, onFailure: {e in
+                    self.loadData()
+                })
+            }, onFailure: {e in
+                SwiftSpinner.hide()
+                let alertController = UIAlertController(title: "Error Requesting Car",
+                                                        message: e,
+                                                        preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            })
+        } else {
+            SwiftSpinner.show("Requesting Car...")
+            APIManager.shared.requestCar(ticketNumber: entries[indexPath.row].ticketNumber, onSuccess: {
+                print("Success!")
+                self.loadData()
+            }, onFailure: {e in
+                SwiftSpinner.hide()
+                let alertController = UIAlertController(title: "Error Requesting Car",
+                                                        message: e,
+                                                        preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            })
+        }
     }
 }

@@ -16,39 +16,43 @@ class APIManager {
     static let shared = APIManager()
     
     // Azure Backend API Endpoints
-    func getAllCars(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
+    func getAllCars(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(String) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/getAllCarsParked")!
-        AF.request(url, method: .get).validate().responseJSON { response in
-            switch response.result {
-            case .success:
+        AF.request(url, method: .get).response{ response in
+            if (response.result.description == "SUCCESS") {
                 if let result = response.result.value {
-                    let obj = JSON(result)
+                    let obj = JSON(result as Any)
+                    onSuccess(obj)
+                } else {
+                    let obj = JSON()
                     onSuccess(obj)
                 }
-            case .failure(let error):
-                onFailure(error)
+            } else {
+                onFailure("Server Error")
             }
         }
     }
     
-    func getRequestedCars(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(Error) -> Void) {
+    func getRequestedCars(onSuccess: @escaping(JSON) -> Void, onFailure: @escaping(String) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/request/getAllRequested")!
-        AF.request(url, method: .get).validate().responseJSON { response in
-            switch response.result {
-            case .success:
+        AF.request(url, method: .get).response { response in
+            if (response.result.description == "SUCCESS") {
                 if let result = response.result.value {
-                    let obj = JSON(result)
+                    let obj = JSON(result as Any)
+                    onSuccess(obj)
+                } else {
+                    let obj = JSON()
                     onSuccess(obj)
                 }
-            case .failure(let error):
-                onFailure(error)
+            } else {
+                onFailure("Server Error")
             }
         }
     }
 
     
-    func addCar(valetEntry: ValetEntry, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
-        let parameters: Parameters = ["Name":valetEntry.name,
+    func addCar(valetEntry: ValetEntry, images: [UIImage?], onSuccess: @escaping() -> Void, onFailure: @escaping(String) -> Void) {
+        let parameters: Parameters = ["name":valetEntry.name,
                                       "phone":valetEntry.phoneNumber,
                                       "license":valetEntry.licensePlate, "color":valetEntry.color,
                                       "type":valetEntry.type, "make":valetEntry.make,
@@ -58,77 +62,85 @@ class APIManager {
             for (key, value) in parameters {
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
             }
-            for i in 0..<valetEntry.images.count{
-                if let data = valetEntry.images[i]?.jpegData(compressionQuality: 0.25){
+            for i in 0..<images.count{
+                if let data = images[i]?.jpegData(compressionQuality: 0.25){
                     multipartFormData.append(data, withName: "images", fileName: "image\(i).jpeg", mimeType: "image/jpeg")
                 }
             }
-        }, to: Constants.CHLA_API_BASE_URL + "/cars/addCar", method: .post).responseString { response in
-            switch response.result {
-            case .success:
-                debugPrint(response)
+        }, to: Constants.CHLA_API_BASE_URL + "/cars/addCar", method: .post).response { response in
+            if (response.result.description == "SUCCESS") {
+                if(response.response?.statusCode == 404) {
+                    onFailure("Car could not be added")
+                    return
+                }
                 onSuccess()
-            case .failure(let error):
-                debugPrint(response)
-                onFailure(error)
+            } else {
+                onFailure("Server Error")
             }
         }
     }
     
-    func updateInfo(valetEntry: ValetEntry, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
+    func updateInfo(valetEntry: ValetEntry, images: [UIImage?], onSuccess: @escaping() -> Void, onFailure: @escaping(String) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/updateInfo/\(valetEntry.ticketNumber)")!
         let parameters: Parameters = ["name": valetEntry.name, "phone":valetEntry.phoneNumber,
                                       "license":valetEntry.licensePlate, "color":valetEntry.color, "type":valetEntry.type, "make":valetEntry.make, "images": "", "parkingLocation": valetEntry.location, "customerType": valetEntry.customerType]
-        AF.request(url, method: .get, parameters: parameters).responseString { response in
-            switch response.result {
-            case .success:
-                debugPrint(response)
+        AF.request(url, method: .post, parameters: parameters).response { response in
+            if (response.result.description == "SUCCESS") {
+                if(response.response?.statusCode == 404) {
+                    onFailure("Failed to update Info")
+                    return
+                }
                 onSuccess()
-            case .failure(let error):
-                debugPrint(response)
-                onFailure(error)
+            } else {
+                onFailure("Server Error")
             }
         }
     }
     
-    func requestCar(ticketNumber: String, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
+    func requestCar(ticketNumber: String, onSuccess: @escaping() -> Void, onFailure: @escaping(String) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/request/" + ticketNumber)!
-        AF.request(url, method: .get).responseString { response in
-            switch response.result {
-            case .success:
-                debugPrint(response)
+        AF.request(url, method: .get).response { response in
+            if (response.result.description == "SUCCESS") {
+                if(response.response?.statusCode == 404) {
+                    onFailure("Car could not be requested")
+                    return
+                }
                 onSuccess()
-            case .failure(let error):
-                debugPrint(response)
-                onFailure(error)
+            } else {
+                onFailure("Server Error")
             }
         }
     }
     
-    func removeCar(ticketNumber: String, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
+    func removeCar(ticketNumber: String, onSuccess: @escaping() -> Void, onFailure: @escaping(String) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/cars/paid/" + ticketNumber)!
-        AF.request(url, method: .get).responseString { response in
-            switch response.result {
-            case .success:
-                debugPrint(response)
+        AF.request(url, method: .get).response { response in
+            debugPrint(response)
+            if (response.result.description == "SUCCESS") {
+                if(response.response?.statusCode == 404) {
+                    onFailure("Car could not be removed")
+                    return
+                }
                 onSuccess()
-            case .failure(let error):
-                debugPrint(response)
-                onFailure(error)
+            } else {
+                onFailure("Server Error")
             }
         }
     }
     
-    func logIn(username: String, password: String, onSuccess: @escaping() -> Void, onFailure: @escaping(Error) -> Void) {
+    func logIn(username: String, password: String, onSuccess: @escaping() -> Void, onFailure: @escaping(String) -> Void) {
         let url = URL(string: Constants.CHLA_API_BASE_URL + "/login")!
-        AF.request(url, method: .get).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                debugPrint(response)
+        let parameters: Parameters = ["username": username, "password": md5Hash(string: password)]
+        AF.request(url, method: .post, parameters: parameters).response { response in
+            debugPrint(response)
+            if (response.result.description == "SUCCESS") {
+                if(response.response?.statusCode == 406) {
+                    onFailure("Username/Password incorrect")
+                    return
+                }
                 onSuccess()
-            case .failure(let error):
-                debugPrint(response)
-                onFailure(error)
+            } else {
+                onFailure("Server Error")
             }
         }
     }
@@ -156,7 +168,6 @@ class APIManager {
         AF.request(url, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success:
-                debugPrint(response)
                 if let result = response.result.value {
                     let obj = JSON(result)
                     onSuccess(obj)

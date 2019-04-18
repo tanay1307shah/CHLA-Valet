@@ -18,12 +18,11 @@ class ValetEntry {
     var color: String
     var type: String
     var make: String
-    var images: [UIImage?]
     var imageURLs: [URL?]
     var location: String
     var customerType: String
     
-    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, images: [UIImage?], customerType: String, location: String) {
+    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, customerType: String, location: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.ticketNumber = ticketNumber
@@ -31,7 +30,6 @@ class ValetEntry {
         self.color = color
         self.type = type
         self.make = make
-        self.images = images
         self.imageURLs = []
         self.customerType = customerType
         self.location = location
@@ -47,12 +45,9 @@ class ValetEntry {
         self.make = obj["make"].stringValue
         
         let imagesArray = obj["imageList"].arrayValue
-        self.images = []
         self.imageURLs = []
         for image in imagesArray{
-            self.images.append(nil)
             self.imageURLs.append(URL(string: image.stringValue))
-            print(image.stringValue)
         }
         self.location = obj["location"].stringValue
         self.customerType = obj["customerType"].stringValue

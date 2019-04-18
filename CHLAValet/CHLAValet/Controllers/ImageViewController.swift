@@ -21,8 +21,4 @@ class ImageViewController: UIViewController, WKNavigationDelegate {
             imageView.image = image
         }
     }
-    @IBAction func trashButtonDidPressed(_ sender: UIBarButtonItem) {
-        
-    }
-    
 }

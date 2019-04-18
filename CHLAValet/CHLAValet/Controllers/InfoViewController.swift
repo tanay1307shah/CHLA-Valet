@@ -10,13 +10,12 @@ import UIKit
 import os.log
 import SwiftSpinner
 
-class InfoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class InfoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var valet: ValetEntry?
+    var images: [UIImage?] = []
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var ticketNumberLabel: UILabel!
@@ -25,9 +24,20 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var customerTypeLabel: UILabel!
+    @IBOutlet weak var updateButton: RoundedUIButton!
+    
+    var updateDisabled: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if updateDisabled ?? false {
+            updateButton.isHidden = true
+        } else {
+            updateButton.isHidden = false
+        }
+        for _ in 0..<(valet?.imageURLs.count)!{
+            images.append(nil)
+        }
         loadInfo()
     }
     
@@ -47,42 +57,73 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError("Unexpected controller: \(navViewController.children[0])")
             }
             editViewController.valet = valet
+            editViewController.images = images
+        case "showImageFromInfo":
+            let viewController = segue.destination as! ImageViewController
+            let index = collectionView.indexPathsForSelectedItems!.first!
+            viewController.selectedImage = images[index.row]
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
     }
     
     // MARK: Collection view delegates
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return valet?.images.count ?? 0
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
-        cell.imageView.image = valet?.images[indexPath.row]
+        cell.imageView.image = images[indexPath.row]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.size.height - 10
+        return CGSize(width: height, height: height)
     }
     
     // MARK: Actions
     @IBAction func unwindToInfoPage(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? AddEditViewController, let editValet = sourceViewController.valet {
             valet = editValet
+            let images = sourceViewController.images
             SwiftSpinner.show("Loading...")
-            APIManager.shared.updateInfo(valetEntry: valet!, onSuccess: {
+            APIManager.shared.updateInfo(valetEntry: valet!, images: images, onSuccess: {
                 SwiftSpinner.hide()
-                
+                self.loadInfo()
+                ValetViewController.edited = true
             }, onFailure: {e in
-                print(e.localizedDescription)
+                print(e)
                 SwiftSpinner.hide()
             })
-            loadInfo()
         } else {
             os_log("The data was not passed back", log: OSLog.default, type: .debug)
         }
     }
     
     func loadInfo() {
+        if valet?.location == "" {
+            navigationItem.title = "No Location"
+        } else {
+            navigationItem.title = valet?.location
+        }
         nameLabel.text = valet?.name.uppercased()
         phoneNumberLabel.text = valet?.phoneNumber
         ticketNumberLabel.text = valet?.ticketNumber
@@ -103,19 +144,19 @@ class InfoViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func downloadImage(from url: URL, index: Int) {
         print("Download Started")
         print(url)
-        valet?.images[index] = UIImage(named: "loading")
+        images[index] = UIImage(named: "loading")
         self.collectionView.reloadData()
         getData(from: url) { data, response, error in
             guard let data = data, error == nil
                 else {
-                    self.valet?.images[index] = UIImage(named: "sadCloud")
+                    self.images[index] = UIImage(named: "sadCloud")
                     self.collectionView.reloadData()
                     return
             }
             print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
             DispatchQueue.main.async() {
-                self.valet?.images[index] = UIImage(data: data)
+                self.images[index] = UIImage(data: data)
                 self.collectionView.reloadData()
             }
         }

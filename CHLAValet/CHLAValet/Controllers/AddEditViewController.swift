@@ -20,6 +20,9 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     //MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var addImageRound: RoundUIView!
+    @IBOutlet weak var addImageImage: UIImageView!
+    @IBOutlet weak var addImageButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -42,9 +45,19 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         // Handle the text field’s user input through delegate callbacks.        
         nameTextField.delegate = self
         phoneNumberTextField.delegate = self
-        locationTextField.delegate = self
         licencePlateNumberTextField.delegate = self
         
+        // Loacation
+        locationTextField.delegate = self
+        let locationPickerView = UIPickerView()
+        locationPickerView.delegate = self
+        locationTextField.inputView = locationPickerView
+        let locationDropDown = UIImageView(image: UIImage(named: "dropDown"))
+        locationDropDown.backgroundColor = UIColor.lightGray
+        locationTextField.rightView = locationDropDown
+        locationTextField.rightViewMode = .always
+        
+        // Color
         colorTextField.delegate = self
         let colorPickerView = UIPickerView()
         colorPickerView.delegate = self
@@ -54,15 +67,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         colorTextField.rightView = colorDropDown
         colorTextField.rightViewMode = .always
         
-        typeTextField.delegate = self
-        let modelPickerView = UIPickerView()
-        modelPickerView.delegate = self
-        typeTextField.inputView = modelPickerView
-        let typeDropDown = UIImageView(image: UIImage(named: "dropDown"))
-        typeDropDown.backgroundColor = UIColor.lightGray
-        typeTextField.rightView = typeDropDown
-        typeTextField.rightViewMode = .always
-        
+        // Make
         makeTextField.delegate = self
         let makePickerView = UIPickerView()
         makePickerView.delegate = self
@@ -72,12 +77,29 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         makeTextField.rightView = makeDropDown
         makeTextField.rightViewMode = .always
         
+        // Model
+        typeTextField.delegate = self
+        let modelPickerView = UIPickerView()
+        modelPickerView.delegate = self
+        typeTextField.inputView = modelPickerView
+        let typeDropDown = UIImageView(image: UIImage(named: "dropDown"))
+        typeDropDown.backgroundColor = UIColor.lightGray
+        typeTextField.rightView = typeDropDown
+        typeTextField.rightViewMode = .always
+        
         saveChangesButton.isHidden = true
         saveButton.isHidden = false
+        addImageRound.isHidden = false
+        addImageImage.isHidden = false
+        addImageButton.isHidden = false
         
         // Set up views if editing an existing car.
         if let valet = valet {
+            addImageRound.isHidden = true
+            addImageImage.isHidden = true
+            addImageButton.isHidden = true
             saveChangesButton.isHidden = false
+            
             saveButton.isHidden = true
             nameTextField.text = valet.name
             phoneNumberTextField.text = valet.phoneNumber
@@ -90,7 +112,6 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
             {
                 customerSegControl.selectedSegmentIndex = 1
             }
-            images = valet.images
         }
         
         // Enable the Save button only if required text fields are filled
@@ -122,17 +143,27 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         cell.imageView.image = images[indexPath.row]
+        if valet != nil {
+            cell.deleteButton.isHidden = true
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.size.height - 10
+        return CGSize(width: height, height: height)
     }
     
     // MARK: Picker View Delegates
@@ -147,8 +178,10 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
             return makes.count
         } else if typeTextField.inputView == pickerView {
             return models.count
+        } else if colorTextField.inputView == pickerView {
+            return Constants.colors.count
         }
-        return Constants.colors.count
+        return Constants.locations.count
     }
     
     // This function sets the text of the picker view to the content of the "makes" array
@@ -157,8 +190,10 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
             return makes[row]
         } else if typeTextField.inputView == pickerView {
             return models[row]
+        } else if colorTextField.inputView == pickerView {
+            return Constants.colors[row]
         }
-        return Constants.colors[row]
+        return Constants.locations[row]
     }
     
     // When user selects an option, this function will set the text of the text field to reflect
@@ -176,17 +211,23 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
                 modelPicker?.reloadAllComponents()
             }
         } else if typeTextField.inputView == pickerView {
+            if models.count == 0 {
+                typeTextField.text = ""
+            }
             typeTextField.text = models[row]
-        } else {
+        } else if colorTextField.inputView == pickerView {
             colorTextField.text = Constants.colors[row]
+        } else {
+            locationTextField.text = Constants.locations[row]
         }
+        updateSaveButtonState()
     }
     
     //MARK: Navigation
     // This method lets you configure a view controller before it's presented.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if segue.identifier == "showImage" {
+        if segue.identifier == "showImageFromAdd" {
             print("segueing!")
             let viewController = segue.destination as! ImageViewController
             let index = collectionView.indexPathsForSelectedItems!.first!
@@ -219,7 +260,7 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     
     @IBAction func getImagePickerDidSelect(_ sender: UIButton){
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = .camera
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
     }
@@ -282,6 +323,6 @@ class AddEditViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         let make = makeTextField.text ?? ""
         let location = locationTextField.text ?? ""
         let customerType = customerSegControl.titleForSegment(at: customerSegControl.selectedSegmentIndex) ?? ""
-        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber ?? "", licensePlate: licensePlateNumber, color: color, type: type, make: make, images: images, customerType: customerType, location: location)
+        valet = ValetEntry(name: name, phoneNumber: phoneNumber, ticketNumber: ticketNumber ?? "", licensePlate: licensePlateNumber, color: color, type: type, make: make, customerType: customerType, location: location)
     }
 }

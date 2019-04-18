@@ -21,9 +21,15 @@ class RequestViewController: ValetViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(ValetViewController.loadData), userInfo: nil, repeats: true)
         parent?.navigationItem.rightBarButtonItems?[1].isEnabled = false
         parent?.navigationItem.rightBarButtonItems?[1].title = ""
         requestsTableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.timer?.invalidate()
     }
     
     // MARK: Navigation
@@ -47,6 +53,7 @@ class RequestViewController: ValetViewController{
             
             let selectedCar = ValetEntryModel.shared.requestedEntries[indexPath.row]
             infoViewController.valet = selectedCar
+            infoViewController.updateDisabled = true
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
@@ -88,7 +95,7 @@ class RequestViewController: ValetViewController{
             self.loadData()
         }, onFailure: {e in
             self.loadData()
-            print(e.localizedDescription)
+            print(e)
             SwiftSpinner.hide()
         })
     }
