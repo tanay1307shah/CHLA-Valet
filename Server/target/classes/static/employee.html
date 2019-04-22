@@ -20,7 +20,7 @@
                     var car = JSON.parse(data);
                     document.getElementById("infoTitle").innerText = "";
                     document.getElementById("nameTag").innerText = "Name: " + car.name;
-                    document.getElementById("locationTag").innerText = "Location: " + car.parkingLocation;
+                    document.getElementById("locationTag").innerText = "Location: " + car.location;
                 }
             };
             xhttp.open("GET",request_url,true);

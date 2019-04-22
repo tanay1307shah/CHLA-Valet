@@ -1,19 +1,13 @@
 package com.example.CHLAserver.Server.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import org.aspectj.lang.annotation.RequiredTypes;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.sql.Date;
 
 @Entity
 public class Car {
@@ -21,7 +15,6 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, nullable = false)
-    @Max(4)
     private Long ticketNumber;
 
     @NotNull
@@ -38,7 +31,7 @@ public class Car {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String images;
 
-    private String parkingLocation;
+    private String location;
     private String customerType;
 
     @Transient
@@ -46,10 +39,26 @@ public class Car {
     @JsonDeserialize
     private String[] imageList;
 
+    @Column(name = "date",updatable = false,nullable = false)
+    private Date date;
+
+
     public Car() {
     }
 
-    public Car(String name, String phoneNumber, String licensePlate, String color, String type, String make, String images, String parkingLocation, String customerType) {
+//    public Car(String name, String phoneNumber, String licensePlate, String color, String type, String make, String images, String parkingLocation, String customerType) {
+//        Name = name;
+//        this.phoneNumber = phoneNumber;
+//        this.licensePlate = licensePlate;
+//        this.color = color;
+//        this.type = type;
+//        this.make = make;
+//        this.images = images;
+//        this.location = parkingLocation;
+//        this.customerType = customerType;
+//    }
+
+    public Car(@NotNull String name, @Min(10) String phoneNumber, String licensePlate, String color, String type, String make, String images, String location, String customerType, Date date) {
         Name = name;
         this.phoneNumber = phoneNumber;
         this.licensePlate = licensePlate;
@@ -57,11 +66,11 @@ public class Car {
         this.type = type;
         this.make = make;
         this.images = images;
-        this.parkingLocation = parkingLocation;
+        this.location = location;
         this.customerType = customerType;
+        this.date = date;
     }
-
-//    public Car(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, boolean customerType, String parkingLocation) {
+    //    public Car(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, boolean customerType, String location) {
 //        this.phoneNumber = phoneNumber;
 //        this.ticketNumber = ticketNumber;
 //        this.licensePlate = licensePlate;
@@ -74,7 +83,7 @@ public class Car {
 //        Image_4 = image_4;
 //    }
 //
-//    public Car(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, String parkingLocation, String customerType) {
+//    public Car(String phoneNumber, String ticketNumber, String licensePlate, String color, String type, String make, String image_1, String image_2, String image_3, String image_4, String location, String customerType) {
 //        this.phoneNumber = phoneNumber;
 //        this.ticketNumber = ticketNumber;
 //        this.licensePlate = licensePlate;
@@ -85,13 +94,24 @@ public class Car {
 //        Image_2 = image_2;
 //        Image_3 = image_3;
 //        Image_4 = image_4;
-//        this.parkingLocation = parkingLocation;
+//        this.location = location;
 //        this.customerType = customerType;
 //    }
 
     public void parseImages(){
-        this.imageList = getImages().split(",");
+        if(!images.isEmpty()){
+            this.imageList = getImages().split(",");
+        }
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public String getName() {
         return Name;
     }
@@ -148,8 +168,8 @@ public class Car {
         this.images = images;
     }
 
-    public String getParkingLocation() {
-        return parkingLocation;
+    public String getLocation() {
+        return location;
     }
 
     public Long getTicketNumber() {
@@ -160,8 +180,8 @@ public class Car {
         this.ticketNumber = ticketNumber;
     }
 
-    public void setParkingLocation(String parkingLocation) {
-        this.parkingLocation = parkingLocation;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getCustomerType() {

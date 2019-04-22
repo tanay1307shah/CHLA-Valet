@@ -1,22 +1,34 @@
 package com.example.CHLAserver.Server.controller;
 
+import com.example.CHLAserver.Server.ChlaServerApplication;
 import com.example.CHLAserver.Server.Model.Car;
 import com.example.CHLAserver.Server.Model.Twillio;
 import com.example.CHLAserver.Server.Service.CarService;
+import com.example.CHLAserver.Server.Service.EmployeeService;
+import com.microsoft.azure.storage.StorageException;
+import com.microsoft.azure.storage.blob.CloudBlob;
+import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import com.microsoft.azure.storage.blob.ListBlobItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -35,15 +47,48 @@ public class MainController {
     public static final String MSG_PRESET = "Thank you for dropping your car at CHLA - Valet, To get your car back from the Valet. ";
     public static final String DATE_PATTERN = "yyyy-MM-dd";
 
+    public static final String REQ_URL = " https://bcc44000.ngrok.io";
+    public static final String AZURE_REQ_URL = "https://chlaserver.azurewebsites.net";
+
     @Autowired
     private CarService cs;
 
+    @Autowired
+    private EmployeeService es;
+
     private static Logger log = LoggerFactory.getLogger(MainController.class);
 
+
+    @Scheduled(fixedDelay = 86400000, initialDelay = 86400000)
+    public void clean(){
+        log.info("Cleaning older cars");
+        Iterable<Car> it = cs.getCarsToRemove();
+        List<Car> removeList = new ArrayList<>();
+        for (Car c: it) {
+            //Removes all images related to that car from Azure file storage
+            Iterable<ListBlobItem> blobList = ChlaServerApplication.container.listBlobs(c.getLicensePlate());
+            for (ListBlobItem item: blobList) {
+                try {
+                    CloudBlockBlob cbb = (CloudBlockBlob) item;
+                    cbb.deleteIfExists();
+                } catch (StorageException e) {
+                    e.printStackTrace();
+                }
+            }
+            //Add car to be removed
+            removeList.add(c);
+        }
+        cs.removeCars(removeList);
+    }
+
+    @GetMapping("/request")
+    public String requestPage(){
+        return "redirect:/request.html";
+    }
+
     @PostMapping("/cars/addCar")
-    public @ResponseBody String addNewCar(@RequestParam Map<String,String> allData,@RequestParam MultipartFile[] images,HttpServletRequest req) throws IOException {
-        //System.out.println(allData.toString());
-        String Name = allData.get("Name");
+    public ResponseEntity<String> addNewCar(@RequestParam Map<String,String> allData, @RequestParam(required = false) MultipartFile[] images, HttpServletRequest req, Model m) throws IOException, StorageException, URISyntaxException {
+        String Name = allData.get("name");
         String phone = allData.get("phone");
         String type = allData.get("type");
         String license = allData.get("license");
@@ -51,23 +96,14 @@ public class MainController {
         String make = allData.get("make");
         String location = allData.get("location");
         String customerType = allData.get("customerType");
-        //System.out.println(make + " " + type);
         StringBuilder sb = new StringBuilder();
 
-
-        //image path finding
-        Path currPath = Paths.get(".");
-        Path absolutePath = currPath.toAbsolutePath();
-
-
-
         for(int i=0;i<images.length;i++){
-           // new File(uploadDirectory + "/"+license).mkdir();
-            Path path = Paths.get(absolutePath + "/src/main/resources/static/" + license + "_" +images[i].getOriginalFilename());
-            log.info("Add Car: Writing image " + images[i].getOriginalFilename() + " at location " + path.normalize().toString());
-            Files.write(path,images[i].getBytes());
 
-            String imLoc = "https://chalserver.azurewebsites.net/images/"+ path.toString();
+            CloudBlockBlob blob = ChlaServerApplication.container.getBlockBlobReference(license +"_"+images[i].getOriginalFilename());
+            log.info("Uploading the sample file ");
+            blob.uploadFromByteArray(images[i].getBytes(),0,images[i].getBytes().length);
+            String imLoc = blob.getUri().toString();
             if(i!=images.length-1){
                 sb.append(imLoc+",");
             }else{
@@ -76,40 +112,50 @@ public class MainController {
 
         }
 
-
         Car c = cs.addCar(Name,phone, license, color, type, make,sb.toString(),location,customerType);
         if(c!= null){
             log.info("Adding Car " + c.getTicketNumber() +" to DB");
             String msg = "";
             if(c.getCustomerType().compareToIgnoreCase("patient") == 0){
-                String url = "https://chlaserver.azurewebsites.net/request.html?id=" + c.getTicketNumber();
+                String url = AZURE_REQ_URL+"/request.html?id=" + c.getTicketNumber();
                 String sp_msg = "You can request your car back by using the link provided below. ";
                 msg = MSG_PRESET + sp_msg + url;
             }else{
-                String url = "https://chlaserver.azurewebsites.net/employee.html?id=" + c.getTicketNumber();
+                String url = AZURE_REQ_URL+"/employee.html?id=" + c.getTicketNumber();
                 String sp_msg = "You can find your cars parking location by the link provided below. ";
-                msg = MSG_PRESET + sp_msg + url;
+                msg = MSG_PRESET + sp_msg+ url;
             }
             Twillio.sendSMS(msg, phone);
-            return "OK";
+            return ResponseEntity.ok("car_added");
         }
         log.error("Car Already Exsits in the Database");
-        return "ALREADY EXSITS";
+        return ResponseEntity.status(ALREADY_REPORTED).body("car_already_added");
     }
 
     @GetMapping("/cars/getAllCarsParked")
-    public @ResponseBody Iterable<Car> getAll(){
-        return cs.getAll();
+    public ResponseEntity<Iterable<Car>> getAll()
+    {
+        Iterable<Car> it =  cs.getAll();
+        if(it != null && it.iterator().hasNext()){
+            return new ResponseEntity<>(it,OK);
+        }else{
+            it  = new ArrayList<>();
+            return new ResponseEntity<>(it,NOT_FOUND);
+        }
     }
 
     @GetMapping("/cars/{ticket}")
-    public @ResponseBody Car getCar(@PathVariable String ticket){
-        return cs.getCar(ticket);
+    public ResponseEntity<?> getCar(@PathVariable String ticket){
+        Car c = cs.getCar(ticket);
+        if(c!=null){
+            return new ResponseEntity<>(c,OK);
+        }else{
+            return new ResponseEntity<>(null,NOT_FOUND);
+        }
     }
 
-    //TODO: Update the function based on the next Database Structure
-    //UPDATED FOR EDITING NAME
-    @GetMapping("/cars/updateInfo/{ticket}")
+
+    @PostMapping("/cars/updateInfo/{ticket}")
     public @ResponseBody String editCarInfo(@PathVariable String ticket,
                                             @RequestParam String name,
                                             @RequestParam String phone,
@@ -124,41 +170,14 @@ public class MainController {
         return "Completed";
     }
 
-
-
-    public @ResponseBody Iterable<Car> getAllRequested(){
-        return null;
-    }
-
-
-    @GetMapping("/static/images")
-    @ResponseStatus(OK)
-    public @ResponseBody String uploadImage(@RequestParam MultipartFile[] fileup) throws IOException {
-        for(int i=0;i<fileup.length;i++){
-            byte[] bytes = fileup[i].getBytes();
-            InputStream inputStream = new ByteArrayInputStream(bytes);
-            String encode = new String(Base64.getEncoder().encode(bytes), "UTF-8");
-            System.out.println(encode + "\n----------------------------------------------------------------------") ;
-        }
-        return "OK";
-    }
-
-    @GetMapping("/getPage")
-    public String getPage(){
-        return "temp.html";
-       // return "<!DOCTYPE html><html><head> <meta chesarset=\"UTF-8\"><title>Uploading Files Example with Spring Boot, Freemarker</title> </head> <form action=\"http://localhost:8080/chla/images\" enctype=\"multipart/form-data\" method=\"post\"><input id=\"fileInput\" type=\"file\" name=\"fileup\" multiple><input type=\"submit\" value=\"Upload files\"></form></body></html>";
-
-    }
-
     @GetMapping("/request/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody Car requestCar(@PathVariable String id){
+    public ResponseEntity<?> requestCar(@PathVariable String id){
         System.out.print(id);
         Car c = cs.request(id);
         if(c !=null){
-            return c;
+            return new ResponseEntity<>(c,HttpStatus.OK);
         }else{
-            return RequestError();
+            return new ResponseEntity<>(c, NOT_FOUND);
         }
     }
 
@@ -175,19 +194,25 @@ public class MainController {
 
     //TODO
     @GetMapping("/cars/paid/{ticket}")
-    @ResponseStatus(OK)
-    public void paidCar(@PathVariable String ticket){
+    public ResponseEntity<String> paidCar(@PathVariable String ticket){
         if(cs.payExistingCar(ticket)){
             log.info("Car : " + ticket + " Paid" );
+            return ResponseEntity.status(OK).body("car_" + ticket +"_requested");
         }else{
-            RequestError();
+            return ResponseEntity.status(NOT_FOUND).body("no_car_with_that_ticket_exsits");
         }
     }
 
-    @PostMapping("/twillio/recieveSMS")
-    @ResponseStatus(HttpStatus.OK)
-    public void recieveText(@RequestParam Map<String,String> allReqParam){
-        System.out.println(allReqParam.toString());
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password){
+        try {
+            if(es.login(username,password)){
+                return ResponseEntity.ok("success");
+            }
+        } catch (SQLException e) {
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body("user_not_found");
+        }
+        return ResponseEntity.status(NOT_ACCEPTABLE).body("password_incorrect");
     }
 
 }
