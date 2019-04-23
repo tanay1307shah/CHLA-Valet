@@ -11,7 +11,7 @@ import Foundation
 struct Constants {
     
     static let someAPIURL = "https://jsonplaceholder.typicode.com/todos/1"
-    static let CHLA_API_BASE_URL = "https://e250c003.ngrok.io/chla" //"https://chlaserver.azurewebsites.net/chla"
+    static let CHLA_API_BASE_URL = "https://chlaserver.azurewebsites.net/chla"
     
     static let colors = ["Red", "Green", "Yellow", "Blue", "Orange", "Purple", "Cyan", "Magenta", "Lime", "Pink", "Teal", "Lavender", "Brown", "Beige", "Maroon", "Mint", "Olive", "Apricot", "Navy", "Grey", "White", "Black"].sorted()
     
