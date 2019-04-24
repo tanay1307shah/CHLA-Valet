@@ -1,3 +1,7 @@
+*.iml
+*.azureauth
+
+
 ## User Settings
 xcuserdata/
 
