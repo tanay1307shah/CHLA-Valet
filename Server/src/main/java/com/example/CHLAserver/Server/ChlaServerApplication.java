@@ -36,6 +36,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 public class ChlaServerApplication{
 
+	/**
+	 * value : AZURE BLOB STORAGE CONNECTION STRING
+	 */
 	private static  final String CONNECTION_STRING = "DefaultEndpointsProtocol=https;" +
 			"AccountName=chlafilestorage;" +
 			"AccountKey=dPuO/5hzU5q73N4wI0EFR7WGKxbQw1IzDTEAi/ONU64SPd1h55I64bQdhoSyUEFOJ+MEXyWLPbb556mnCNkBbA==;" +
@@ -61,6 +64,11 @@ public class ChlaServerApplication{
 		SpringApplication.run(ChlaServerApplication.class, args);
 	}
 
+	/**
+	 *
+	 * SWAGGER DOCS GENERATOR,
+	 * ACCESSED @ chlaserver.azurewebsites.net/swagger-ui.html
+	 */
 	@Bean
 	public Docket swaggerEmployeeApi() {
 		System.out.println("Hello");
