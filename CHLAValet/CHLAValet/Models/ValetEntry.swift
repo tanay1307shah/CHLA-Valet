@@ -2,12 +2,13 @@
 //  ValetEntry.swift
 //  CHLAValet
 //
-//  Created by Ali Hashemi on 2/14/19.
+//  Created by Student on 2/14/19.
 //  Copyright © 2019 CSCI401. All rights reserved.
 //
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 class ValetEntry {
     var name: String
@@ -17,12 +18,11 @@ class ValetEntry {
     var color: String
     var type: String
     var make: String
-    var image: UIImage?
-    var requested: Bool
-    var paid: Bool
-    var ready: Bool
+    var imageURLs: [URL?]
+    var location: String
+    var customerType: String
     
-    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, image: UIImage?, requested: Bool, paid: Bool, ready: Bool) {
+    init(name: String, phoneNumber: String, ticketNumber: String, licensePlate: String, color: String, type: String, make: String, customerType: String, location: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.ticketNumber = ticketNumber
@@ -30,9 +30,26 @@ class ValetEntry {
         self.color = color
         self.type = type
         self.make = make
-        self.image = image
-        self.requested = requested
-        self.paid = paid
-        self.ready = ready
+        self.imageURLs = []
+        self.customerType = customerType
+        self.location = location
+    }
+    
+    init(obj: JSON) {
+        self.name = obj["name"].stringValue
+        self.phoneNumber = obj["phoneNumber"].stringValue
+        self.ticketNumber = obj["ticketNumber"].stringValue
+        self.licensePlate = obj["licensePlate"].stringValue
+        self.color = obj["color"].stringValue
+        self.type = obj["type"].stringValue
+        self.make = obj["make"].stringValue
+        
+        let imagesArray = obj["imageList"].arrayValue
+        self.imageURLs = []
+        for image in imagesArray{
+            self.imageURLs.append(URL(string: image.stringValue))
+        }
+        self.location = obj["location"].stringValue
+        self.customerType = obj["customerType"].stringValue
     }
 }

@@ -14,12 +14,5 @@ class ValetTableViewCell : UITableViewCell {
     @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var carLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//    }
+    @IBOutlet weak var requestButton: RoundedUIButton!
 }

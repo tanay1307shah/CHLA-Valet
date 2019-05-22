@@ -7,8 +7,6 @@ target 'CHLAValet' do
   # Pods for CHLAValet
   pod 'Alamofire', '~> 5.0.0-beta.2'
   pod 'SwiftyJSON', '~> 4.0'
-
-  target 'CHLAValetTests' do
-    inherit! :search_paths
-  end
+  pod 'SwiftSpinner'
+  pod 'SwiftHash'
 end
